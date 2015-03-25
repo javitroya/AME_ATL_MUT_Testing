@@ -1,0 +1,18 @@
+-- @atlcompiler emftvm
+
+module Public2Private4;
+create OUT : UML refining IN : UML;
+
+rule Property {
+	from
+		c_src : UML!Class
+	to
+	    c_trg : UML!Class(
+	    	properties <- c_src.properties -> append(p)	
+	    ),
+		p : UML!Property (
+			name <- 'New property',
+			visibility <- #public
+		)
+}
+

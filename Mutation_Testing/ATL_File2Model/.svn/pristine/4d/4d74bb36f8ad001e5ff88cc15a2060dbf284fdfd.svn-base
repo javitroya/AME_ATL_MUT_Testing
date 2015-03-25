@@ -1,0 +1,273 @@
+--@atlcompiler atl2006
+module SOOML2SOOPL; -- Module Template
+create OUT : SOOPL from IN : SOOML;
+
+-- trg_Model
+-- helper def: seenModel: SOOPL!Model = OclUndefined;
+
+-- trg_Class
+-- helper def: seenClasses: Set(SOOPL!Class) = Set{};
+
+-- src_State
+helper def : getStateMachine (state : SOOML!State) : SOOML!StateMachine = SOOML!StateMachine.allInstances() -> select(e|e.states -> includes(state)).first();
+
+-- src_Class
+helper def : getClass4SM (statem : SOOML!StateMachine) : SOOML!Class = 
+	SOOML!Class.allInstances() -> select(e|e.stateMachine = statem).first();
+
+-- R1
+-- src_NamedElement, trg_NamedElement, src_NamedElement.name, trg_NamedElement.name  
+abstract rule SOOMLNamedElement2SOOPLNamedElement{
+	from
+	i:SOOML!NamedElement
+	to
+	o:SOOPL!NamedElement(
+		name <- i.name
+	)
+}
+
+-- R2
+-- src_Model, trg_Model, src_Model.classes, src_Class, src_Model.enumerations, src_Enumeration,
+-- trg_Model.classes, trg_Model.enumerations, trg_Enumeration, trg_Class, trg_Enumeration
+rule SOOMLModel2SOOPLModel{
+	from
+	i:SOOML!Model
+	to
+	o:SOOPL!Model(
+		classes <- i.classes,
+		enumerations <- i.enumerations		
+	)
+	do
+	{
+		-- thisModule.seenModel <- o;
+	}
+}
+
+-- R3
+-- src_Class, src_Class.operations, src_Class.features, src_Class.stateMachine, src_Class.name,
+-- trg_Class, trg_Class.operations, trg_Class.features, trg_Operation, trg_Operation.name, trg_Field, trg_Field.complexType, trg_Field.name
+-- trg_Operation.parameter, trg_Class.parameter
+-- trg_Parameter, trg_Parameter.name
+rule SOOMLClass2SOOPLClass extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!Class
+	to
+	o:SOOPL!Class(
+		operations <- i.operations,
+		operations <- c, -- Constructor
+		operations <- gSM,
+		operations <- sSM,
+		features <- i.features,
+		features <- sm	-- StateMachine
+	),
+	c:SOOPL!Operation(
+		name  <- 'Constructor'
+	),	
+	sm:SOOPL!Field(
+		complexType <- i.stateMachine,
+		name <- 'state' +  (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+	),
+	gSM: SOOPL!Operation(
+		name <- 'getState' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+	),
+	sSM: SOOPL!Operation(
+		name <- 'setState' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+	),
+	smPar:SOOPL!Parameter(
+		name <- 'State' +  (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+	)
+	do
+	{
+		sSM.parameter <- c.parameter.including(smPar);
+		-- thisModule.seenClasses <- thisModule.seenClasses.including(o);
+	}
+}
+
+-- R4
+-- src_Operation, src_Operation.parameter, src_Class, src_Class.operations, src_Operation.name,
+-- trg_Operation, trg_Operation.parameter, trg_Operation.name, trg_Parameter.name, trg_Parameter.complexType
+-- src_Parameter, trg_Parameter, trg_Class
+rule SOOMLOperation2SOOPLOperation extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!Operation
+	to
+	o:SOOPL!Operation(
+		parameter <- i.parameter
+	),
+	State1:SOOPL!Operation(   
+		name <- i.name,
+		parameter <- i.parameter->collect(p | thisModule.resolveTemp(p, 'State3')), -- el source del resolveTemp es un VariableExp
+		parameter <- contextParam
+	),
+	contextParam:SOOPL!Parameter(
+		name <- SOOML!Class.allInstances()->select(c | c.operations->includes(i))->first().name,
+		complexType <- SOOML!Class.allInstances()->select(c | c.operations->includes(i))->first()
+	),
+	State2:SOOPL!Operation(
+		name <- i.name,
+		parameter <- StateContext
+	),
+	StateContext:SOOPL!Parameter(
+		name <- SOOML!Class.allInstances()->select(c | c.operations->includes(i))->first().name,
+		complexType <- SOOML!Class.allInstances()->select(c | c.operations->includes(i))->first()
+	)
+}
+
+-- R5
+-- src_Parameter, src_Parameter.dataType, src_Parameter.classType, src_Parameter.name, src_Class
+-- trg_Parameter, trg_Parameter.dataType, trg_Parameter.complexType, trg_Parameter.name, 
+-- src_DataType, trg_DataType, trg_Class
+rule SOOMLParameter2SOOPLParameter extends SOOMLNamedElement2SOOPLNamedElement{
+	from
+	i:SOOML!Parameter
+	to
+	o:SOOPL!Parameter(
+		dataType <- i.dataType,
+		complexType <- i.classType
+	),
+	State3:SOOPL!Parameter(
+		name <- i.name,
+		dataType <- i.dataType,
+		complexType <- i.classType
+	)
+}
+
+-- R6
+-- src_Enumeration, src_Enumeration.literal, src_Literal, trg_Enumeration, trg_Enumeration.literal, trg_Literal
+rule SOOMLEnumeration2SOOPLEnumeration extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!Enumeration
+	to
+	o:SOOPL!Enumeration(
+		literal <- i.literal	
+	)
+}
+
+-- R7
+-- src_Literal, trg_Literal
+rule SOOMLLiteral2SOOPLLiteral extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!Literal
+	to
+	o:SOOPL!Literal
+}
+
+-- R8
+-- src_Attribute, src_Attribute.name, src_Attribute.type, 
+-- trg_Field, trg_Field.simpleType, trg_Operation, trg_Operation.name, trg_Parameter, trg_Parameter.name, trg_Parameter.dataType,
+-- trg_Operation.returnComplexType, trg_Operation.parameter,
+-- src_DataType, trg_DataType, trg_Field
+rule SOOMLAttribute2SOOPLField extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!Attribute
+	to
+		o:SOOPL!Field(
+			simpleType <- i.type
+		),
+		o2: SOOPL!Operation
+		(
+			name <- 'get' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+		),
+		o3: SOOPL!Operation
+		(
+			name <- 'set' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+		),
+		o4: SOOPL!Parameter
+		(
+			name <- i.name,
+			dataType <- i.type
+		)
+	do
+	{
+		o2.returnComplexType <- o4;
+		o3.parameter <- o3.parameter.including(o4);
+		
+		--for(cl in thisModule.seenClasses)
+		--{
+		--	if(cl.features->includes(o))
+		--	{
+		--		cl.operations <- cl.operations.append(o2);
+		--		cl.operations <- cl.operations.append(o3);
+		--	}
+		--}
+	}
+}
+
+-- R9
+-- src_Reference, src_Reference.type, src_Reference.name,
+-- trg_Field, trg_Field.complexType, trg_Operation, trg_Operation.name, trg_Parameter, trg_Parameter.name, trg_Parameter.complexType
+-- trg_Operation.returnComplexType
+-- src_Class
+rule SOOMLReference2SOOPLField extends SOOMLNamedElement2SOOPLNamedElement {
+	from 
+		i: SOOML!Reference
+	to
+		o: SOOPL!Field
+		(
+			complexType <- i.type
+		),
+		o2: SOOPL!Operation
+		(
+			name <- 'get' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+		),
+		o3: SOOPL!Operation
+		(
+			name <- 'set' + (i.name.substring(1,1)).toUpper() + i.name.substring(2,i.name.size())
+		),
+		o4: SOOPL!Parameter
+		(
+			name <-  i.name,
+			complexType <- i.type
+		)
+	do
+	{
+		o2.returnComplexType <- o4;
+		o3.parameter <- o3.parameter.including(o4);
+		
+		--for(cl in thisModule.seenClasses)
+		--{
+		--	if(cl.features->includes(o))
+		--	{
+		--		cl.operations <- cl.operations.append(o2);
+		--		cl.operations <- cl.operations.append(o3);
+		--	}
+		--}
+	}
+}
+
+-- R10
+-- src_State, src_State.transitions, src_Transition, src_Transition.event, src_Event, src_Event.operation, src_Operation, src_StateMachine
+-- trg_Class, trg_Class.name, trg_Class.operations, trg_Class.superClass
+rule SOOMLState2SOOPLClass  extends SOOMLNamedElement2SOOPLNamedElement {
+	from
+	i:SOOML!State
+	to
+	o:SOOPL!Class(
+		name <- i.name,
+		operations <- i.transitions -> collect(t | t.event.operation) -> collect(op | thisModule.resolveTemp(op, 'State2')),
+		superClass <- thisModule.getStateMachine(i)
+	)
+	do {
+		--thisModule.seenModel.classes <- o;
+	}
+}
+
+-- R11
+-- src_StateMachine, src_Class, src_Class.name, src_Class.operations, src_Operation, trg_Operation
+-- trg_Class, trg_Class.name, trg_Class.operations,
+-- trg_Class.isAbstract
+rule SOOMLStateMachine2SOOPLClass {
+	from
+	i:SOOML!StateMachine
+	to
+	o:SOOPL!Class(
+			name <- 'State' + thisModule.getClass4SM(i).name,
+			operations <- thisModule.getClass4SM(i).operations->collect(l | thisModule.resolveTemp(l, 'State1')),
+			name <- thisModule.resolveTemp(i, 'State2')
+	)
+	do
+	{
+	--thisModule.seenModel.classes <- o;	
+	o.isAbstract <- true;
+	}
+}

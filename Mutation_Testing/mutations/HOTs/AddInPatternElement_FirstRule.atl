@@ -1,0 +1,25 @@
+-- @atlcompiler emftvm
+
+module AddInPatternElement_FirstRule;
+create OUT : ATL refining IN : ATL;
+
+-- Sequence for giving new variable names to new pattern elements that are created
+helper def : varNames : Sequence(String) = Sequence{'a','aa','b','bb','c','cc','d','dd','e','ee','f','ff','...'};
+
+rule AddInPatternElement {
+	from s : ATL!InPattern
+		(ATL!Rule.allInstances()->first() = s."rule") --We will add the SIPE only in the first rule
+	to t : ATL!InPattern(
+		elements <- s.elements -> append(newIPE)	
+	),
+	newIPE : ATL!SimpleInPatternElement (
+		-- We have to give a variable name that no PatternElement has
+		varName <- thisModule.varNames->any(n | ATL!PatternElement.allInstances()->collect(pe|pe.varName)->excludes(n)),
+		type <- newOCLType	
+	),
+	-- The type is composed of a model and a name: model!name
+	newOCLType : ATL!OclModelElement(
+		model <- s.elements->first().type.model,
+		name <- 'Complete_IPE'
+	)
+}

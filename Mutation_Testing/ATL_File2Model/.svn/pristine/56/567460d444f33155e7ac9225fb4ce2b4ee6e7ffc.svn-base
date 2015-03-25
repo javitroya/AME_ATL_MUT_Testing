@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.atl.eclipse.adt.launching.atlTransformation">
+<mapAttribute key="Model Handler">
+<mapEntry key="OUT" value=""/>
+<mapEntry key="R2ML" value="MDR"/>
+<mapEntry key="XML" value="MDR"/>
+<mapEntry key="IN" value=""/>
+</mapAttribute>
+<stringAttribute key="ATL File Name" value="/WSDL2R2ML/transformations/R2ML2XML/R2ML2XML.atl"/>
+<mapAttribute key="Libs"/>
+<booleanAttribute key="Mode Debug" value="false"/>
+<stringAttribute key="Project Name" value="WSDL2R2ML"/>
+<mapAttribute key="ModelType">
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+<mapEntry key="R2ML" value="METAMODELINPUT"/>
+<mapEntry key="XML" value="METAMODELOUTPUT"/>
+<mapEntry key="IN" value="MODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="OUT" value="/WSDL2R2ML/outModels/R2ML2XML/r2ml2xml_model.xmi"/>
+<mapEntry key="R2ML" value="/WSDL2R2ML/metamodels/r2ml/r2ml.xmi"/>
+<mapEntry key="XML" value="/WSDL2R2ML/metamodels/xml/XML.xmi"/>
+<mapEntry key="IN" value="/WSDL2R2ML/outModels/WSDL2R2ML/wsdl2r2ml_model.xmi"/>
+</mapAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="XML"/>
+</mapAttribute>
+<booleanAttribute key="ContinueAfterError" value="false"/>
+<booleanAttribute key="AllowInterModelReferences" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="R2ML"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+</launchConfiguration>

@@ -1,0 +1,174 @@
+-- @path SimpleUML=/UML2ER/Metamodels/SimpleUml.ecore
+-- @path ER=/UML2ER/Metamodels/ER.ecore
+
+module UML2ER;
+create OUT : ER from IN : SimpleUML;
+
+helper def: seenReferences : SimpleUML!EReferences = Sequence{};
+
+helper context SimpleUML!ClassSub def : troyaHelper() : SimpleUML!Property =
+	self.package.casas.barco.aviones
+;
+
+helper context SimpleUML!Property def : troyaHelperProperty() : SimpleUML!Property =
+	self.package.casas.barco.aviones
+;
+helper context SimpleUML!Casa def : troyaHelperCasa() : SimpleUML!Casa =
+	self
+;
+
+
+helper context SimpleUML!ClassSub def : troyaHelper2() : SimpleUML!Boing =
+	self.package.casas.barco.aviones
+;
+
+lazy rule ruleLazy{
+	from
+		p : SimpleUML!Property (SimpleUML!Casa -> exists (e | e.rooms = p.name))
+	to
+		w : ER!StrongReference(
+			name <- p.name,
+			garage <- p -> select(f | f.troyaHelperProperty().complexType > 0),
+			lago <- p.troyaHelperProperty(),
+			type <- et
+		),
+		et : ER!EntityType(
+			name <- p.complexType.ownedProperty->first().name,
+			type <- p.complexType -> select (e | e.package.casas.rooms = 'hola')
+		)
+	do{
+		--et.casa <- p.name.concat('hola');
+		--et.hotel <- et.casa.name.concat('ahora');
+		--if (not p.complexType.oclIsUndefined()){
+			--et.name <- et.complexType.ownedProperty -> collect(e | e.barco) -> select(j|j.name.casa.avion = 'hola');
+			--et.name <- et.complexType.ownedProperty -> select(j|j.name.casa.avion = 'hola') -> collect(e | e.barco);
+		--}
+		--for (ie in SimpleUML!House.allInstances() -> collect(e|e.helado.cabeza) -> collect(a|a.nombre.troyaHelper())){
+--			et.features <- ie.ownedElements;
+		--}
+		--for (it in p.ownedElements -> collect(p | p.nombre)){
+		--for (it in p.ownedElements -> select(p | p.nombre = 'hola')){
+		--for (it in p.ownedElements -> collect(e|e.arbol.raiz) -> collect(a|a.nombre.apellido)){
+--			et.features <- it.troyaHelper().casa;
+			--et.eso <- it.avion.coche;
+			--et.cosas <- it.garage;
+		--}
+		--for (it in p.ownedElements -> select(p | p.nombre = 'hola') -> collect(e | e.coche.avion.troyaHelper())){
+--			et.features <- it.troyaHelper().casa;
+		--}
+		--for (ref in p.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EClass)) -> collect (r | r.eReferences) -> flatten() -> select(r | r.eOpposite <> OclUndefined)){
+                    --if(thisModule.seenReferences.excludes(ref)){
+                        --w.associations <- thisModule.BiDirectionalReference2Association(ref);
+                        --thisModule.seenReferences <- thisModule.seenReferences.append(ref.eOpposite);
+                    --}
+        --}
+		for (p in w.type){
+			w.attributes <- thisModule.auxCalledRule(p);
+		}
+	}
+}
+		
+rule auxCalledRule(c : SimpleUml!Casa){
+	to
+		g : ER!Attribute(
+			name <- c.rooms
+		)
+}
+
+rule auxCalledRule2(c : ER!Attribute){
+	to
+		g : ER!ERModel(
+			name <- c.type
+		)
+}
+		
+lazy rule BiDirectionalReference2Association{
+    from
+        r : SimpleUML!Property
+    to
+        a : ER!Attribute (
+            name <- r.name + '_' + r.complexType.name + '_' + r.complexType.package.name,
+            type <- if (r.isContainment) then 'Composition' else 'Association' endif,           
+            et <- if(r.isContainment)
+                    then Sequence{}.append(et2).append(et1)
+                    else Sequence{}.append(et1).append(et2)
+                    endif
+        ),
+        et1 : ER!EntityType (
+            enm <- #two
+        ),
+        et2 : ER!EntityType (
+            enm <- #three
+        )
+}		
+
+--R9
+rule SubClasses{
+	from
+		--s: SimpleUML!ClassSub (s.ownedProperty -> select(cl|cl.fly=cl.casas->first().isla)->first() = s.si.no->first())
+		--s: SimpleUML!ClassSub (s.ownedProperty -> exists(cl|cl.name.fly=cl.casas->first().isla))
+		s: SimpleUML!ClassSub (s.ownedProperty -> forAll(e|e.name.subString(1,3)<>'hola' and e.primitiveType='hey' 
+															and e.complexType.package.oclIsTypeOf(SimpleUML!Package))
+													--->exists(f|f.fly.plane>0)
+													->exists(f|f.casas.troyaHelperCasa().barco>0)												
+								and s.package -> exists(g | g.casas.oclIsTypeOf(SimpleUML!Package))->size()=1)
+		using{
+			--c : SimpleUML!Class = SimpleUML!ClassSub.allInstances() -> select(cl|cl.name = cl.hola) -> first();
+			--c : SimpleUML!Class = SimpleUML!ClassSub.allInstances() -> select(cl|cl.name.fly = cl.casas->first().isla) -> first();
+			c : SimpleUML!Class = SimpleUML!ClassSub.allInstances() -> select(cl|cl.ownedProperty.name = cl.package->first().troyaHelper2().name) -> first();
+			--c : SimpleUML!Class = SimpleUML!ClassSub.allInstances() -> first();
+		}
+	to
+		t: ER!WeakReference(
+			name <- s.ownedProperty.primitiveType,
+			type2 <- thisModule.ruleLazy(s.ownedProperty->first())
+			--features <- s.superClasses -> collect(e|e.name),
+			--type <- s.superClasses -> select(f|f.name.fly=s.casas->first().isla) -> collect(e|e.ownedProperty.complexType),
+			--type <- s.superClasses -> select(f|f.fly=s.isla) -> collect(e|e.complexType),
+			--type <- ER!EReference.allInstances()->select(r|r.name=c.casa.avion),
+			--type <- ER!EReference.allInstances()->select(r|r.name=s.ref.name and
+				--	(c.eStructuralFeatures->exists(r|r.oclIsKindOf(WeaveMM!EReference) and r.name = s.ref.name) or
+					--c.eAllSuperTypes->exists(cl|cl.eStructuralFeatures->exists(r|r.oclIsKindOf(WeaveMM!EReference) and r.name=s.ref.name))))->first(),
+			--type <- s.superClasses -> select(f|f.name='hola') -> collect(e|e.ownedProperty),
+			--type <- s.superClasses -> collect(f|f.name) -> collect(e|e.ownedProperty.complexType),
+			--name <- s.hello -> collect(g|g.ownedProperty.complexType) -> select(h|h.name.house)
+			--name <- s.hello -> collect(g|g.ownedProperty.complexType) -> select(h|h.name),
+			--name <- s.ownedProperties -> select(cl|cl.name.fly = cl.casas->first().isla) -> first(),
+			--name <- s.eClassifiers -> select(c | c.oclIsTypeOf(Ecore!EClass)) -> collect (r | r.eReferences) -> flatten() -> select(r | r.eOpposite = OclUndefined),
+			--name <- s.eClassifiers -> select(c | c.name = s.casa.name) -> collect (r | r.eReferences) -> flatten() -> select(r | r.eOpposite = OclUndefined),
+			--name <- s.eClassifiers -> select(c | c.name = s.casa.name) -> collect (r | r.eReferences.isla) -> flatten() -> first().name,
+			--name <- s.eClassifiers -> select(c | c.name = s.casa.name) -> collect (r | r.eReferences.isla) -> flatten() -> first() -> collect(h|h.hola.adios),
+			--name <- s.eClassifiers -> select(c | c.name = s.casa.name) -> collect (r | r.eReferences.isla) -> flatten() -> first() -> collect(h|h.hola.adios)
+--												-> select(j|j.gato = j.perro) -> asSequence() -> collect(i|i.computer.mouse),
+			--type <- s.ownedType -> collect(b | b.barco)
+			--type <- s.ownedType -> union (c.house),
+			--type <- thisModule.resolveTemp (s.house, 'quepasa')
+			--type <- s.ownedType -> collect (e| thisModule.resolveTemp (e.house, 'quepasa'))
+			--type <- if s.ownedType->first() = s.ownedType.hola then s.quepasa.oye else s.oye.quepasa endif
+			--type <- s.authors->iterate(e; str : String = '' | str + ' ' + e.author) -> collect(f|f.hola)
+			--type <- s.troyaHelper()
+			--type <- s -> collect (e | e.troyaHelper().complexType)
+			--type <- s.troyaHelper().hola.name
+			--attributes <- s.ownedProperty
+			--type <-  if (s.name = 'hola') then s.eClassifiers -> select(e | e.name.vacio.sigue = s.casa and c.lista->isEmpty()) 
+			--type <-  if (s.name.arbol.banco = 'hola') then s.eClassifiers -> select(e | e.name.vacio.sigue = s.casa and c.lista->isEmpty())
+			 								---> collect (r | r.eReferences.tomate.troyaHelper()) -> flatten() -> first() -> collect(h|h.troyaHelper().adios)
+									  --else s.eClassifiers -> collect(j | j.barco.casa.troyaHelper())
+							  --endif
+			  --name <-  if (s.ownedProperty.name = 'hola') then s.eClassifiers -> select(e | e.name.troyaHelper().sigue = s.casa.name and c.lista->isEmpty()) 
+			 				---> collect (r | r.eReferences.tomate.troyaHelper()) -> flatten() -> first() -> collect(h|h.troyaHelper().adios)
+					  --else s.eClassifiers -> collect(j | j.barco.casa.troyaHelper())
+					  --endif--,
+			--type <- if (s.name = 'hola') 
+					--then s -> select(e | e.avion = 'hola') 
+					--else if (s.camion.coche > 5)
+						 --then s.ownedType -> collect (r|r.troyaHelper())
+						 --else s.troyaHelper2()
+						 --endif
+					--endif
+			--name <- s -> collect(r | r.eReferences.troyaHelper2())
+			--name <- s -> flatten() -> first() -> collect(h|h.troyaHelper().adios)
+			--name <- s.eClassifiers -> select(e | e.name = s.casa.name and c.lista->isEmpty())
+			--name <- s.eClassifiers -> select(e | e.name = s.casa.name and c.lista->isEmpty()) -> collect(r | r.eReferences.troyaHelper())
+		)
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="FlattenPCM" default="transformation">
+
+
+<target name="transformation">
+	
+	<property name="atl.launcher" value="EMF-specific VM"/>
+	
+	<atl.loadModel modelHandler="EMF" name="ATL" metamodel="MOF" path="ATL.ecore" />
+	<atl.loadModel modelHandler="EMF" name="ATL_model" metamodel="ATL" path="input/Transformation(2)_Out.xmi" />
+	<atl.saveModel model="ATL_model" path="output/Transformation(2)_Out.atl">
+		<extractor name="ATL"/>
+	</atl.saveModel>
+	
+	</target>
+
+</project>
+

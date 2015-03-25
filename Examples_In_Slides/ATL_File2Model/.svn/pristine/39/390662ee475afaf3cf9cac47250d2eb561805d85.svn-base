@@ -1,0 +1,40 @@
+package Museum {
+	
+	class Artist {
+		attribute firstName : String;
+		attribute lastName : String;
+		reference creates[*] : Artefact oppositeOf hasArtist;
+	}
+	
+	class Artefact {
+		reference hasArtist[1-1] : Artist oppositeOf creates;
+		reference exhibited : Museum oppositeOf exhibits;
+	}
+	
+	class Painter extends Artist {
+		reference paints[*] subsets creates : Painting oppositeOf hasPainter;
+	}
+	
+	class Painting extends Artefact {
+		attribute technique : String;
+		reference hasPainter[1-1] : Painter oppositeOf paints;
+	}
+	
+	class Sculptor extends Artist {
+		reference sculpts[*] subsets creates : Sculpture oppositeOf hasSculptor;
+	}
+	
+	class Sculpture extends Artefact {
+		attribute material : String;
+		reference hasSculptor[1-1] : Sculptor oppositeOf sculpts;
+	}
+	
+	class Museum {
+		reference exhibits[1-*]  : Artefact oppositeOf exhibited;
+	}
+}
+
+package PrimitiveTypes {
+	datatype String;
+	datatype Integer;
+}

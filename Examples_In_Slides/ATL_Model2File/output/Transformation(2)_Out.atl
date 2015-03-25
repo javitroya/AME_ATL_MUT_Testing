@@ -1,0 +1,234 @@
+-- @path SOOPL=/ME_WS11_Lab3/model/SOOPL.ecore
+-- @path SOOML=/ME_WS11_Lab3/model/SOOML.ecore
+module sooml2soopl;
+create OUT : SOOPL from IN : SOOML;
+
+
+helper def: helperTransMeth : Set(SOOML!Transition) =
+ Set {};
+
+rule Package2Package {
+ from
+  p : SOOML!Package
+ to
+  package : SOOPL!Package (
+   name <- p.name,
+   classes <- SOOPL!Class.allInstances()
+  )
+}
+
+rule Class2StatefulClass {
+ from
+  soc : SOOML!Class
+ to
+  spc : SOOPL!StatefulClass (
+   isAbstract <- false,
+   name <- soc.name,
+   methods <- soc.operations,
+   initialState <- soc.stateMachine.initialState,
+   properties <- soc.features,
+   stateClass <- soc.stateMachine
+  )
+}
+
+rule StateMachine2StateClass {
+ from
+  sm : SOOML!StateMachine
+ to
+  sc : SOOPL!StateClass (
+   isAbstract <- true,
+   statefulClass <- sm.class,
+   methods <- sm.class.operations,
+   name <- sc.statefulClass.name + 'State'
+  )
+}
+
+rule Transition2Transition {
+ from
+  trans : SOOML!Transition
+ to
+  transM : SOOPL!Transition (
+   guard <- trans.guard,
+   targetState <- trans.target,
+   actions <- trans.actions
+  )
+ do {
+  if(thisModule.helperTransMeth->excludes(trans.event.operation.name)) {
+   thisModule.createTransMethod(trans, transM);
+   thisModule.helperTransMeth <- thisModule.helperTransMeth->including(trans.event.operation.name);
+  }
+ }
+}
+
+rule createTransMethod() {
+ to
+  tm : SOOPL!TransitionMethod (
+   name <-.event.operation.name,
+   
+   parameters <-.event.operation.parameter,
+   transitions <- SOOML!Transition.allInstances()->select(t |
+    t.event.operation.name =.event.operation.name
+   )
+  )
+}
+
+rule State2StateImplementationClass {
+ from
+  st : SOOML!State
+ to
+  si : SOOPL!StateImplementationClass (
+   isAbstract <- false,
+   stateClass <- SOOML!StateMachine.allInstances()->select(s |
+    s.states.includes(st)
+   ),
+   entryMethod <- if st.entryOperation <> OclUndefined then
+    st.entryOperation.calledOperation
+   else
+    OclUndefined
+   endif,
+   
+   name <- st.name.substring(1, 1).toUpper() + st.name.substring(2, st.name.size()) + 'StateStateImpl',
+   methods <- SOOPL!TransitionMethod.allInstances()->select(tm |
+    tm.name = st.transitions->first().event.operation.name
+   )
+  )
+}
+
+rule ReferenceAssignmentAction2AssignProperty {
+ from
+  r : SOOML!ReferenceAssignmentAction
+ to
+  a : SOOPL!AssignProperty (
+   property <- r.reference,
+   parameter <- r.parameter
+  )
+}
+
+rule ReferenceIsInStateCondition2PropertyIsInState {
+ from
+  r : SOOML!ReferenceIsInStateCondition
+ to
+  p : SOOPL!PropertyIsInState (
+   inState <- r.inState,
+   property <- r.reference
+  )
+}
+
+rule ParameterIsInStateCondition2ParameterIsInState {
+ from
+  p : SOOML!ParameterIsInStateCondition
+ to
+  pp : SOOPL!ParameterIsInState (
+   inState <- p.inState,
+   property <- p.parameter
+  )
+}
+
+rule CallParameterOperationAction2CallMethodOfProperty {
+ from
+  cpoa : SOOML!CallParameterOperationAction
+ to
+  cmop : SOOPL!CallMethodOfParameter (
+   calledMethod <- cpoa.calledOperation,
+   parameterBinding <- cpoa.parameter,
+   parameter <- cpoa.callObjectViaParameter
+  )
+}
+
+rule CallReferenceOperationAction2CallMethodOfParameter {
+ from
+  croa : SOOML!CallReferenceOperationAction
+ to
+  cmop : SOOPL!CallMethodOfProperty (
+   calledMethod <- croa.calledOperation,
+   parameterBinding <- croa.parameter,
+   property <- croa.callObjectViaReference
+  )
+}
+
+rule Operation2Method {
+ from
+  o : SOOML!Operation
+ to
+  m : SOOPL!Method (
+   name <- o.name,
+   parameters <- o.parameter
+  )
+}
+
+rule Parameter2ComplexTypeParameter {
+ from
+  p : SOOML!Parameter
+  (
+   p.dataType = #Complex
+  )
+ to
+  psoopl : SOOPL!ComplexTypeParameter (
+   name <- p.name,
+   classType <- p.classType
+  )
+}
+
+rule Parameter2SimpleTypeParameter {
+ from
+  p : SOOML!Parameter
+  (
+   p.dataType <> #Complex
+  )
+ to
+  psoopl : SOOPL!SimpleTypeParameter (
+   name <- p.name,
+   dataType <- p.dataType
+  )
+}
+
+helper context Boolean def: mV() : Boolean =
+ self.upperBound = - 1;
+
+rule Reference2ComplexTypeProperty {
+ from
+  r : SOOML!Reference
+ to
+  ctp : SOOPL!ComplexTypeProperty (
+   name <- r.name,
+   upperBound <- r.upperBound,
+   lowerBound <- r.lowerBound,
+   opposite <- r.opposite,
+   type <- r.type
+  )
+ do {
+  if(r.upperBound > 1 or r.upperBound = - 1)
+   ctp.multiValued <- true;
+  else
+   ctp.multiValued <- false;
+  
+ }
+}
+
+rule Attribute2SimpleTypeProperty {
+ from
+  a : SOOML!Attribute
+ to
+  stp : SOOPL!SimpleTypeProperty (
+   name <- a.name,
+   upperBound <- a.upperBound,
+   lowerBound <- a.lowerBound
+  )
+ do {
+  if(a.upperBound > 1 or a.upperBound = - 1)
+   stp.multiValued <- true;
+  else
+   stp.multiValued <- false;
+  
+ }
+}
+
+rule ParameterBinding2ParameterBinding {
+ from
+  pbo : SOOML!ParameterBinding
+ to
+  pbp : SOOPL!ParameterBinding (
+   parameter <- pbo.parameterBinding,
+   structuralFeatureBinding <- pbo.structuralFeatureBinding
+  )
+}

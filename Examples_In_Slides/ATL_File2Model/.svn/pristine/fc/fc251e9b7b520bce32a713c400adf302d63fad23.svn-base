@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ruletypesmm:Trafo xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ruletypesmm="http://ruletypesmm/1.0" name="Measure2Table">
+  <rules name="Tables">
+    <outFeaturesImperative>trg_Table</outFeaturesImperative>
+    <outFeaturesImperative>trg_Table</outFeaturesImperative>
+    <outFeaturesImperative>trg_Table</outFeaturesImperative>
+    <outFeaturesImperative>trg_Table</outFeaturesImperative>
+    <outFeaturesImperative>trg_Table</outFeaturesImperative>
+    <allNavigationPaths>trg_Table</allNavigationPaths>
+    <allFootPrints>trg_Table</allFootPrints>
+  </rules>
+  <rules name="AllMeasureSet2Table">
+    <outTypes>trg_Table</outTypes>
+    <allNavigationPaths>trg_Table</allNavigationPaths>
+    <allNavigationPaths>trg_Row</allNavigationPaths>
+    <allNavigationPaths>trg_Table.rows</allNavigationPaths>
+    <bindingFeatures>trg_Table.rows</bindingFeatures>
+    <bindingFeatures>trg_Table.rows</bindingFeatures>
+    <allFootPrints>trg_Table</allFootPrints>
+    <allFootPrints>trg_Row</allFootPrints>
+    <allFootPrints>trg_Table.rows</allFootPrints>
+    <outFeatures>trg_Row</outFeatures>
+    <outFeatures>trg_Row</outFeatures>
+  </rules>
+  <rules name="MeasureSet2HdrRow">
+    <outTypes>trg_Row</outTypes>
+    <allNavigationPaths>trg_Row</allNavigationPaths>
+    <allNavigationPaths>trg_Cell</allNavigationPaths>
+    <allNavigationPaths>trg_Row.cells</allNavigationPaths>
+    <bindingFeatures>trg_Row.cells</bindingFeatures>
+    <bindingFeatures>trg_Row.cells</bindingFeatures>
+    <allFootPrints>trg_Row</allFootPrints>
+    <allFootPrints>trg_Cell</allFootPrints>
+    <allFootPrints>trg_Row.cells</allFootPrints>
+    <outFeatures>trg_Cell</outFeatures>
+    <outFeatures>trg_Cell</outFeatures>
+  </rules>
+  <rules name="MeasureSet2ValueRow">
+    <outTypes>trg_Row</outTypes>
+    <allNavigationPaths>trg_Row</allNavigationPaths>
+    <allNavigationPaths>trg_Cell</allNavigationPaths>
+    <allNavigationPaths>trg_Row.cells</allNavigationPaths>
+    <bindingFeatures>trg_Row.cells</bindingFeatures>
+    <bindingFeatures>trg_Row.cells</bindingFeatures>
+    <allFootPrints>trg_Row</allFootPrints>
+    <allFootPrints>trg_Cell</allFootPrints>
+    <allFootPrints>trg_Row.cells</allFootPrints>
+    <outFeatures>trg_Cell</outFeatures>
+    <outFeatures>trg_Cell</outFeatures>
+  </rules>
+  <rules name="Sequence2Row">
+    <outTypes>trg_Row</outTypes>
+    <allNavigationPaths>trg_Row</allNavigationPaths>
+    <allNavigationPaths>trg_Row.cells</allNavigationPaths>
+    <bindingFeatures>trg_Row.cells</bindingFeatures>
+    <allFootPrints>trg_Row</allFootPrints>
+    <allFootPrints>trg_Row.cells</allFootPrints>
+    <allFootPrints>trg_Cell</allFootPrints>
+  </rules>
+  <rules name="String2Cell">
+    <outTypes>trg_Cell</outTypes>
+    <allNavigationPaths>trg_Cell</allNavigationPaths>
+    <allNavigationPaths>trg_Cell.content</allNavigationPaths>
+    <bindingFeatures>trg_Cell.content</bindingFeatures>
+    <allFootPrints>trg_Cell</allFootPrints>
+    <allFootPrints>trg_Cell.content</allFootPrints>
+  </rules>
+  <mms inputMM="Measure"/>
+  <mms inputMM="PrimitiveTypes"/>
+  <mms outputMM="Table"/>
+  <mms outputMM="PrimitiveTypes"/>
+</ruletypesmm:Trafo>

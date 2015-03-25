@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launchConfiguration type="org.atl.eclipse.adt.launching.atlTransformation">
+<mapAttribute key="Model Handler">
+<mapEntry key="WSDL" value="MDR"/>
+<mapEntry key="OUT" value=""/>
+<mapEntry key="XML" value="MDR"/>
+<mapEntry key="IN" value=""/>
+</mapAttribute>
+<stringAttribute key="ATL File Name" value="/WSDL2R2ML/transformations/XML2WSDL/XML2WSDL.atl"/>
+<mapAttribute key="Libs">
+<mapEntry key="XMLHelpers" value="/WSDL2R2ML/transformations/XML2WSDL/XMLHelpers.asm"/>
+</mapAttribute>
+<booleanAttribute key="Mode Debug" value="false"/>
+<stringAttribute key="Project Name" value="WSDL2R2ML"/>
+<mapAttribute key="ModelType">
+<mapEntry key="WSDL" value="METAMODELOUTPUT"/>
+<mapEntry key="OUT" value="MODELOUTPUT"/>
+<mapEntry key="XML" value="METAMODELINPUT"/>
+<mapEntry key="IN" value="MODELINPUT"/>
+</mapAttribute>
+<mapAttribute key="Path">
+<mapEntry key="WSDL" value="/WSDL2R2ML/metamodels/wsdl/wsdl.xmi"/>
+<mapEntry key="OUT" value="/WSDL2R2ML/outModels/XML2WSDL/xml2wsdl_model.xmi"/>
+<mapEntry key="XML" value="/WSDL2R2ML/metamodels/xml/XML.xmi"/>
+<mapEntry key="IN" value="/WSDL2R2ML/models/wsdl-xml/hotelReservation.wsdl-XML.xmi"/>
+</mapAttribute>
+<mapAttribute key="Output">
+<mapEntry key="OUT" value="WSDL"/>
+</mapAttribute>
+<booleanAttribute key="ContinueAfterError" value="false"/>
+<booleanAttribute key="AllowInterModelReferences" value="false"/>
+<mapAttribute key="Input">
+<mapEntry key="IN" value="XML"/>
+</mapAttribute>
+<listAttribute key="Superimpose"/>
+</launchConfiguration>

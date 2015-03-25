@@ -1,0 +1,21 @@
+module ExampleHOT;
+create OUT : EXMP from IN : ATL;
+
+
+rule Module2ExampleModel{
+	from m : ATL!Module
+	to   em : EXMP!ExampleModel(
+		moduleName <- m.name,
+		outPatternElements <- m.elements -> select(e|e.oclIsTypeOf(ATL!Rule)) 
+								-> collect(r | r.outPattern) -> collect (op | op.elements)
+	)
+}
+
+rule OutPatternElements{
+	from atl_sope : ATL!SimpleOutPatternElement
+	to exmp_ope : EXMP!OutPatternElement(
+		ruleName <- atl_sope.outPattern.rule.name,
+		numBindings <- atl_sope.bindings -> size()
+	)
+}
+

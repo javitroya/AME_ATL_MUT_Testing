@@ -1,0 +1,22 @@
+# ==============================================================================
+# ExtractRuleTypes properties
+# ==============================================================================
+
+# ATL modules: if several, by order of superimposition (the latter ones overrides the former ones)
+ExtractRuleTypes.modules = ExtractRuleTypes.atl
+
+# Metamodels paths or nsUris
+ExtractRuleTypes.metamodels.MM_Src = Properties/a.ecore
+ExtractRuleTypes.metamodels.MM_Out = Properties/b.ecore
+ExtractRuleTypes.metamodels.MM_ATL = Properties/c.ecore
+ExtractRuleTypes.metamodels.MM_Trg = Properties/d.ecore
+
+# Libraries paths
+
+# ATL Launching options
+ExtractRuleTypes.options.supportUML2Stereotypes = false
+ExtractRuleTypes.options.printExecutionTime = true
+ExtractRuleTypes.options.OPTION_CONTENT_TYPE = false
+ExtractRuleTypes.options.allowInterModelReferences = true
+ExtractRuleTypes.options.step = false
+

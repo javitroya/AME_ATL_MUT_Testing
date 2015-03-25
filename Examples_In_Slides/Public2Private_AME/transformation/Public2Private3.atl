@@ -1,0 +1,14 @@
+-- @atlcompiler emftvm
+
+module Public2Private3;
+create OUT : UML refining IN : UML;
+
+--Rule to delete an element
+rule Property {
+	from
+		p_src : UML!Property (
+			p_src.visibility = #public
+		)
+	to
+}
+

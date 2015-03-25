@@ -1,0 +1,42 @@
+<project name="KM32OWL" default="transfo">
+
+	<!-- Change the value of this property to use another input model -->
+	<property name="model" value="Museum"/>
+	
+	<target name="transfo" depends="loadModels">
+
+		<am3.loadModel name="km3Model" metamodel="KM3" path="Samples/${model}.km3">
+			<injector name="ebnf">
+				<param name="name" value="KM3"/>
+			</injector>
+		</am3.loadModel>
+		
+		<am3.atl path="Transformations/KM32OWL.asm">
+			<inModel name="IN" model="km3Model"/>
+			<inModel name="KM3" model="KM3"/>
+			<inModel name="OWL" model="OWL"/>
+			<outModel name="OUT" model="owlModel" metamodel="OWL"/>
+		</am3.atl>
+
+		<am3.atl path="Transformations/OWL2XML.asm">
+			<inModel name="IN" model="owlModel"/>
+			<inModel name="OWL" model="OWL"/>
+			<inModel name="XML" model="XML"/>
+			<outModel name="OUT" model="xmlModel" metamodel="XML"/>
+		</am3.atl>
+		
+		<am3.saveModel model="xmlModel" path="Samples/${model}.owl">
+			<extractor name="xml"/>
+		</am3.saveModel>
+		
+	</target>
+	
+	<target name="loadModels">	
+		<!-- Load KM3 metamodel-->
+		<am3.loadModel modelHandler="EMF" name="KM3" metamodel="MOF" nsUri="http://www.eclipse.org/gmt/2005/KM3"/>
+		<!-- Load OWL metamodel-->
+		<am3.loadModel modelHandler="EMF" name="OWL" metamodel="MOF" path="Metamodels/OWL.ecore"/>
+		<!-- Load XML metamodel-->
+		<am3.loadModel modelHandler="EMF" name="XML" metamodel="MOF" path="Metamodels/XML.ecore"/>
+	</target>
+</project>

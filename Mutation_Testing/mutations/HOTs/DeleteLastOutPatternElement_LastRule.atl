@@ -1,0 +1,30 @@
+-- @atlcompiler emftvm
+module DeleteLastOutPatternElement_LastRule;
+create OUT : ATL refining IN : ATL;
+
+rule DeleteLastOutPatternElement_LastRule {
+ from
+  ope : ATL!OutPatternElement
+  (
+   ope.outPattern.elements->size() > 1 and
+   ope = ope.outPattern.elements -> last() and --It is the last OutPatternElement
+   ope.outPattern.rule = ope.outPattern.rule.module.elements -> last() -- of the last rule
+  )
+ to
+}
+
+rule DeleteAssociatedBinding{
+	from
+	 b : ATL!Binding (b.value.oclIsTypeOf(ATL!VariableExp) and b.value.referredVariable.oclIsUndefined())
+	to
+}
+
+-- Due to the behavior of the in-place mode of ATL, namely refining mode, the second rule is not executed.
+-- This is because the ATL refining mode is not purely in-place.
+-- In a purely in-place mode, when a transformation rule is applied in a model, the output model produced by 
+-- the rule is the input for matching the remaining rules (including the rule that has just been applied, if another match is found). 
+-- However, in the refining mode of ATL, the model performing the matches with the rules is always the model that is given as input, 
+-- not the evolved one. For this reason, the two rules of the transformation have to be actually split in two transformations, 
+-- and apply one after the other, so that the input model for the latter is the output model obtained by the former. 
+
+-- This is the reason why we have also created the DeleteBndingsWithoutReferredVariable.atl transformation 

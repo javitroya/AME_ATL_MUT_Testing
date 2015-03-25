@@ -1,0 +1,52 @@
+module UML2ER;
+create OUT : ER from IN : SimpleUML;
+rule Package {
+  from s: SimpleUML!Package
+  to t: ER!ERModel (
+    entities <- s.ownedElements	
+  )
+} 
+helper context SimpleUML!Class def: allClasses : Sequence(SimpleUML!Class) =
+  self.superClasses-> iterate(e; acc : Sequence(SimpleUML!Class) = Sequence {} | acc-> union(Set{e})->union(e.allClasses) );
+helper context SimpleUML!Class def : getAllProperties : Sequence (SimpleUML!Properties) =
+  self.allClasses.including(self).flatten()->collect(e | e.ownedProperty).flatten();
+abstract rule NamedElement{
+  from s : SimpleUML!NamedElement
+  to t : ER!Element(
+    name <- s.name
+  )
+}
+rule Class extends NamedElement{
+  from s: SimpleUML!Class
+  to t: ER!EntityType (
+     features <- s.getAllProperties -> collect(e | Tuple {s = e, c = s}) )
+}
+abstract rule Property extends NamedElement{
+  from s: SimpleUML!Property,
+       c: SimpleUML!Class (c.getAllProperties->includes(s) )	
+  to t: ER!Feature ()
+}
+rule Attributes extends Property{
+  from s: SimpleUML!Property,
+       c: SimpleUML!Class (not s.primitiveType.oclIsUndefined())
+  to t: ER!Attribute (
+     type <- s.primitiveType	
+  )
+}
+abstract rule References extends Property{
+  from s: SimpleUML!Property,
+       c: SimpleUML!Class (not s.complexType.oclIsUndefined())
+  to t: ER!WeakReference (
+     type <- s.complexType 
+  )
+}
+rule WeakReferences extends References{
+  from s: SimpleUML!Property,
+       c: SimpleUML!Class (not s.isContainment)
+  to t: ER!WeakReference 
+}
+rule StrongReferences extends References{
+  from s: SimpleUML!Property,
+       c: SimpleUML!Class (s.isContainment)
+  to t: ER!StrongReference 
+}

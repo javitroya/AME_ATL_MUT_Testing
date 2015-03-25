@@ -1,0 +1,22 @@
+# ==============================================================================
+# ExtractRuleTypes properties
+# ==============================================================================
+
+# ATL modules: if several, by order of superimposition (the latter ones overrides the former ones)
+ExtractRuleTypes.modules = ExtractRuleTypes.atl
+
+# Metamodels paths or nsUris
+ExtractRuleTypes.metamodels.MM_Src = Example/BibTeX2DocBook/BibTeX.ecore
+ExtractRuleTypes.metamodels.MM_Out = metamodels/RuleTypesMM.ecore
+ExtractRuleTypes.metamodels.MM_ATL = metamodels/ATL.ecore
+ExtractRuleTypes.metamodels.MM_Trg = Example/BibTeX2DocBook/DocBook.ecore
+
+# Libraries paths
+
+# ATL Launching options
+ExtractRuleTypes.options.supportUML2Stereotypes = false
+ExtractRuleTypes.options.printExecutionTime = true
+ExtractRuleTypes.options.OPTION_CONTENT_TYPE = false
+ExtractRuleTypes.options.allowInterModelReferences = true
+ExtractRuleTypes.options.step = false
+

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="XML" name="ATOM">
+  <children xsi:type="Element" name="title">
+    <children xsi:type="Text" name="letitle" value="Example ATOM"/>
+  </children>
+  <children xsi:type="Element" name="id">
+    <children xsi:type="Text" name="theid" value="urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af6"/>
+  </children>
+  <children xsi:type="Element" name="subtitle">
+    <children xsi:type="Text" name="thesubtitle" value="Insert witty or insightful remark here"/>
+  </children>
+  <children xsi:type="Element" name="rights">
+    <children xsi:type="Text" name="therights" value=""/>
+  </children>
+  <children xsi:type="Element" name="lastUpdate">
+    <children xsi:type="Text" name="thelastUpdate" value="2003-12-13T18:30:02Z"/>
+  </children>
+  <children xsi:type="Element" name="links">
+    <children xsi:type="Element" name="Link">
+      <children xsi:type="Element" name="rel">
+        <children xsi:type="Text" name="therel" value=""/>
+      </children>
+      <children xsi:type="Element" name="hrefl">
+        <children xsi:type="Text" name="thehrefl" value="http://example.org"/>
+      </children>
+      <children xsi:type="Element" name="type">
+        <children xsi:type="Text" name="thetype" value=""/>
+      </children>
+      <children xsi:type="Element" name="hreflang">
+        <children xsi:type="Text" name="thehreflang" value=""/>
+      </children>
+      <children xsi:type="Element" name="title">
+        <children xsi:type="Text" name="thetitle" value=""/>
+      </children>
+      <children xsi:type="Element" name="lenght">
+        <children xsi:type="Text" name="thelenght" value=""/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="Element" name="icon">
+    <children xsi:type="Text" name="theicon" value=""/>
+  </children>
+  <children xsi:type="Element" name="logo">
+    <children xsi:type="Text" name="thelogo" value=""/>
+  </children>
+  <children xsi:type="Element" name="authors">
+    <children xsi:type="Element" name="Author">
+      <children xsi:type="Element" name="name">
+        <children xsi:type="Text" name="thename" value="John Doe"/>
+      </children>
+      <children xsi:type="Element" name="uri">
+        <children xsi:type="Text" name="theuri" value=""/>
+      </children>
+      <children xsi:type="Element" name="email">
+        <children xsi:type="Text" name="theemail" value="johndoe@example.com"/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="Element" name="entrie">
+    <children xsi:type="Element" name="Entry">
+      <children xsi:type="Element" name="title">
+        <children xsi:type="Text" name="thetitle" value="Atom-Powered Robots Run Amok"/>
+      </children>
+      <children xsi:type="Element" name="id">
+        <children xsi:type="Text" name="theid" value="urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"/>
+      </children>
+      <children xsi:type="Element" name="rights">
+        <children xsi:type="Text" name="therights" value=""/>
+      </children>
+      <children xsi:type="Element" name="summary">
+        <children xsi:type="Text" name="thesummary" value="Some text."/>
+      </children>
+      <children xsi:type="Element" name="published">
+        <children xsi:type="Text" name="thepublished" value=""/>
+      </children>
+      <children xsi:type="Element" name="lastUpdate">
+        <children xsi:type="Text" name="thelastUpdate" value="2003-12-13T18:30:02Z"/>
+      </children>
+      <children xsi:type="Element" name="links">
+        <children xsi:type="Element" name="Link">
+          <children xsi:type="Element" name="rel">
+            <children xsi:type="Text" name="therel" value=""/>
+          </children>
+          <children xsi:type="Element" name="hrefl">
+            <children xsi:type="Text" name="thehrefl" value="http://example.org/2003/12/13/atom03"/>
+          </children>
+          <children xsi:type="Element" name="type">
+            <children xsi:type="Text" name="thetype" value=""/>
+          </children>
+          <children xsi:type="Element" name="hreflang">
+            <children xsi:type="Text" name="thehreflang" value=""/>
+          </children>
+          <children xsi:type="Element" name="title">
+            <children xsi:type="Text" name="thetitle" value=""/>
+          </children>
+          <children xsi:type="Element" name="lenght">
+            <children xsi:type="Text" name="thelenght" value=""/>
+          </children>
+        </children>
+      </children>
+      <children xsi:type="Element" name="categories"/>
+      <children xsi:type="Element" name="content"/>
+      <children xsi:type="Element" name="contributors"/>
+    </children>
+  </children>
+  <children xsi:type="Element" name="generator"/>
+  <children xsi:type="Element" name="categories">
+    <children xsi:type="Element" name="category">
+      <children xsi:type="Element" name="term">
+        <children xsi:type="Text" name="theterm" value="Film"/>
+      </children>
+      <children xsi:type="Element" name="scheme">
+        <children xsi:type="Text" name="thescheme" value="lesheme1"/>
+      </children>
+      <children xsi:type="Element" name="label">
+        <children xsi:type="Text" name="thelabel" value="lelabel"/>
+      </children>
+    </children>
+    <children xsi:type="Element" name="category">
+      <children xsi:type="Element" name="term">
+        <children xsi:type="Text" name="theterm" value="Movie"/>
+      </children>
+      <children xsi:type="Element" name="scheme">
+        <children xsi:type="Text" name="thescheme" value="lesheme2"/>
+      </children>
+      <children xsi:type="Element" name="label">
+        <children xsi:type="Text" name="thelabel" value="lelabel"/>
+      </children>
+    </children>
+  </children>
+  <children xsi:type="Element" name="contributors"/>
+</Root>

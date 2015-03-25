@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<ATOM>
+  <title>Example ATOM</title>
+  <id>urn:uuid:60a76c80-d399-11d9-b91C-0003939e0af6</id>
+  <subtitle>Insert witty or insightful remark here</subtitle>
+  <rights></rights>
+  <lastUpdate>2003-12-13T18:30:02Z</lastUpdate>
+  <links>
+    <Link>
+      <rel></rel>
+      <hrefl>http://example.org</hrefl>
+      <type></type>
+      <hreflang></hreflang>
+      <title></title>
+      <lenght></lenght>
+    </Link>
+  </links>
+  <icon></icon>
+  <logo></logo>
+  <authors>
+    <Author>
+      <name>John Doe</name>
+      <uri></uri>
+      <email>johndoe@example.com</email>
+    </Author>
+  </authors>
+  <entrie>
+    <Entry>
+      <title>Atom-Powered Robots Run Amok</title>
+      <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+      <rights></rights>
+      <summary>Some text.</summary>
+      <published></published>
+      <lastUpdate>2003-12-13T18:30:02Z</lastUpdate>
+      <links>
+        <Link>
+          <rel></rel>
+          <hrefl>http://example.org/2003/12/13/atom03</hrefl>
+          <type></type>
+          <hreflang></hreflang>
+          <title></title>
+          <lenght></lenght>
+        </Link>
+      </links>
+      <categories/>
+      <content/>
+      <contributors/>
+    </Entry>
+  </entrie>
+  <generator/>
+  <categories>
+    <category>
+      <term>Film</term>
+      <scheme>lesheme1</scheme>
+      <label>lelabel</label>
+    </category>
+    <category>
+      <term>Movie</term>
+      <scheme>lesheme2</scheme>
+      <label>lelabel</label>
+    </category>
+  </categories>
+  <contributors/>
+</ATOM>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="3:1-4:32" name="EmptyTrans">
+    <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
+    <inModels location="4:23-4:31" name="IN" metamodel="/1"/>
+    <outModels location="4:8-4:17" name="OUT" metamodel="/1"/>
+  </atl:Module>
+  <ocl:OclModel location="4:14-4:17" name="ATL" model="/0/@outModels.0 /0/@inModels.0"/>
+</xmi:XMI>

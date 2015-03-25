@@ -1,0 +1,6 @@
+<project id="gs-example" name="gs-example">
+  <build>
+    <defaultGoal>build</defaultGoal>
+    <sourceDirectory>.</sourceDirectory>
+  </build>
+</project>

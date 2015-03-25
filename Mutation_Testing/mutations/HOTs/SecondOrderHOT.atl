@@ -1,0 +1,24 @@
+-- @atlcompiler emftvm
+
+module SecondOrderHOT;
+create OUT : ATL refining IN : ATL, IN_MM : IN_MM, OUT_MM : OUT_MM;
+
+helper def : random() : Real =
+	"#native"!"java::util::Random".newInstance().nextDouble();
+
+-- A StringExp is one of the types that can conform to the value part of a Binding
+-- Since the generic mutation transformation adds 'CompleteIt_IM' in the value part,
+-- a StringExp is created, whose stringSymbol is 'Complete_IPE'
+rule CompleteInMMNames {
+	from s : ATL!StringExp (s.stringSymbol = 'Complete_IPE')
+	using {
+		classes : Sequence(IN_MM!EClass) = IN_MM!EClass.allInstancesFrom('IN_MM')->select(c|not c.abstract);
+	}
+	to t : ATL!StringExp(
+		-- The idea is to have in the following a random class from the input model
+		stringSymbol <- classes->at((thisModule.random()*classes->size()).floor()+1).name
+	)
+	do{
+		classes->at((thisModule.random()*classes->size()).floor()+1).name;
+	}
+}

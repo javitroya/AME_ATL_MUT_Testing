@@ -1,0 +1,166 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<XMI xmi.version = '1.2' timestamp = 'Fri Jul 27 10:00:47 CEST 2007'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <R2ML.RuleBase xmi.id = 'a1'>
+      <R2ML.RuleBase.vocabularies>
+        <R2ML.Vocabulary.VocBasic.Vocabulary xmi.id = 'a2'>
+          <R2ML.Vocabulary.VocBasic.Vocabulary.entries>
+            <R2ML.Events.MessageType xmi.id = 'a3' name = 'ex:CheckAvailability'>
+              <R2ML.Vocabulary.VocBasic.Class.attributes>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a4'/>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a5'/>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a6'/>
+              </R2ML.Vocabulary.VocBasic.Class.attributes>
+              <R2ML.Vocabulary.VocBasic.Class.referencePropertyRef>
+                <R2ML.Vocabulary.VocBasic.ReferenceProperty xmi.idref = 'a7'/>
+              </R2ML.Vocabulary.VocBasic.Class.referencePropertyRef>
+            </R2ML.Events.MessageType>
+            <R2ML.Vocabulary.VocBasic.Class xmi.id = 'a8' name = 'ex:Customer'>
+              <R2ML.Vocabulary.VocBasic.Class.attributes>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a9'/>
+              </R2ML.Vocabulary.VocBasic.Class.attributes>
+            </R2ML.Vocabulary.VocBasic.Class>
+            <R2ML.Events.MessageType xmi.id = 'a10' name = 'ex:CheckAvailabilityResponse'>
+              <R2ML.Vocabulary.VocBasic.Class.attributes>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a11'/>
+              </R2ML.Vocabulary.VocBasic.Class.attributes>
+            </R2ML.Events.MessageType>
+            <R2ML.Events.FaultMessageType xmi.id = 'a12' name = 'ex:InvalidDataError'>
+              <R2ML.Vocabulary.VocBasic.Class.attributes>
+                <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a13'/>
+              </R2ML.Vocabulary.VocBasic.Class.attributes>
+            </R2ML.Events.FaultMessageType>
+          </R2ML.Vocabulary.VocBasic.Vocabulary.entries>
+        </R2ML.Vocabulary.VocBasic.Vocabulary>
+      </R2ML.RuleBase.vocabularies>
+      <R2ML.RuleBase.rules>
+        <R2ML.ReactionRuleSet xmi.id = 'a14' ruleSetID = 'tns:reservationInterface'>
+          <R2ML.ReactionRuleSet.rules>
+            <R2ML.Rules.ReactionRule xmi.id = 'a15' ruleID = '???' groupID = 'tns:checkAvailability'>
+              <R2ML.Rules.ReactionRule.triggeringEvent>
+                <R2ML.Events.MessageEventExpression xmi.idref = 'a16'/>
+              </R2ML.Rules.ReactionRule.triggeringEvent>
+              <R2ML.Rules.ReactionRule.producedAction>
+                <R2ML.Events.MessageEventExpression xmi.id = 'a17' sender = 'http://www.bookingservice.com'>
+                  <R2ML.Events.AtomicEventExpression.type>
+                    <R2ML.Events.MessageType xmi.idref = 'a10'/>
+                  </R2ML.Events.AtomicEventExpression.type>
+                  <R2ML.Events.AtomicEventExpression.slot>
+                    <R2ML.Atoms.AtRelational.DataSlot xmi.id = 'a18'>
+                      <R2ML.Atoms.AtRelational.DataSlot.value>
+                        <R2ML.Vocabulary.VocBasic.TypedLiteral xmi.idref = 'a19'/>
+                      </R2ML.Atoms.AtRelational.DataSlot.value>
+                      <R2ML.Atoms.AtRelational.DataSlot.attribute>
+                        <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a20'/>
+                      </R2ML.Atoms.AtRelational.DataSlot.attribute>
+                    </R2ML.Atoms.AtRelational.DataSlot>
+                  </R2ML.Events.AtomicEventExpression.slot>
+                </R2ML.Events.MessageEventExpression>
+              </R2ML.Rules.ReactionRule.producedAction>
+            </R2ML.Rules.ReactionRule>
+            <R2ML.Rules.ReactionRule xmi.id = 'a21' ruleID = '???' groupID = 'tns:checkAvailability'>
+              <R2ML.Rules.ReactionRule.triggeringEvent>
+                <R2ML.Events.MessageEventExpression xmi.idref = 'a16'/>
+              </R2ML.Rules.ReactionRule.triggeringEvent>
+              <R2ML.Rules.ReactionRule.producedAction>
+                <R2ML.Events.MessageEventExpression xmi.id = 'a22' sender = 'http://www.bookingservice.com'>
+                  <R2ML.Events.AtomicEventExpression.type>
+                    <R2ML.Events.FaultMessageType xmi.idref = 'a12'/>
+                  </R2ML.Events.AtomicEventExpression.type>
+                  <R2ML.Events.AtomicEventExpression.slot>
+                    <R2ML.Atoms.AtRelational.DataSlot xmi.id = 'a23'>
+                      <R2ML.Atoms.AtRelational.DataSlot.value>
+                        <R2ML.Vocabulary.VocBasic.TypedLiteral xmi.idref = 'a24'/>
+                      </R2ML.Atoms.AtRelational.DataSlot.value>
+                      <R2ML.Atoms.AtRelational.DataSlot.attribute>
+                        <R2ML.Vocabulary.VocBasic.Attribute xmi.idref = 'a25'/>
+                      </R2ML.Atoms.AtRelational.DataSlot.attribute>
+                    </R2ML.Atoms.AtRelational.DataSlot>
+                  </R2ML.Events.AtomicEventExpression.slot>
+                </R2ML.Events.MessageEventExpression>
+              </R2ML.Rules.ReactionRule.producedAction>
+            </R2ML.Rules.ReactionRule>
+          </R2ML.ReactionRuleSet.rules>
+        </R2ML.ReactionRuleSet>
+      </R2ML.RuleBase.rules>
+    </R2ML.RuleBase>
+    <R2ML.Events.MessageEventExpression xmi.id = 'a16' sender = 'to_be_defined'>
+      <R2ML.Events.AtomicEventExpression.type>
+        <R2ML.Events.MessageType xmi.idref = 'a3'/>
+      </R2ML.Events.AtomicEventExpression.type>
+      <R2ML.Events.AtomicEventExpression.objectVariable>
+        <R2ML.Terms.TerBasic.Variables.ObjectVariable xmi.id = 'a26' typeCategory = 'individual'
+          name = '???'>
+          <R2ML.Terms.TerBasic.Variables.ObjectVariable.classRef>
+            <R2ML.Events.MessageType xmi.idref = 'a3'/>
+          </R2ML.Terms.TerBasic.Variables.ObjectVariable.classRef>
+        </R2ML.Terms.TerBasic.Variables.ObjectVariable>
+      </R2ML.Events.AtomicEventExpression.objectVariable>
+    </R2ML.Events.MessageEventExpression>
+    <R2ML.Vocabulary.VocBasic.TypedLiteral xmi.id = 'a19' lexicalValue = '???'>
+      <R2ML.Vocabulary.VocBasic.TypedLiteral.type>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.TypedLiteral.type>
+    </R2ML.Vocabulary.VocBasic.TypedLiteral>
+    <R2ML.Vocabulary.VocBasic.TypedLiteral xmi.id = 'a24' lexicalValue = '???'>
+      <R2ML.Vocabulary.VocBasic.TypedLiteral.type>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.TypedLiteral.type>
+    </R2ML.Vocabulary.VocBasic.TypedLiteral>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a9' name = 'ex:Customer.custNo'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a28'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a11' name = 'ex:CheckAvailabilityResponse.yesNoAnswer'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a4' name = 'ex:CheckAvailability.checkInDate'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a29'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a5' name = 'ex:CheckAvailability.checkOutDate'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a29'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a6' name = 'ex:CheckAvailability.roomType'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a13' name = 'ex:InvalidDataError.message'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a20' name = 'ex:CheckAvailabilityResponse.yesNoAnswer'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Attribute xmi.id = 'a25' name = 'ex:InvalidDataError.message'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Datatype xmi.idref = 'a27'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.Attribute>
+    <R2ML.Vocabulary.VocBasic.Class xmi.id = 'a30'/>
+    <R2ML.Vocabulary.VocBasic.Datatype xmi.id = 'a28' name = 'xs:decimal' predicateCategory = 'closed'/>
+    <R2ML.Vocabulary.VocBasic.Datatype xmi.id = 'a27' name = 'xs:string' predicateCategory = 'closed'/>
+    <R2ML.Vocabulary.VocBasic.Datatype xmi.id = 'a29' name = 'xs:dateTime' predicateCategory = 'closed'/>
+    <R2ML.Vocabulary.VocBasic.ReferenceProperty xmi.id = 'a7' name = 'ex:Customer'>
+      <R2ML.Vocabulary.VocBasic.Property.range>
+        <R2ML.Vocabulary.VocBasic.Class xmi.idref = 'a8'/>
+      </R2ML.Vocabulary.VocBasic.Property.range>
+    </R2ML.Vocabulary.VocBasic.ReferenceProperty>
+  </XMI.content>
+</XMI>

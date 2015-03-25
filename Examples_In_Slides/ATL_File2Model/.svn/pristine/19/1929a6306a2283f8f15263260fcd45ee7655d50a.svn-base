@@ -1,0 +1,12 @@
+List<List<String>> constraintTypes = new LinkedList<List<String>>();
+List<String> l = new LinkedList<String>();
+l.add("src_Model"); l.add("trg_Model"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_BibTeXFile"); l.add("trg_DocBook"); l.add("trg_Book"); l.add("trg_Article"); l.add("trg_Sect1"); l.add("src_BibTeXEntry"); l.add("src_BibTeXEntry.id"); l.add("trg_DocBook.books"); l.add("trg_Book.articles"); l.add("trg_Article.title"); l.add("trg_Article.sections_1"); l.add("trg_Sect1.title"); l.add("trg_Sect1.paras"); l.add("trg_Para"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_Author"); l.add("trg_Para"); l.add("src_Author.author"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_BibTeXEntry"); l.add("src_TitledEntry"); l.add("trg_Para"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_TitledEntry"); l.add("src_Article"); l.add("trg_Para"); l.add("src_TitledEntry.title"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_TitledEntry"); l.add("src_Article"); l.add("trg_Para"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_Article"); l.add("trg_Para"); l.add("src_Article.title"); l.add("src_Article.journal"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_Article"); l.add("trg_Para"); l.add("src_Article.journal"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_Article"); l.add("trg_Para"); l.add("src_Article.title"); l.add("trg_Para.content"); constraintTypes.add(l);
+l = new LinkedList<String>(); l.add("src_Article"); l.add("trg_Para"); l.add("trg_Para.content"); constraintTypes.add(l);

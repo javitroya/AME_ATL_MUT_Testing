@@ -1,0 +1,9 @@
+-- @atlcompiler emftvm
+module EmptyTrans;
+create OUT : ATL from IN : ATL;
+
+rule DeleteOutPatternElement {
+ from
+  ope : ATL!SimpleOutPatternElement
+ to  
+}

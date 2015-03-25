@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="XML" startLine="2" endLine="27" name="rss">
+  <children xsi:type="Attribute" name="version" value="0.91"/>
+  <children xsi:type="Attribute" name="xmlns:dc" value="http://purl.org/dc/elements/1.1/"/>
+  <children xsi:type="Text" startLine="2" name="#text" value="&#xA;"/>
+  <children xsi:type="Text" startLine="3" name="#text" value="&#xA;"/>
+  <children xsi:type="Element" startLine="4" endLine="25" name="channel">
+    <children xsi:type="Text" startLine="4" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="5" name="#text" value="        "/>
+    <children xsi:type="Element" startLine="5" endLine="5" name="title">
+      <children xsi:type="Text" startLine="5" name="#text" value="Atoute.org"/>
+    </children>
+    <children xsi:type="Text" startLine="5" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="6" name="#text" value="        "/>
+    <children xsi:type="Element" startLine="6" endLine="6" name="link">
+      <children xsi:type="Text" startLine="6" name="#text" value="http://www.atoute.org/"/>
+    </children>
+    <children xsi:type="Text" startLine="6" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="7" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="8" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="9" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="10" name="#text" value="        "/>
+    <children xsi:type="Element" startLine="10" endLine="13" name="item">
+      <children xsi:type="Text" startLine="10" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="11" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="11" endLine="11" name="title">
+        <children xsi:type="Text" startLine="11" name="#text" value="La page du médecin"/>
+      </children>
+      <children xsi:type="Text" startLine="11" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="12" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="12" endLine="12" name="link">
+        <children xsi:type="Text" startLine="12" name="#text" value="http://www.atoute.org/page_du_medecin/spe/mg/mg_1024.htm"/>
+      </children>
+      <children xsi:type="Text" startLine="12" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="13" name="#text" value="        "/>
+    </children>
+    <children xsi:type="Text" startLine="13" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="14" name="#text" value="        "/>
+    <children xsi:type="Text" startLine="14" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="15" name="#text" value="        "/>
+    <children xsi:type="Element" startLine="15" endLine="18" name="item">
+      <children xsi:type="Text" startLine="15" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="16" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="16" endLine="16" name="title">
+        <children xsi:type="Text" startLine="16" name="#text" value="Outils de recherche pour professionnels"/>
+      </children>
+      <children xsi:type="Text" startLine="16" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="17" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="17" endLine="17" name="link">
+        <children xsi:type="Text" startLine="17" name="#text" value="http://www.atoute.org/medecine_pro.htm"/>
+      </children>
+      <children xsi:type="Text" startLine="17" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="18" name="#text" value="        "/>
+    </children>
+    <children xsi:type="Text" startLine="18" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="19" name="#text" value="        "/>
+    <children xsi:type="Text" startLine="19" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="20" name="#text" value="        "/>
+    <children xsi:type="Element" startLine="20" endLine="23" name="item">
+      <children xsi:type="Text" startLine="20" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="21" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="21" endLine="21" name="title">
+        <children xsi:type="Text" startLine="21" name="#text" value="Dictionnaires médicaux"/>
+      </children>
+      <children xsi:type="Text" startLine="21" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="22" name="#text" value="        "/>
+      <children xsi:type="Element" startLine="22" endLine="22" name="link">
+        <children xsi:type="Text" startLine="22" name="#text" value="http://www.atoute.org/dictionnaire_medical.htm"/>
+      </children>
+      <children xsi:type="Text" startLine="22" name="#text" value="&#xA;"/>
+      <children xsi:type="Text" startLine="23" name="#text" value="        "/>
+    </children>
+    <children xsi:type="Text" startLine="23" name="#text" value="&#xA;"/>
+    <children xsi:type="Text" startLine="24" name="#text" value="                    "/>
+    <children xsi:type="Text" startLine="24" name="#text" value="&#xA;"/>
+  </children>
+  <children xsi:type="Text" startLine="25" name="#text" value="&#xA;"/>
+  <children xsi:type="Text" startLine="26" name="#text" value="&#xA;"/>
+</Root>

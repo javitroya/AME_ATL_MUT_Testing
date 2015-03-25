@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ruletypesmm="http://ruletypesmm/1.0">
+  <ruletypesmm:Trafo name="SM2LUT">
+    <rules name="SM2LUT">
+      <inputTypes name="StateMachine"/>
+      <outputTypes name="LookUpTable"/>
+    </rules>
+    <rules name="T2C">
+      <inputTypes name="Transition"/>
+      <outputTypes name="Change"/>
+    </rules>
+  </ruletypesmm:Trafo>
+  <ruletypesmm:Rule name="createEvent">
+    <inputTypes/>
+    <outputTypes name="Event"/>
+  </ruletypesmm:Rule>
+</xmi:XMI>

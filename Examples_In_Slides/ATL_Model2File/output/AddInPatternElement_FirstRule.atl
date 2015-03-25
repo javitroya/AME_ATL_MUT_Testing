@@ -1,0 +1,28 @@
+-- @atlcompiler emftvm
+module AddInPatternElement;
+create OUT : ATL refining IN : ATL;
+
+-- The SimpleInPatternElement that this transformation adds will look like this
+-- at this stage:       z : -same model as s-!CompleteIt_IM
+rule AddInPatternElement {
+ from
+  s : ATL!InPattern
+  (
+   ATL!Rule.allInstances()->first() = s.rule
+  )
+ --We will add the SIPE only in the first rule
+ --We will add the SIPE only in the first rule
+ to
+  t : ATL!InPattern (
+   elements <- s.elements->append(newIPE)
+  ),
+  newIPE : ATL!SimpleInPatternElement (
+   varName <- 'z',
+   type <- newOCLType
+  ),
+  -- The type is composed of a model and a name: model!name
+  newOCLType : ATL!OclModelElement (
+   model <- s.elements->first().type.model,
+   name <- 'PetriNet'
+  )
+}

@@ -1,0 +1,17 @@
+-- @atlcompiler emftvm
+
+module Public2Private1;
+create OUT : UML refining IN : UML;
+
+--Rule to modify an element
+rule Property {
+	from
+		p_src : UML!Property (
+			p_src.visibility = #public
+		)
+	to
+		p_trg : UML!Property (
+			visibility <- #private
+		)
+}
+

@@ -1,0 +1,67 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<description xmlns = 'http://www.w3.org/2006/01/wsdl' targetNamespace = 'http://www.bookingservice.com/?wsdl' xmlns:tns = 'http://www.bookingservice.com/?wsdl' xmlns:wsoap = 'http://www.w3.org/2006/01/wsdl/soap' xmlns:soap = 'http://www.w3.org/2003/05/soap-envelope' xmlns:ex = 'http://www.bookingservice.com/schema'>
+  <types>
+    <xs:schema xmlns:xs = 'http://www.w3.org/2001/XMLSchema' targetNamespace = 'http://www.bookingservice.com/schema' xmlns = 'http://www.bookingservice.com/schema'>
+      <xs:element name = 'ex:Customer'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:Customer.custNo' type = 'xs:integer'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = 'ex:CheckAvailability'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:CheckAvailability.checkInDate' type = 'xs:dateTime'/>
+            <xs:element name = 'ex:CheckAvailability.checkOutDate' type = 'xs:dateTime'/>
+            <xs:element name = 'ex:CheckAvailability.roomType' type = 'xs:integer'/>
+            <xs:element ref = 'ex:Customer'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = 'ex:InvalidDataError'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:InvalidDataError.message' type = 'xs:string'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = 'ex:CheckAvailabilityResponse'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:CheckAvailabilityResponse.yesNoAnswer' type = 'xs:boolean'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = 'ex:Room'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:Room.isAvailable' type = 'xs:boolean'/>
+            <xs:element name = 'ex:Room.roomNo' type = 'xs:integer'/>
+            <xs:element name = 'ex:Room.roomType' type = 'xs:integer'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name = 'ex:Booking'>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name = 'ex:Booking.from' type = 'xs:float'/>
+            <xs:element name = 'ex:Booking.to' type = 'xs:float'/>
+            <xs:element ref = 'ex:Room'/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <interface name = 'tns:reservationInterface'>
+    <fault name = 'ex:InvalidDataError' element = 'ex:InvalidDataError'/>
+    <operation name = 'tns:checkAvailability' pattern = 'http://www.w3.org/2006/01/wsdl/in-out'>
+      <input messageLabel = 'In' element = 'ex:CheckAvailability'/>
+      <output messageLabel = 'Out' element = 'ex:CheckAvailabilityResponse'/>
+      <outfault messageLabel = 'Out' ref = 'ex:InvalidDataError'/>
+    </operation>
+  </interface>
+  <service name = 'tns:reservationService' interface = 'tns:reservationInterface'>
+    <endpoint name = 'tns:reservationEndpoint' binding = 'temp_value' address = 'http://www.bookingservice.com'/>
+  </service>
+</description>

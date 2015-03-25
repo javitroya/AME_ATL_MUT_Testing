@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="3:1-23:2" name="AddInPatternElement" isRefining="true">
+    <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
+    <inModels location="4:27-4:35" name="IN" metamodel="/1"/>
+    <outModels location="4:8-4:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="8:1-23:2" name="AddInPatternElement">
+      <commentsBefore>-- The SimpleInPatternElement that this transformation adds will look like this</commentsBefore>
+      <commentsBefore>-- at this stage:       z : -same model as s-!CompleteIt_IM</commentsBefore>
+      <outPattern location="11:2-22:3">
+        <commentsBefore>--We will add the SIPE only in the first rule</commentsBefore>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="11:5-13:3" varName="t">
+          <type xsi:type="ocl:OclModelElement" location="11:9-11:22" name="InPattern" model="/1"/>
+          <bindings location="12:3-12:43" propertyName="elements">
+            <value xsi:type="ocl:CollectionOperationCallExp" location="12:15-12:43" operationName="append">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="12:15-12:25" name="elements">
+                <source xsi:type="ocl:VariableExp" location="12:15-12:16" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="12:36-12:42" referredVariable="/0/@elements.0/@outPattern/@elements.1"/>
+            </value>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="14:2-17:3" varName="newIPE" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@arguments.0">
+          <type xsi:type="ocl:OclModelElement" location="14:11-14:37" name="SimpleInPatternElement" model="/1"/>
+          <bindings location="15:3-15:17" propertyName="varName">
+            <value xsi:type="ocl:StringExp" location="15:14-15:17" stringSymbol="z"/>
+          </bindings>
+          <bindings location="16:3-16:21" propertyName="type">
+            <value xsi:type="ocl:VariableExp" location="16:11-16:21" referredVariable="/0/@elements.0/@outPattern/@elements.2"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="19:2-22:3" varName="newOCLType" variableExp="/0/@elements.0/@outPattern/@elements.1/@bindings.1/@value">
+          <commentsBefore>-- The type is composed of a model and a name: model!name</commentsBefore>
+          <type xsi:type="ocl:OclModelElement" location="19:15-19:34" name="OclModelElement" model="/1"/>
+          <bindings location="20:3-20:42" propertyName="model">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="20:12-20:42" name="model">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="20:12-20:36" name="type">
+                <source xsi:type="ocl:CollectionOperationCallExp" location="20:12-20:31" operationName="first">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="20:12-20:22" name="elements">
+                    <source xsi:type="ocl:VariableExp" location="20:12-20:13" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                  </source>
+                </source>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="21:3-21:26" propertyName="name">
+            <value xsi:type="ocl:StringExp" location="21:11-21:26" stringSymbol="PetriNet"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="9:2-10:48">
+        <commentsAfter>--We will add the SIPE only in the first rule</commentsAfter>
+        <elements xsi:type="atl:SimpleInPatternElement" location="9:7-9:24" varName="s" variableExp="/0/@elements.0/@inPattern/@filter/@arguments.0/@source /0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source /0/@elements.0/@outPattern/@elements.2/@bindings.0/@value/@source/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="9:11-9:24" name="InPattern" model="/1"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="10:4-10:47" operationName="=">
+          <source xsi:type="ocl:CollectionOperationCallExp" location="10:4-10:36" operationName="first">
+            <source xsi:type="ocl:OperationCallExp" location="10:4-10:27" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="10:4-10:12" name="Rule" model="/1"/>
+            </source>
+          </source>
+          <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="10:39-10:47" name="rule">
+            <source xsi:type="ocl:VariableExp" location="10:39-10:40" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="4:14-4:17" name="ATL" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.0/@inPattern/@filter/@source/@source/@source /0/@elements.0/@outPattern/@elements.0/@type /0/@elements.0/@outPattern/@elements.1/@type /0/@elements.0/@outPattern/@elements.2/@type" model="/0/@outModels.0 /0/@inModels.0"/>
+</xmi:XMI>

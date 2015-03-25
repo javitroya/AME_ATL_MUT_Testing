@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="">
+  <ExampleModel moduleName="Public2Private"/>
+  <OutPatternElement ruleName="CreateGetter4PublicProperties" numBindings="1"/>
+  <OutPatternElement ruleName="CreateGetter4PublicProperties" numBindings="4"/>
+  <OutPatternElement ruleName="CreateGetter4PublicProperties" numBindings="2"/>
+  <OutPatternElement ruleName="FirstCapital4PrivateMethods" numBindings="1"/>
+</xmi:XMI>

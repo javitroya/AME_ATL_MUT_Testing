@@ -1,0 +1,52 @@
+package Pa_1 {
+	class Cl_A extends Cl_B {
+		attribute att_a : String;
+	}
+	class Cl_B extends Cl_C {
+	}
+	class Cl_C extends Cl_D {
+		attribute att_a : Integer;
+	}
+	class Cl_D extends Cl_B {
+	}
+}
+
+package Pa_2 {
+	class Cl_H {
+	}
+	class Cl_F {
+		reference ref_a : Cl_G oppositeOf ref_c;
+		reference ref_b : Cl_G oppositeOf ref_d;
+	}
+	class Cl_G {
+		reference ref_c : Cl_F;
+		reference ref_d : Cl_F oppositeOf ref_a;
+	}
+	class Cl_H {
+	}
+}
+
+package Pa_3 {
+	class Cl_I {
+	}
+	class Cl_J {
+		attribute att_b : Cl_I;
+		reference ref_e : Integer;
+	}
+}
+
+package Pa_4 {
+	class Cl_K {
+		reference ref_a : Cl_M oppositeOf ref_b;
+	}
+	class Cl_L extends Cl_K {
+	}
+	class Cl_M {
+		reference ref_b : Cl_L oppositeOf ref_a;
+	}
+}
+
+package PrimitiveTypes {
+	datatype String;
+	datatype Integer;
+}

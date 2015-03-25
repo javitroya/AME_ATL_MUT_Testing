@@ -1,0 +1,55 @@
+<project xmlns:ant="jelly:ant" default="build">
+  <ant:path id="classpath">
+    <ant:fileset dir="${jwsdp.home}/common/lib">
+      <ant:include name="*.jar"/>
+    </ant:fileset>
+  </ant:path>
+  <ant:property name="example" value="GSApp"/>
+  <ant:property name="path" value="/${example}"/>
+  <ant:property name="build" value="${jwsdp.home}/docs/tutorial/examples/${example}/build"/>
+  <ant:property name="url" value="http://localhost:8080/manager"/>
+  <ant:property file="build.properties"/>
+  <ant:property file="${user.home}/build.properties"/>
+  <ant:taskdef name="install" classname="org.apache.catalina.ant.InstallTask"/>
+  <ant:taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask"/>
+  <ant:taskdef name="remove" classname="org.apache.catalina.ant.RemoveTask"/>
+  <goal name="init">
+    <ant:tstamp/>
+  </goal>
+  <goal name="prepare">
+    <attainGoal name="init"/>
+    <ant:mkdir ant:dir="${build}"/>
+    <ant:mkdir ant:dir="${build}/WEB-INF"/>
+    <ant:mkdir ant:dir="${build}/WEB-INF/classes"/>
+  </goal>
+  <goal name="install">
+    <attainGoal name="build"/>
+    <install url="${url}" username="${username}" password="${password}" path="${path}" war="file:${build}"/>
+  </goal>
+  <goal name="reload">
+    <attainGoal name="build"/>
+    <reload url="${url}" username="${username}" password="${password}" path="${path}"/>
+  </goal>
+  <goal name="remove">
+    <remove url="${url}" username="${username}" password="${password}" path="${path}"/>
+  </goal>
+  <goal name="build">
+    <attainGoal name="prepare"/>
+    <ant:javac srcdir="src" destdir="${build}/WEB-INF/classes">
+      <ant:include name="**/*.java"/>
+      <ant:classpath refid="classpath"/>
+    </ant:javac>
+    <ant:copy todir="${build}/WEB-INF">
+      <ant:fileset dir="web/WEB-INF">
+        <ant:include name="web.xml"/>
+      </ant:fileset>
+    </ant:copy>
+    <ant:copy todir="${build}">
+      <ant:fileset dir="web">
+        <ant:include name="*.html"/>
+        <ant:include name="*.jsp"/>
+        <ant:include name="*.gif"/>
+      </ant:fileset>
+    </ant:copy>
+  </goal>
+</project>

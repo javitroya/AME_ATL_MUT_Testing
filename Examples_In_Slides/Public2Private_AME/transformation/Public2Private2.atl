@@ -1,0 +1,15 @@
+-- @atlcompiler emftvm
+
+module Public2Private2;
+create OUT : UML refining IN : UML;
+
+rule Property {
+	from
+		c : UML!Class
+	to
+		p : UML!Property (
+			name <- 'New property',
+			class <- c
+		)
+}
+

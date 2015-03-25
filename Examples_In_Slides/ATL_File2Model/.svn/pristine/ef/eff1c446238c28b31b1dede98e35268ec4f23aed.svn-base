@@ -1,0 +1,127 @@
+<project name="WSDL2R2ML" default="transformAll">
+
+	<!-- property name="parentDir" value="./WSDL2R2ML"/ -->
+	<property name="parentDir" value="."/>
+	<property name="r2ml.metamodel.dir" value="${parentDir}/metamodels/r2ml"/>
+	<property name="wsdl.metamodel.dir" value="${parentDir}/metamodels/wsdl"/>
+	<property name="xml.metamodel.dir" value="${parentDir}/metamodels/xml"/>
+	
+	<property name="wsdl-xml.model.dir" value="${parentDir}/models/wsdl-xml"/>
+	<property name="r2ml-xml.model.dir" value="${parentDir}/models/r2ml-xml"/>
+	
+	<property name="r2ml2xml.outmodel.dir" value="${parentDir}/outModels/R2ML2XML"/>
+	<property name="xml2wsdl.transf.dir" value="${parentDir}/transformations/XML2WSDL"/>
+	<property name="wsdl2r2ml.transf.dir" value="${parentDir}/transformations/WSDL2R2ML"/>
+	<property name="r2ml2xml.transf.dir" value="${parentDir}/transformations/R2ML2XML"/>
+	<property name="wsdl2xml.outmodel.dir" value="${parentDir}/outModels/WSDL2XML"/>
+	<property name="xml2r2ml.transf.dir" value="${parentDir}/transformations/XML2R2ML"/>
+	<property name="r2ml2wsdl.transf.dir" value="${parentDir}/transformations/R2ML2WSDL"/>
+	<property name="wsdl2xml.transf.dir" value="${parentDir}/transformations/WSDL2XML"/>
+
+	
+	<target name="transformAll">
+		<antcall target="transformWSDL2R2ML" inheritall="true" inheritrefs="true" />
+		
+		<antcall target="transformR2ML2WSDL" inheritall="true" inheritrefs="true" />
+	</target>
+	
+	<target name="transformWSDL2R2ML" depends="loadModels">
+		<property name="source.model" value="${wsdl-xml.model.dir}/hotelReservation.wsdl.xml"/>
+		<property name="target.model" value="${r2ml2xml.outmodel.dir}/r2ml_out.xml"/>
+
+		<echo message="Transforming ${source.model}"/>
+		
+		<!-- Inject source model -->
+		<am3.loadModel modelHandler="MDR" name="xmlModel" metamodel="XML" path="${source.model}">
+			<injector name="xml"/>
+		</am3.loadModel>
+
+		<!-- Transform XML model into WSDL model -->
+		<am3.atl path="${xml2wsdl.transf.dir}/XML2WSDL.atl">
+			<inModel name="IN" model="xmlModel"/>
+			<inModel name="XML" model="XML"/>
+			<inModel name="WSDL" model="WSDL"/>
+			<outModel name="OUT" model="wsdlModel" metamodel="WSDL"/>
+			<library name="XMLHelpers" path="${xml2wsdl.transf.dir}/XMLHelpers.asm" />
+		</am3.atl>
+		
+		<!-- am3.saveModel model="wsdlModel" path="${target.model}" / -->
+
+		<!-- Transform WSDL model into R2ML model -->
+		<am3.atl path="${wsdl2r2ml.transf.dir}/WSDL2R2ML.atl">
+			<inModel name="IN" model="wsdlModel"/>
+			<inModel name="WSDL" model="WSDL"/>
+			<inModel name="R2ML" model="R2ML"/>
+			<outModel name="OUT" model="r2mlModel" metamodel="R2ML"/>
+			<!-- library name="strings" path="${wsdl2r2ml.transf.dir}/strings.asm" / -->
+		</am3.atl>
+		
+		<!-- Transform R2ML model into XML model -->
+		<am3.atl path="${r2ml2xml.transf.dir}/R2ML2XML.atl">
+			<inModel name="IN" model="r2mlModel"/>
+			<inModel name="R2ML" model="R2ML"/>
+			<inModel name="XML" model="XML"/>
+			<outModel name="OUT" model="xmlModel" metamodel="XML"/>
+		</am3.atl>
+
+		<!-- Extract output model  -->
+		<am3.saveModel model="xmlModel" path="${target.model}">
+			<extractor name="xml"/>
+		</am3.saveModel>
+	</target>
+	
+
+	<target name="transformR2ML2WSDL" depends="loadModels">
+		<property name="source.model" value="${r2ml-xml.model.dir}/R2ML_RR.xml"/>
+		<property name="target.model" value="${wsdl2xml.outmodel.dir}/wsdl_out.xml"/>
+
+		<echo message="Transforming ${source.model}"/>
+		
+		<!-- Inject source model -->
+		<am3.loadModel modelHandler="MDR" name="xmlModel2" metamodel="XML" path="${source.model}">
+			<injector name="xml"/>
+		</am3.loadModel>
+
+		<!-- Transform XML model into R2ML model -->
+		<am3.atl path="${xml2r2ml.transf.dir}/XML2R2ML.atl">
+			<inModel name="IN" model="xmlModel2"/>
+			<inModel name="XML" model="XML"/>
+			<inModel name="R2ML" model="R2ML"/>
+			<outModel name="OUT" model="r2mlModel" metamodel="R2ML"/>
+			<library name="XMLHelpers" path="${xml2r2ml.transf.dir}/XMLHelpers.asm" />
+		</am3.atl>
+		
+		<!-- Transform R2ML model into WSDL model -->
+		<am3.atl path="${r2ml2wsdl.transf.dir}/R2ML2WSDL.atl">
+			<inModel name="IN" model="r2mlModel"/>
+			<inModel name="R2ML" model="R2ML"/>
+			<inModel name="WSDL" model="WSDL"/>
+			<outModel name="OUT" model="wsdlModel" metamodel="WSDL"/>
+		</am3.atl>
+		
+		<!-- Transform WSDL model into XML model -->
+		<am3.atl path="${wsdl2xml.transf.dir}/WSDL2XML.atl">
+			<inModel name="IN" model="wsdlModel"/>
+			<inModel name="WSDL" model="WSDL"/>
+			<inModel name="XML" model="XML"/>
+			<outModel name="OUT" model="xmlModel2" metamodel="XML"/>
+		</am3.atl>
+
+		<!-- Extract output model  -->
+		<am3.saveModel model="xmlModel2" path="${target.model}">
+			<extractor name="xml"/>
+		</am3.saveModel>
+	</target>
+
+	<target name="loadModels">
+		<!-- Load XML metamodel -->
+		<am3.loadModel modelHandler="MDR" name="XML" metamodel="MOF" path="${xml.metamodel.dir}/XML.xmi" />
+
+		<!-- Load WSDL metamodel -->
+		<am3.loadModel modelHandler="MDR" name="WSDL" metamodel="MOF" path="${wsdl.metamodel.dir}/wsdl.xmi" />
+
+		<!-- Load R2ML metamodel -->
+		<am3.loadModel modelHandler="MDR" name="R2ML" metamodel="MOF" path="${r2ml.metamodel.dir}/r2ml.xmi" />
+		
+	</target>	
+</project>

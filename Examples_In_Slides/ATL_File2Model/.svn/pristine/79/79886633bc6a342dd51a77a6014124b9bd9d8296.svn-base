@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<channel>
+        <title>Atoute.org</title>
+        <link>http://www.atoute.org/</link>
+
+<!-- liste des pages à indexer (1 à 6 pour les MMT) -->
+
+        <item>
+        <title>La page du médecin</title>
+        <link>http://www.atoute.org/page_du_medecin/spe/mg/mg_1024.htm</link>
+        </item>
+        
+        <item>
+        <title>Outils de recherche pour professionnels</title>
+        <link>http://www.atoute.org/medecine_pro.htm</link>
+        </item>
+        
+        <item>
+        <title>Dictionnaires médicaux</title>
+        <link>http://www.atoute.org/dictionnaire_medical.htm</link>
+        </item>
+                    
+</channel>
+
+</rss>

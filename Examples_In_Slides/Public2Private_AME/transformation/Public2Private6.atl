@@ -1,0 +1,28 @@
+-- @atlcompiler emftvm
+
+module Public2Private6;
+create OUT : UML refining IN : UML;
+
+helper context String def: firstToUpper() : String =
+	self.substring(1, 1).toUpper() + self.substring(2, self.size());
+
+rule Public2Private {
+	from
+		p_src : UML!Property (p_src.visibility = #public)
+	to
+		p_trg : UML!Property (
+			visibility <- #private
+		)
+}
+
+rule FirstCapital4PrivateMethods{
+	from
+		p_src : UML!Property (p_src.visibility = #private)
+	to
+		p_trg : UML!Property(
+			name <- p_src.name.firstToUpper()	
+		)
+}
+
+
+

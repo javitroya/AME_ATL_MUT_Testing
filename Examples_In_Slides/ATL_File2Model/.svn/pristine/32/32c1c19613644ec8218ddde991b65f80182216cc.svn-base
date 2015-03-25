@@ -1,0 +1,89 @@
+-- @path SimpleUML=/UML2ER/Metamodels/SimpleUml.ecore
+-- @path ER=/UML2ER/Metamodels/ER.ecore
+
+module UML2ER;
+create OUT : ER from IN : SimpleUML;
+
+--R1
+abstract rule NamedElement{
+	from s : SimpleUML!NamedElement
+	to t : ER!Element(name <- s.name)
+}
+
+--R2
+rule Package extends NamedElement{
+	from
+		s: SimpleUML!Package
+	to
+		t: ER!ERModel (
+			entities <- s.ownedElements	
+		)
+}
+
+--R3
+rule Class extends NamedElement{
+	from s: SimpleUML!Class
+	to t: ER!EntityType (
+		features <- s.ownedProperties
+		)
+}
+
+--R4
+abstract rule Property extends NamedElement{
+	from s: SimpleUML!Property	
+	to t: ER!Feature (
+	)
+}
+
+--R5
+rule Attributes extends Property{
+	from s: SimpleUML!Property,
+		 s1: SimpleUML!Package (not s.primitiveType.oclIsUndefined() or s1.ownedElements.size()=1 and s1.oclIsTypeOf(SimpleUML!NamedElement))
+	to t: ER!Attribute ()
+}
+
+--R6
+abstract rule References extends Property{
+	from s: SimpleUML!Class,
+		 s1: SimpleUML!Package (s1.name='nombre' and s.ops<>#first and s.name='clase' and s.ownedProperty.oclIsTypeOf(SimpleUML!NamedElement))
+	to t: ER!Reference (
+			type <- s.complexType 
+	)
+}
+
+--R7
+rule WeakReferences extends References{
+	from s: SimpleUML!Property,
+		 s1: SimpleUML!Package (not s.isContainment)
+	to t: ER!WeakReference (
+		name <- s.name,
+		type <- t1
+	),
+	t1: ER!EntityType(
+		name <- s1.name.concat(s.name),
+		features <- Set{}, -- aquí hay que recuperar también el tipo
+		enm <- #one
+	),
+	t2: ER!StrongReference(
+		name <- 'HOLA',
+		type <- s.complexType -- aquí hay que recuperar también el tipo
+	)
+}
+
+--R8
+rule StrongReferences extends References{
+	from
+		s: SimpleUML!Property (s.isContainment)
+	to t: ER!StrongReference 
+}
+
+--R9
+rule SubClasses{
+	from
+		s: SimpleUML!ClassSub
+	to
+		t: ER!EntityType(
+			--features <- s.superClasses -> collect(e|e.name)	
+			features <- s.superClasses -> select(f|f.name='hola') -> collect(e|e.ownedProperty.complexType)
+		)
+}

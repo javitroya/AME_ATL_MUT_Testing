@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="SPL">
+  <service name="unnamed">
+    <declarations xsi:type="LocalFunctionDeclaration" name="voicemail">
+      <returnType xsi:type="SimpleType" type="response"/>
+      <statements xsi:type="ReturnStat">
+        <returnedValue xsi:type="WithExp">
+          <exp xsi:type="ConstantExp">
+            <value xsi:type="ResponseConstant">
+              <response xsi:type="RedirectionErrorResponse" errorKind="MOVED_TEMPORARILY"/>
+            </value>
+          </exp>
+          <msgFields xsi:type="ReasonMessageField">
+            <exp xsi:type="ConstantExp">
+              <value xsi:type="StringConstant" value="unspecified"/>
+            </exp>
+          </msgFields>
+          <msgFields xsi:type="HeadedMessageField" headerId="#contact:">
+            <exp xsi:type="ConstantExp">
+              <value xsi:type="URIConstant" uri="sip:jones@voicemail.example.com"/>
+            </exp>
+          </msgFields>
+        </returnedValue>
+      </statements>
+    </declarations>
+    <sessions xsi:type="Dialog">
+      <methods direction="in">
+        <type xsi:type="SimpleType" type="response"/>
+        <methodName xsi:type="SIPMethodName" name="INVITE"/>
+        <statements xsi:type="CompoundStat">
+          <statements xsi:type="DeclarationStat">
+            <declaration xsi:type="VariableDeclaration" name="r">
+              <type xsi:type="SimpleType" type="response"/>
+              <initExp xsi:type="ForwardExp">
+                <exp xsi:type="ConstantExp">
+                  <value xsi:type="URIConstant" uri="sip:jones@phone.example.com"/>
+                </exp>
+              </initExp>
+            </declaration>
+          </statements>
+          <statements xsi:type="SelectStat">
+            <matchedExp xsi:type="Variable" source="//@service/@sessions.0/@methods.0/@statements.0/@statements.0/@declaration"/>
+            <selectCases>
+              <commentsBefore>// busy</commentsBefore>
+              <statements xsi:type="ReturnStat">
+                <returnedValue xsi:type="FunctionCallExp">
+                  <functionCall function="//@service/@declarations.0"/>
+                </returnedValue>
+              </statements>
+              <values xsi:type="ResponseConstant">
+                <response xsi:type="ClientErrorResponse" errorKind="BUSY_HERE"/>
+              </values>
+            </selectCases>
+            <selectCases>
+              <commentsBefore>// noanswer</commentsBefore>
+              <statements xsi:type="SelectStat">
+                <matchedExp xsi:type="SIPHeaderPlace" header="FROM"/>
+                <selectCases>
+                  <statements xsi:type="ReturnStat">
+                    <returnedValue xsi:type="ForwardExp">
+                      <exp xsi:type="ConstantExp">
+                        <value xsi:type="URIConstant" uri="tel:+19175551212"/>
+                      </exp>
+                    </returnedValue>
+                  </statements>
+                  <values xsi:type="StringConstant" value="sip:boss@example.com"/>
+                </selectCases>
+                <selectDefault>
+                  <statements xsi:type="ReturnStat">
+                    <returnedValue xsi:type="FunctionCallExp">
+                      <functionCall function="//@service/@declarations.0"/>
+                    </returnedValue>
+                  </statements>
+                </selectDefault>
+              </statements>
+              <values xsi:type="ResponseConstant">
+                <response xsi:type="ClientErrorResponse" errorKind="REQUEST_TIMEOUT"/>
+              </values>
+            </selectCases>
+          </statements>
+        </statements>
+      </methods>
+    </sessions>
+  </service>
+</Program>

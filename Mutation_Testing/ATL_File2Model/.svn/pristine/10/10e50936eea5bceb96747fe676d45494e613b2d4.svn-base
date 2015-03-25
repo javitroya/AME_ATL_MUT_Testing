@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<Channel>
+  <title>Example ATOM</title>
+  <link>http://example.org</link>
+  <description>Insert witty or insightful remark here</description>
+  <language></language>
+  <copyright></copyright>
+  <managingEditor>John Doe</managingEditor>
+  <webmaster>johndoe@example.com</webmaster>
+  <generator></generator>
+  <pubDate></pubDate>
+  <lastBuildDate>2003-12-13T18:30:02Z</lastBuildDate>
+  <items>
+    <Item>
+      <title>Atom-Powered Robots Run Amok</title>
+      <link>http://example.org/2003/12/13/atom03</link>
+      <comments>Some text.</comments>
+      <description></description>
+      <author></author>
+      <guid>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</guid>
+      <category/>
+    </Item>
+  </items>
+  <category>
+    <category>
+      <domain>lesheme1</domain>
+      <value>lelabel</value>
+    </category>
+  </category>
+  <docs></docs>
+  <ttl></ttl>
+  <rating></rating>
+</Channel>

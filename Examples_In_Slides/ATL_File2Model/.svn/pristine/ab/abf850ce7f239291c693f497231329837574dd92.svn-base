@@ -1,0 +1,253 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<XMI xmi.version = '1.2' timestamp = 'Fri Jul 27 10:00:07 CEST 2007'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <XML.Attribute xmi.id = 'a1' name = 'name'/>
+    <XML.Attribute xmi.id = 'a2' name = 'name'/>
+    <XML.Attribute xmi.id = 'a3' name = 'name'/>
+    <XML.Attribute xmi.id = 'a4' name = 'name'/>
+    <XML.Attribute xmi.id = 'a5' name = 'name'/>
+    <XML.Attribute xmi.id = 'a6' name = 'name'/>
+    <XML.Attribute xmi.id = 'a7' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a8' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a9' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a10' name = 'name' value = 'ex:CheckAvailability.customer'/>
+    <XML.Attribute xmi.id = 'a11' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a12' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a13' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a14' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a15' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a16' name = 'name' value = 'ex:Booking.room'/>
+    <XML.Attribute xmi.id = 'a17' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a18' name = 'ref'/>
+    <XML.Attribute xmi.id = 'a19' name = 'ref'/>
+    <XML.Root xmi.id = 'a20' name = 'description'>
+      <XML.Element.children>
+        <XML.Attribute xmi.id = 'a21' name = 'xmlns' value = 'http://www.w3.org/2006/01/wsdl'/>
+        <XML.Attribute xmi.id = 'a22' name = 'targetNamespace' value = 'http://www.bookingservice.com/?wsdl'/>
+        <XML.Attribute xmi.id = 'a23' name = 'xmlns:tns' value = 'http://www.bookingservice.com/?wsdl'/>
+        <XML.Attribute xmi.id = 'a24' name = 'xmlns:wsoap' value = 'http://www.w3.org/2006/01/wsdl/soap'/>
+        <XML.Attribute xmi.id = 'a25' name = 'xmlns:soap' value = 'http://www.w3.org/2003/05/soap-envelope'/>
+        <XML.Attribute xmi.id = 'a26' name = 'xmlns:ex' value = 'http://www.bookingservice.com/schema'/>
+        <XML.Element xmi.id = 'a27' name = 'types'>
+          <XML.Element.children>
+            <XML.Element xmi.id = 'a28' name = 'xs:schema'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a29' name = 'xmlns:xs' value = 'http://www.w3.org/2001/XMLSchema'/>
+                <XML.Attribute xmi.id = 'a30' name = 'targetNamespace' value = 'http://www.bookingservice.com/schema'/>
+                <XML.Attribute xmi.id = 'a31' name = 'xmlns' value = 'http://www.bookingservice.com/schema'/>
+                <XML.Element xmi.id = 'a32' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a33' name = 'name' value = 'ex:Customer'/>
+                    <XML.Element xmi.id = 'a34' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a35' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a36' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a37' name = 'name' value = 'ex:Customer.custNo'/>
+                                <XML.Attribute xmi.id = 'a38' name = 'type' value = 'xs:integer'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a39' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a40' name = 'name' value = 'ex:CheckAvailability'/>
+                    <XML.Element xmi.id = 'a41' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a42' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a43' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a44' name = 'name' value = 'ex:CheckAvailability.checkInDate'/>
+                                <XML.Attribute xmi.id = 'a45' name = 'type' value = 'xs:dateTime'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a46' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a47' name = 'name' value = 'ex:CheckAvailability.checkOutDate'/>
+                                <XML.Attribute xmi.id = 'a48' name = 'type' value = 'xs:dateTime'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a49' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a50' name = 'name' value = 'ex:CheckAvailability.roomType'/>
+                                <XML.Attribute xmi.id = 'a51' name = 'type' value = 'xs:integer'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a52' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a53' name = 'ref' value = 'ex:Customer'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a54' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a55' name = 'name' value = 'ex:InvalidDataError'/>
+                    <XML.Element xmi.id = 'a56' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a57' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a58' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a59' name = 'name' value = 'ex:InvalidDataError.message'/>
+                                <XML.Attribute xmi.id = 'a60' name = 'type' value = 'xs:string'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a61' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a62' name = 'name' value = 'ex:CheckAvailabilityResponse'/>
+                    <XML.Element xmi.id = 'a63' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a64' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a65' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a66' name = 'name' value = 'ex:CheckAvailabilityResponse.yesNoAnswer'/>
+                                <XML.Attribute xmi.id = 'a67' name = 'type' value = 'xs:boolean'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a68' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a69' name = 'name' value = 'ex:Room'/>
+                    <XML.Element xmi.id = 'a70' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a71' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a72' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a73' name = 'name' value = 'ex:Room.isAvailable'/>
+                                <XML.Attribute xmi.id = 'a74' name = 'type' value = 'xs:boolean'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a75' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a76' name = 'name' value = 'ex:Room.roomNo'/>
+                                <XML.Attribute xmi.id = 'a77' name = 'type' value = 'xs:integer'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a78' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a79' name = 'name' value = 'ex:Room.roomType'/>
+                                <XML.Attribute xmi.id = 'a80' name = 'type' value = 'xs:integer'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a81' name = 'xs:element'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a82' name = 'name' value = 'ex:Booking'/>
+                    <XML.Element xmi.id = 'a83' name = 'xs:complexType'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a84' name = 'xs:sequence'>
+                          <XML.Element.children>
+                            <XML.Element xmi.id = 'a85' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a86' name = 'name' value = 'ex:Booking.from'/>
+                                <XML.Attribute xmi.id = 'a87' name = 'type' value = 'xs:float'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a88' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a89' name = 'name' value = 'ex:Booking.to'/>
+                                <XML.Attribute xmi.id = 'a90' name = 'type' value = 'xs:float'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                            <XML.Element xmi.id = 'a91' name = 'xs:element'>
+                              <XML.Element.children>
+                                <XML.Attribute xmi.id = 'a92' name = 'ref' value = 'ex:Room'/>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+        <XML.Element xmi.id = 'a93' name = 'interface'>
+          <XML.Element.children>
+            <XML.Attribute xmi.id = 'a94' name = 'name' value = 'tns:reservationInterface'/>
+            <XML.Element xmi.id = 'a95' name = 'fault'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a96' name = 'name' value = 'ex:InvalidDataError'/>
+                <XML.Attribute xmi.id = 'a97' name = 'element' value = 'ex:InvalidDataError'/>
+              </XML.Element.children>
+            </XML.Element>
+            <XML.Element xmi.id = 'a98' name = 'operation'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a99' name = 'name' value = 'tns:checkAvailability'/>
+                <XML.Attribute xmi.id = 'a100' name = 'pattern' value = 'http://www.w3.org/2006/01/wsdl/in-out'/>
+                <XML.Element xmi.id = 'a101' name = 'input'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a102' name = 'messageLabel' value = 'In'/>
+                    <XML.Attribute xmi.id = 'a103' name = 'element' value = 'ex:CheckAvailability'/>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a104' name = 'output'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a105' name = 'messageLabel' value = 'Out'/>
+                    <XML.Attribute xmi.id = 'a106' name = 'element' value = 'ex:CheckAvailabilityResponse'/>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a107' name = 'outfault'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a108' name = 'messageLabel' value = 'Out'/>
+                    <XML.Attribute xmi.id = 'a109' name = 'ref' value = 'ex:InvalidDataError'/>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+        <XML.Element xmi.id = 'a110' name = 'service'>
+          <XML.Element.children>
+            <XML.Attribute xmi.id = 'a111' name = 'name' value = 'tns:reservationService'/>
+            <XML.Attribute xmi.id = 'a112' name = 'interface' value = 'tns:reservationInterface'/>
+            <XML.Element xmi.id = 'a113' name = 'endpoint'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a114' name = 'name' value = 'tns:reservationEndpoint'/>
+                <XML.Attribute xmi.id = 'a115' name = 'binding' value = 'temp_value'/>
+                <XML.Attribute xmi.id = 'a116' name = 'address' value = 'http://www.bookingservice.com'/>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+      </XML.Element.children>
+    </XML.Root>
+  </XMI.content>
+</XMI>

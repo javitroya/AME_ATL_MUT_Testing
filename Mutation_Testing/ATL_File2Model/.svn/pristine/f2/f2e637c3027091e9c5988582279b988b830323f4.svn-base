@@ -1,0 +1,761 @@
+package WSDL {
+
+	enumeration MEP {
+		literal inoptionalout;
+		literal outoptionalin;
+		literal robust_in_only;
+		literal outonly;
+		literal inout;
+		literal robustoutonly;
+		literal outin;
+		literal inonly;
+	}
+
+	enumeration TransmissionProtocol {
+		literal HTTP;
+		literal SMTP;
+	}
+
+	enumeration HTTPMethod {
+		literal POST;
+		literal GET;
+	}
+
+	enumeration SOAPMEP {
+		literal soapresponse;
+		literal requestresponse;
+	}
+
+	enumeration OperationStyle {
+		literal IRI;
+		literal Multipart;
+		literal RPC;
+	}
+
+	enumeration MessageFormat {
+		literal SOAP12;
+		literal SOAP11;
+		literal HTTP;
+	}
+
+	enumeration XsAttributeUseCategory {
+		literal prohibited;
+		literal optional;
+		literal required;
+	}
+
+	enumeration XsCardinality {
+		literal countablyInfinite;
+		literal finite;
+	}
+
+	enumeration XsComplexFinal {
+		literal all;
+		literal restriction;
+		literal extension;
+	}
+
+	enumeration XsCompositor {
+		literal all;
+		literal choice;
+		literal sequence;
+	}
+
+	enumeration XsConstraint {
+		literal fixed;
+		literal default;
+	}
+
+	enumeration XsContentTypeCategory {
+		literal elementOnly;
+		literal mixed;
+		literal simple;
+		literal empty;
+	}
+
+	enumeration XsDerivationMethod {
+		literal extension;
+		literal restriction;
+	}
+
+	enumeration XsDiagnosticSeverity {
+		literal fatal;
+		literal warning;
+		literal error;
+		literal information;
+	}
+
+	enumeration XsDisallowedSubstitutions {
+		literal extension;
+		literal substitution;
+		literal all;
+		literal restriction;
+	}
+
+	enumeration XsForm {
+		literal unqualified;
+		literal qualified;
+	}
+
+	enumeration XsIdentityConstraintCategory {
+		literal keyref;
+		literal "unique";
+		literal key;
+	}
+
+	enumeration XsNamespaceConstraintCategory {
+		literal set;
+		literal not;
+		literal any;
+	}
+
+	enumeration XsOrdered {
+		literal total;
+		literal partial;
+	}
+
+	enumeration XsProcessContents {
+		literal skip;
+		literal lax;
+		literal strict;
+	}
+
+	enumeration XsProhibitedSubstitutions {
+		literal extension;
+		literal restriction;
+		literal all;
+	}
+
+	enumeration XsSimpleFinal {
+		literal list;
+		literal restriction;
+		literal all;
+		literal union;
+	}
+
+	enumeration XsSubstitutionGroupExclusions {
+		literal restriction;
+		literal extension;
+	}
+
+	enumeration XsVariety {
+		literal union;
+		literal list;
+		literal atomic;
+	}
+
+	enumeration XsWhiteSpace {
+		literal replace;
+		literal collapse;
+		literal preserve;
+	}
+
+	enumeration XsXPathVariety {
+		literal field;
+		literal selector;
+	}
+
+	enumeration FaultCodeEnum {
+		literal Sender;
+		literal MustUnderstand;
+		literal DataEncodingUnknown;
+		literal VersionMismatch;
+		literal Receiver;
+	}
+	
+	class EObject {
+		
+	}
+
+	class SOAPConversationalMessage extends SOAPMessage {
+		
+	}
+
+	class SOAPMessage {
+		reference header[0-1] container : SOAPMessageHeader;
+		reference body container : SOAPMessageBody;
+	}
+
+	class SOAPMessageBody {
+		reference children[1-*] container : SOAPMessageBodyChild;
+	}
+
+	class SOAPMessageBodyChild {
+		attribute localName : String;
+		attribute namespaceName[0-1] : String;
+		attribute encodingStyle[0-1] : String;
+	}
+
+	class SOAPMessageHeader {
+		reference headerBlocks[1-*] container : SOAPMessageHeaderBlock;
+	}
+
+	class SOAPMessageHeaderBlock {
+		attribute namespaceName : String;
+		attribute localName : String;
+		attribute encodingStyle[0-1] : String;
+		attribute mustUnderstand[0-1] : Boolean;
+		attribute role[0-1] : String;
+		attribute relay[0-1] : Boolean;
+	}
+
+	class Fault {
+		reference reason container : Reason;
+		reference node[0-1] container : Node;
+		reference code container : Code;
+		reference infault[*] : Infault;
+		reference outfault[*] : Outfault;
+		attribute name : String;
+		reference element : XsElementDeclaration;
+		attribute elementNS : String;
+	}
+
+	class Code {
+		reference subCode[0-1] container : SubCode;
+		reference baseFault container : Value1;
+	}
+
+	class Value1 {
+		
+	}
+
+	class SubCode {
+		reference subCodeA[0-1] container : SubCode;
+		reference value container : Value1;
+	}
+
+	class Node {
+		
+	}
+
+	class Reason {
+		reference text[1-*] container : Text;
+	}
+
+	class Text {
+		
+	}
+
+	class Service {
+		reference interface : Interface;
+		reference endpoint[1-*] container : Endpoint;
+		attribute name : String;
+		attribute interfaceNS : String;
+	}
+
+	class Endpoint {
+		reference binding : Binding;
+		attribute name : String;
+		attribute address : String;
+		attribute bindingNS : String;
+	}
+
+	class Binding {
+		reference bindingFault[*] container : BindingFault;
+		reference interface : Interface;
+		reference bindingOperation[*] container : BindingOperation;
+		attribute name : String;
+		attribute type : MessageFormat;
+		attribute wsoap_protocol[0-1] : TransmissionProtocol;
+		attribute wsoap_version[0-1] : Integer;
+		attribute whttp_methodDefault[0-1] : HTTPMethod;
+		attribute interfaceNS : String;
+	}
+
+	class BindingOperation {
+		reference "operation" : Operation;
+		attribute wsoap_mep[0-1] : SOAPMEP;
+		attribute whttp_method[0-1] : HTTPMethod;
+		attribute operationNS : String;
+	}
+
+	class BindingFault {
+		reference fault : Fault;
+		attribute wsoap_code[0-1] : FaultCodeEnum;
+		attribute faultNS : String;
+	}
+	
+	class Operation {
+		reference infault[*] container : Infault;
+		reference outfault[*] container : Outfault;
+		reference output[*] container : Output;
+		reference input[*] container : Input;
+		attribute name : String;
+		attribute pattern : MEP;
+		attribute style[0-1] : OperationStyle;
+		attribute wsdlx_safe[0-1] : Boolean;
+	}
+
+	class Input {
+		attribute messageLabel : String;
+		reference element : XsElementDeclaration;
+		attribute elementNS : String;
+	}
+
+	class Output {
+		attribute messageLabel : String;
+		reference element : XsElementDeclaration;
+		attribute elementNS : String;
+	}
+	
+	class Infault {
+		attribute messageLabel : String;
+		reference fault : Fault;
+		attribute faultNS : String;
+	}
+
+	class Outfault {
+		attribute messageLabel : String;
+		reference fault : Fault;
+		attribute faultNS : String;
+	}
+
+	class Interface {
+		reference fault[*] container : Fault;
+		reference "operation"[*] container : Operation;
+		attribute name : String;
+	}
+
+	class SOAPNode {
+		
+	}
+
+	class SOAPRPCResponseMessage extends SOAPMessage {
+		
+	}
+
+	class SOAPRPCRequestMessage extends SOAPMessage {
+		
+	}
+
+	class SOAPCommunication {
+		
+	}
+
+	class ElementType {
+		reference schema[0-1] : XsSchema;
+	}
+
+	class Description {
+		reference types[1-*] container : ElementType;
+		reference binding[*] container : Binding;
+		reference service[*] container : Service;
+		reference interface[*] container : Interface;
+	}
+
+	class Schema {
+		reference elementType[1-*] container : ElementType;
+		attribute language : String;
+	}
+	
+-- ------------------------------------------------------------------------
+
+	package Xs {
+
+	class XsAnnotation extends XsRedefineContent {
+	}
+
+	class XsAttributeDeclaration extends XsFeature {
+		attribute attributeDeclarationReference[0-1] : Boolean;
+		reference annotation[0-1] container : XsAnnotation;
+		reference anonymousTypeDefinition[0-1] container : XsSimpleTypeDefinition;
+		reference typeDefinition : XsSimpleTypeDefinition;
+		reference resolvedAttributeDeclaration : XsAttributeDeclaration;
+	}
+
+	abstract class XsAttributeGroupContent extends XsConcreteComponent {
+		
+	}
+
+	class XsAttributeGroupDefinition extends XsRedefinableComponent {
+		attribute attributeGroupDefinitionReference[0-1] : Boolean;
+		reference annotation[0-1] container : XsAnnotation;
+		reference contents[*] ordered container : XsAttributeGroupContent;
+		reference attributeUses[*] ordered : XsAttributeUse;
+		reference attributeWildcardContent[0-1] container : XsWildcard;
+		reference attributeWildcard[0-1] : XsWildcard;
+		reference resolvedAttributeGroupDefinition : XsAttributeGroupDefinition;
+		reference syntheticWildcard[0-1] container : XsWildcard;
+	}
+
+	class XsAttributeUse extends XsAttributeGroupContent {
+		attribute required[0-1] : Boolean;
+		attribute constraint[0-1] : XsConstraint;
+		attribute use[0-1] : XsAttributeUseCategory;
+		attribute lexicalValue[0-1] : String;
+		reference attributeDeclaration : XsAttributeDeclaration;
+		reference content container : XsAttributeDeclaration;
+	}
+
+	class XsBoundedFacet extends XsFundamentalFacet {
+		attribute value[0-1] : Boolean;
+	}
+
+	class XsCardinalityFacet extends XsFundamentalFacet {
+		attribute value[0-1] : XsCardinality;
+	}
+
+	abstract class XsComplexTypeContent extends XsComponent {
+		
+	}
+
+	class XsComplexTypeDefinition extends XsTypeDefinition {
+		attribute derivationMethod[0-1] : XsDerivationMethod;
+		attribute final[*] ordered : XsComplexFinal;
+		attribute "abstract"[0-1] : Boolean;
+		attribute contentTypeCategory[0-1] : XsContentTypeCategory;
+		attribute prohibitedSubstitutions[*] ordered : XsProhibitedSubstitutions;
+		attribute lexicalFinal[*] ordered : XsComplexFinal;
+		attribute block[*] ordered : XsProhibitedSubstitutions;
+		attribute mixed[0-1] : Boolean;
+		reference contentAnnotation[0-1] container : XsAnnotation;
+		reference baseTypeDefinition : XsTypeDefinition;
+		reference content[0-1] container : XsComplexTypeContent;
+		reference contentType[0-1] : XsComplexTypeContent;
+		reference attributeUses[*] ordered : XsAttributeUse;
+		reference attributeContents[*] ordered container : XsAttributeGroupContent;
+		reference attributeWildcard[0-1] : XsWildcard;
+		reference attributeWildcardContent[0-1] container : XsWildcard;
+		reference rootTypeDefinition : XsTypeDefinition;
+		reference syntheticParticle[0-1] container : XsParticle;
+		reference syntheticWildcard[0-1] container : XsWildcard;
+	}
+
+	abstract class XsComponent extends XsConcreteComponent {
+		
+	}
+
+	abstract class XsConcreteComponent {
+		reference "container"[0-1] : XsConcreteComponent;
+		reference rootContainer : XsConcreteComponent;
+		reference schema[0-1] : XsSchema;
+		reference diagnostics[*] ordered container : XsDiagnostic;
+	}
+
+	abstract class XsConstrainingFacet extends XsFacet {
+		
+	}
+
+	class XsDiagnostic extends XsConcreteComponent {
+		attribute severity[0-1] : XsDiagnosticSeverity;
+		attribute message[0-1] : String;
+		attribute locationURI[0-1] : String;
+		attribute line[0-1] : Integer;
+		attribute column[0-1] : Integer;
+		attribute annotationURI[0-1] : String;
+		attribute key[0-1] : String;
+		attribute substitutions[*] ordered : String;
+		reference components[1-*] ordered : XsConcreteComponent;
+		reference primaryComponent : XsConcreteComponent;
+	}
+
+	class XsElementDeclaration extends XsTerm {
+		attribute nillable[0-1] : Boolean;
+		attribute disallowedSubstitutions[*] ordered : XsDisallowedSubstitutions;
+		attribute substitutionGroupExclusions[*] ordered : XsSubstitutionGroupExclusions;
+		attribute "abstract"[0-1] : Boolean;
+		attribute lexicalFinal[*] ordered : XsProhibitedSubstitutions;
+		attribute block[*] ordered : XsDisallowedSubstitutions;
+		attribute elementDeclarationReference[0-1] : Boolean;
+		attribute circular[0-1] : Boolean;
+		reference annotation[0-1] container : XsAnnotation;
+		reference anonymousTypeDefinition[0-1] container : XsTypeDefinition;
+		reference typeDefinition : XsTypeDefinition;
+		reference identityConstraintDefinitions[*] ordered container : XsIdentityConstraintDefinition;
+		reference resolvedElementDeclaration : XsElementDeclaration;
+		reference substitutionGroupAffiliation[0-1] : XsElementDeclaration;
+		reference substitutionGroup[*] ordered : XsElementDeclaration;
+	}
+
+	class XsEnumerationFacet extends XsRepeatableFacet {
+	}
+
+	abstract class XsFacet extends XsComponent {
+		attribute lexicalValue[0-1] : String;
+		attribute facetName[0-1] : String;
+		reference annotation[0-1] container : XsAnnotation;
+		reference simpleTypeDefinition[0-1] : XsSimpleTypeDefinition;
+	}
+
+	abstract class XsFeature extends XsNamedComponent {
+		attribute constraint[0-1] : XsConstraint;
+		attribute form[0-1] : XsForm;
+		attribute lexicalValue[0-1] : String;
+		attribute global[0-1] : Boolean;
+		attribute featureReference[0-1] : Boolean;
+		reference scope[0-1] : XsScope;
+		reference resolvedFeature : XsFeature;
+		reference type : XsTypeDefinition;
+	}
+
+	abstract class XsFixedFacet extends XsConstrainingFacet {
+		attribute fixed[0-1] : Boolean;
+	}
+
+	class XsFractionDigitsFacet extends XsFixedFacet {
+		attribute value[0-1] : Integer;
+	}
+
+	abstract class XsFundamentalFacet extends XsFacet {
+		
+	}
+
+	class XsIdentityConstraintDefinition extends XsNamedComponent {
+		attribute identityConstraintCategory[0-1] : XsIdentityConstraintCategory;
+		reference annotation[0-1] container : XsAnnotation;
+		reference referencedKey[0-1] : XsIdentityConstraintDefinition;
+		reference selector container : XsXPathDefinition;
+		reference fields[1-*] ordered container : XsXPathDefinition;
+	}
+
+	class XsImport extends XsSchemaDirective {
+		attribute namespace[0-1] : String;
+		reference annotation[0-1] container : XsAnnotation;
+	}
+
+	class XsInclude extends XsSchemaCompositor {
+		reference annotation[0-1] container : XsAnnotation;
+	}
+
+	class XsLengthFacet extends XsFixedFacet {
+		attribute value[0-1] : Integer;
+	}
+
+	class XsMaxExclusiveFacet extends XsMaxFacet {
+		
+	}
+
+	abstract class XsMaxFacet extends XsFixedFacet {
+		attribute inclusive[0-1] : Boolean;
+		attribute exclusive[0-1] : Boolean;
+	}
+
+	class XsMaxInclusiveFacet extends XsMaxFacet {
+		
+	}
+
+	class XsMaxLengthFacet extends XsFixedFacet {
+		attribute value[0-1] : Integer;
+	}
+
+	class XsMinExclusiveFacet extends XsMinFacet {
+		
+	}
+
+	abstract class XsMinFacet extends XsFixedFacet {
+		attribute inclusive[0-1] : Boolean;
+		attribute exclusive[0-1] : Boolean;
+	}
+
+	class XsMinInclusiveFacet extends XsMinFacet {
+		
+	}
+
+	class XsMinLengthFacet extends XsFixedFacet {
+		attribute value[0-1] : Integer;
+	}
+
+	class XsModelGroup extends XsTerm {
+		attribute compositor[0-1] : XsCompositor;
+		reference annotation[0-1] container : XsAnnotation;
+		reference contents[*] ordered container : XsParticle;
+		reference particles[1-*] ordered : XsParticle;
+	}
+
+ 	class XsModelGroupDefinition extends XsRedefinableComponent {
+		attribute modelGroupDefinitionReference[0-1] : Boolean;
+		reference annotation[0-1] container : XsAnnotation;
+		reference modelGroup container : XsModelGroup;
+		reference resolvedModelGroupDefinition : XsModelGroupDefinition;
+	}
+ 
+	abstract class XsNamedComponent extends XsComponent {
+		attribute name[0-1] : String;
+		attribute targetNamespace[0-1] : String;
+		attribute aliasName[0-1] : String;
+		attribute uRI[0-1] : String;
+		attribute aliasURI[0-1] : String;
+		attribute qName[0-1] : String;
+	}
+
+	class XsNotationDeclaration extends XsNamedComponent {
+		attribute systemIdentifier[0-1] : String;
+		attribute publicIdentifier[0-1] : String;
+		reference annotation[0-1] container : XsAnnotation;
+	}
+
+	class XsNumericFacet extends XsFundamentalFacet {
+		attribute value[0-1] : Boolean;
+	}
+
+	class XsOrderedFacet extends XsFundamentalFacet {
+		attribute value[0-1] : XsOrdered;
+	}
+
+	class XsParticle extends XsComplexTypeContent {
+		attribute minOccurs[0-1] : Integer;
+		attribute maxOccurs[0-1] : Integer;
+		reference content container : XsParticleContent;
+		reference term : XsTerm;
+	}
+
+	abstract class XsParticleContent extends XsFeature {
+		
+	}
+
+	class XsPatternFacet extends XsRepeatableFacet {
+		attribute value[*] ordered : String;
+	}
+
+	abstract class XsRedefinableComponent extends XsNamedComponent {
+		attribute circular[0-1] : Boolean;
+	}
+
+	abstract class XsRedefineContent extends XsSchemaContent {
+		
+	}
+
+	class XsRedefine extends XsSchemaCompositor {
+		reference annotations[*] ordered : XsAnnotation;
+		reference contents[*] ordered container : XsRedefineContent;
+	}
+
+	abstract class XsRepeatableFacet extends XsConstrainingFacet {
+		reference annotations[*] ordered : XsAnnotation;
+	}
+
+	class XsSchema extends XsScope {
+		attribute schemaLocation[0-1] : String;
+		attribute targetNamespace[0-1] : String;
+		attribute attributeFormDefault[0-1] : XsForm;
+		attribute elementFormDefault[0-1] : XsForm;
+		attribute finalDefault[*] ordered : XsProhibitedSubstitutions;
+		attribute blockDefault[*] ordered : XsDisallowedSubstitutions;
+		attribute version[0-1] : String;
+		reference contents[*] ordered container : XsSchemaContent;
+		reference elementDeclarations[*] ordered : XsElementDeclaration;
+		reference attributeDeclarations[*] ordered : XsAttributeDeclaration;
+		reference attributeGroupDefinitions[*] ordered : XsAttributeGroupDefinition;
+		reference typeDefinitions[*] ordered : XsTypeDefinition;
+		reference modelGroupDefinitions[*] ordered : XsModelGroupDefinition;
+		reference identityConstraintDefinitions[*] ordered : XsIdentityConstraintDefinition;
+		reference notationDeclarations[*] ordered : XsNotationDeclaration;
+		reference annotations[*] ordered : XsAnnotation;
+		reference allDiagnostics[*] ordered : XsDiagnostic;
+		reference referencingDirectives[*] ordered : XsSchemaDirective;
+		reference rootVersion : XsSchema;
+		reference originalVersion[0-1] : XsSchema;
+		reference incorporatedVersions[*] ordered container : XsSchema;
+		reference schemaForSchema : XsSchema;
+	}
+
+	abstract class XsSchemaCompositor extends XsSchemaDirective {
+		reference incorporatedSchema[0-1] : XsSchema;
+	}
+
+	abstract class XsSchemaContent extends XsConcreteComponent {
+		
+	}
+ 
+	abstract class XsSchemaDirective extends XsSchemaContent {
+		attribute schemaLocation[0-1] : String;
+		reference resolvedSchema[0-1] : XsSchema;
+	}
+
+	abstract class XsScope extends XsComponent {
+		
+	}
+
+	class XsSimpleTypeDefinition extends XsTypeDefinition  {
+		attribute variety[0-1] : XsVariety;
+		attribute final[*] ordered : XsSimpleFinal;
+		attribute lexicalFinal[*] ordered : XsSimpleFinal;
+		attribute validFacets[*] ordered : String;
+		reference contents[*] ordered container : XsSimpleTypeDefinition;
+		reference facetContents[*] ordered container : XsConstrainingFacet;
+		reference facets[*] ordered : XsConstrainingFacet;
+		reference memberTypeDefinitions[*] ordered : XsSimpleTypeDefinition;
+		reference fundamentalFacets[1-*] ordered container : XsFundamentalFacet;
+		reference baseTypeDefinition : XsSimpleTypeDefinition;
+		reference primitiveTypeDefinition[0-1] : XsSimpleTypeDefinition;
+		reference itemTypeDefinition[0-1] : XsSimpleTypeDefinition;
+		reference rootTypeDefinition : XsSimpleTypeDefinition;
+		reference minFacet[0-1] : XsMinFacet;
+		reference maxFacet[0-1] : XsMaxFacet;
+		reference maxInclusiveFacet[0-1] : XsMaxInclusiveFacet;
+		reference minInclusiveFacet[0-1] : XsMinInclusiveFacet;
+		reference minExclusiveFacet[0-1] : XsMinExclusiveFacet;
+		reference maxExclusiveFacet[0-1] : XsMaxExclusiveFacet;
+		reference lengthFacet[0-1] : XsLengthFacet;
+		reference whiteSpaceFacet[0-1] : XsWhiteSpaceFacet;
+		reference enumerationFacets[*] ordered : XsEnumerationFacet;
+		reference patternFacets[*] ordered : XsPatternFacet;
+		reference cardinalityFacet : XsCardinalityFacet;
+		reference numericFacet : XsNumericFacet;
+		reference maxLengthFacet[0-1] : XsMaxLengthFacet;
+		reference minLengthFacet[0-1] : XsMinLengthFacet;
+		reference totalDigitsFacet[0-1] : XsTotalDigitsFacet;
+		reference fractionDigitsFacet[0-1] : XsFractionDigitsFacet;
+		reference orderedFacet : XsOrderedFacet;
+		reference boundedFacet : XsBoundedFacet;
+		reference effectiveMaxFacet[0-1] : XsMaxFacet;
+		reference effectiveWhiteSpaceFacet[0-1] : XsWhiteSpaceFacet;
+		reference effectiveMaxLengthFacet[0-1] : XsMaxLengthFacet;
+		reference effectiveFractionDigitsFacet[0-1] : XsFractionDigitsFacet;
+		reference effectivePatternFacet[0-1] : XsPatternFacet;
+		reference effectiveEnumerationFacet[0-1] : XsEnumerationFacet;
+		reference effectiveTotalDigitsFacet[0-1] : XsTotalDigitsFacet;
+		reference effectiveMinLengthFacet[0-1] : XsMinLengthFacet;
+		reference effectiveLengthFacet[0-1] : XsLengthFacet;
+		reference effectiveMinFacet[0-1] : XsMinFacet;
+		reference syntheticFacets[*] ordered container : XsFacet;
+	}
+
+	abstract class XsTerm extends XsParticleContent {
+		
+	}
+
+	class XsTotalDigitsFacet extends XsFixedFacet {
+		attribute value[0-1] : Integer;
+	}
+
+	abstract class XsTypeDefinition extends XsRedefinableComponent {
+		reference annotation[0-1] container : XsAnnotation;
+		reference derivationAnnotation[0-1] container : XsAnnotation;
+		reference annotations[*] ordered : XsAnnotation;
+		reference rootType : XsTypeDefinition;
+		reference baseType : XsTypeDefinition;
+		reference simpleType[0-1] : XsSimpleTypeDefinition;
+		reference complexType[0-1] : XsParticle;
+	}
+
+	class XsWhiteSpaceFacet extends XsFixedFacet {
+		attribute value[0-1] : XsWhiteSpace;
+	}
+
+	class XsWildcard extends XsTerm {
+		attribute namespaceConstraintCategory[0-1] : XsNamespaceConstraintCategory;
+		attribute namespaceConstraint[*] ordered : String;
+		attribute processContents[0-1] : XsProcessContents;
+		attribute lexicalNamespaceConstraint[*] ordered : String;
+		reference annotation[0-1] container : XsAnnotation;
+		reference annotations[*] ordered : XsAnnotation;
+	}
+
+	class XsXPathDefinition extends XsComponent {
+		attribute variety[0-1] : XsXPathVariety;
+		attribute value[0-1] : String;
+		reference annotation[0-1] container : XsAnnotation;
+	}
+ 
+	}
+}
+
+package PrimitiveTypes {
+
+	datatype Integer;
+
+	datatype Boolean;
+
+	datatype String;
+}

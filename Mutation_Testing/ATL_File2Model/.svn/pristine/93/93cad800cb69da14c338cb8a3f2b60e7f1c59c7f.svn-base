@@ -1,0 +1,325 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<XMI xmi.version = '1.2' timestamp = 'Fri Jul 27 09:59:54 CEST 2007'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <WSDL.Description xmi.id = 'a1'>
+      <WSDL.Description.service>
+        <WSDL.Service xmi.id = 'a2' name = 'tns:reservationService'>
+          <WSDL.Service.interface>
+            <WSDL.Interface xmi.idref = 'a3'/>
+          </WSDL.Service.interface>
+          <WSDL.Service.endpoint>
+            <WSDL.Endpoint xmi.id = 'a4' name = 'tns:reservationEndpoint' address = 'http://www.bookingservice.com'/>
+          </WSDL.Service.endpoint>
+        </WSDL.Service>
+      </WSDL.Description.service>
+      <WSDL.Description.interface>
+        <WSDL.Interface xmi.id = 'a3' name = 'tns:reservationInterface'>
+          <WSDL.Interface.fault>
+            <WSDL.Fault xmi.id = 'a5' name = 'ex:InvalidDataError'>
+              <WSDL.Fault.element>
+                <WSDL.Xs.XsElementDeclaration xmi.idref = 'a6'/>
+              </WSDL.Fault.element>
+            </WSDL.Fault>
+          </WSDL.Interface.fault>
+          <WSDL.Interface.operation>
+            <WSDL.Operation xmi.id = 'a7' name = 'tns:checkAvailability' pattern = 'inout'>
+              <WSDL.Operation.input>
+                <WSDL.Input xmi.id = 'a8' messageLabel = 'In'>
+                  <WSDL.Input.element>
+                    <WSDL.Xs.XsElementDeclaration xmi.idref = 'a9'/>
+                  </WSDL.Input.element>
+                </WSDL.Input>
+              </WSDL.Operation.input>
+              <WSDL.Operation.outfault>
+                <WSDL.Outfault xmi.id = 'a10' messageLabel = 'Out'>
+                  <WSDL.Outfault.fault>
+                    <WSDL.Fault xmi.idref = 'a5'/>
+                  </WSDL.Outfault.fault>
+                </WSDL.Outfault>
+              </WSDL.Operation.outfault>
+              <WSDL.Operation.output>
+                <WSDL.Output xmi.id = 'a11' messageLabel = 'Out'>
+                  <WSDL.Output.element>
+                    <WSDL.Xs.XsElementDeclaration xmi.idref = 'a12'/>
+                  </WSDL.Output.element>
+                </WSDL.Output>
+              </WSDL.Operation.output>
+            </WSDL.Operation>
+          </WSDL.Interface.operation>
+        </WSDL.Interface>
+      </WSDL.Description.interface>
+      <WSDL.Description.types>
+        <WSDL.ElementType xmi.id = 'a13'>
+          <WSDL.ElementType.schema>
+            <WSDL.Xs.XsSchema xmi.idref = 'a14'/>
+          </WSDL.ElementType.schema>
+        </WSDL.ElementType>
+      </WSDL.Description.types>
+    </WSDL.Description>
+    <WSDL.Xs.XsSimpleTypeDefinition xmi.id = 'a15' name = 'xs:integer'/>
+    <WSDL.Xs.XsSimpleTypeDefinition xmi.id = 'a16' name = 'xs:float'/>
+    <WSDL.Xs.XsSimpleTypeDefinition xmi.id = 'a17' name = 'xs:dateTime'/>
+    <WSDL.Xs.XsSimpleTypeDefinition xmi.id = 'a18' name = 'xs:boolean'/>
+    <WSDL.Xs.XsSimpleTypeDefinition xmi.id = 'a19' name = 'xs:string'/>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a20'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a21'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a22'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a23'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a24'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a25'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a26'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a27'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a28'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a29'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a30'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a31'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a32'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a33'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a34'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsComplexTypeDefinition xmi.id = 'a35'>
+      <WSDL.Xs.XsComplexTypeDefinition.content>
+        <WSDL.Xs.XsParticle xmi.id = 'a36'>
+          <WSDL.Xs.XsParticle.term>
+            <WSDL.Xs.XsModelGroup xmi.idref = 'a37'/>
+          </WSDL.Xs.XsParticle.term>
+        </WSDL.Xs.XsParticle>
+      </WSDL.Xs.XsComplexTypeDefinition.content>
+    </WSDL.Xs.XsComplexTypeDefinition>
+    <WSDL.Xs.XsParticle xmi.id = 'a38'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a39' name = 'ex:CheckAvailability.customer'>
+          <WSDL.Xs.XsElementDeclaration.resolvedElementDeclaration>
+            <WSDL.Xs.XsElementDeclaration xmi.idref = 'a40'/>
+          </WSDL.Xs.XsElementDeclaration.resolvedElementDeclaration>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a41'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a42' name = 'ex:Booking.room'>
+          <WSDL.Xs.XsElementDeclaration.resolvedElementDeclaration>
+            <WSDL.Xs.XsElementDeclaration xmi.idref = 'a43'/>
+          </WSDL.Xs.XsElementDeclaration.resolvedElementDeclaration>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a44'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a45' name = 'isAvaillable'/>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a46'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a47' name = 'ex:Customer.custNo'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a15'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a48'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a49' name = 'ex:Booking.to'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a16'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a50'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a51' name = 'ex:CheckAvailability.roomType'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a15'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a52'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a53' name = 'ex:Room.roomNo'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a15'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a54'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a55' name = 'ex:CheckAvailability.checkOutDate'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a17'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a56'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a57' name = 'ex:CheckAvailabilityResponse.yesNoAnswer'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a18'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a58'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a59' name = 'ex:Booking.from'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a16'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a60'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a61' name = 'ex:InvalidDataError.message'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a19'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a62'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a63' name = 'ex:CheckAvailability.checkInDate'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a17'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a64'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a65' name = 'ex:Room.isAvailable'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a18'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsParticle xmi.id = 'a66'>
+      <WSDL.Xs.XsParticle.content>
+        <WSDL.Xs.XsElementDeclaration xmi.id = 'a67' name = 'ex:Room.roomType'>
+          <WSDL.Xs.XsElementDeclaration.typeDefinition>
+            <WSDL.Xs.XsSimpleTypeDefinition xmi.idref = 'a15'/>
+          </WSDL.Xs.XsElementDeclaration.typeDefinition>
+        </WSDL.Xs.XsElementDeclaration>
+      </WSDL.Xs.XsParticle.content>
+    </WSDL.Xs.XsParticle>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a22' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a64'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a52'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a66'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a25' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a46'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a28' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a58'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a48'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a41'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a31' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a56'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a34' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a62'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a54'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a50'/>
+        <WSDL.Xs.XsParticle xmi.idref = 'a38'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsModelGroup xmi.id = 'a37' compositor = 'sequence'>
+      <WSDL.Xs.XsModelGroup.particles>
+        <WSDL.Xs.XsParticle xmi.idref = 'a60'/>
+      </WSDL.Xs.XsModelGroup.particles>
+    </WSDL.Xs.XsModelGroup>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a43' name = 'ex:Room'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a20'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a40' name = 'ex:Customer'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a23'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a68' name = 'ex:Booking'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a26'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a12' name = 'ex:CheckAvailabilityResponse'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a29'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a9' name = 'ex:CheckAvailability'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a32'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsElementDeclaration xmi.id = 'a6' name = 'ex:InvalidDataError'>
+      <WSDL.Xs.XsElementDeclaration.typeDefinition>
+        <WSDL.Xs.XsComplexTypeDefinition xmi.idref = 'a35'/>
+      </WSDL.Xs.XsElementDeclaration.typeDefinition>
+    </WSDL.Xs.XsElementDeclaration>
+    <WSDL.Xs.XsSchema xmi.id = 'a14' schemaLocation = 'http://www.w3.org/2006/01/wsdl'
+      targetNamespace = 'http://www.bookingservice.com/?wsdl'>
+      <WSDL.Xs.XsSchema.elementDeclarations>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a40'/>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a9'/>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a6'/>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a12'/>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a43'/>
+        <WSDL.Xs.XsElementDeclaration xmi.idref = 'a68'/>
+      </WSDL.Xs.XsSchema.elementDeclarations>
+    </WSDL.Xs.XsSchema>
+  </XMI.content>
+</XMI>

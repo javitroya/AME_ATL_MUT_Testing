@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="SimpleUml" nsURI="http://SimpleUML" nsPrefix="SimpleUml">
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedProperty" upperBound="-1"
+        eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="superClasses" upperBound="-1"
+        eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ops" eType="#//EnumCounter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="package" eType="#//Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="primitiveType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="complexType" eType="#//Class"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isContainment" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElements" upperBound="-1"
+        eType="#//Class" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="casas" eType="#//Casa"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumCounter">
+    <eLiterals name="first"/>
+    <eLiterals name="second" value="1"/>
+    <eLiterals name="third" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassSub" eSuperTypes="#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Casa">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="barco" eType="#//Barco"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rooms" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Avion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="casas" eType="#//Casa"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Barco">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aviones" eType="#//Avion"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ab" eType="#//Airbus"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Airbus" eSuperTypes="#//Avion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classsub" eType="#//ClassSub"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Boing" eSuperTypes="#//Avion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="city" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

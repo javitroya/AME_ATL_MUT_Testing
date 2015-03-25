@@ -1,0 +1,834 @@
+package PrimitiveTypes {
+
+	datatype Boolean;
+
+	datatype Double;
+
+	datatype Float;
+
+	datatype Integer;
+
+	datatype Long;
+
+	datatype String;
+}
+	
+	
+package R2ML {
+
+	enumeration CollectionTypes {
+		literal set;
+		literal orderedSet;
+		literal bag;
+		literal individual;
+		literal sequence;
+	}
+
+	enumeration ExternalVocabularyLanguage {
+		literal RDFS;
+		literal UML;
+		literal OWL;
+	}
+
+	enumeration PredicateCategory {
+		literal partial;
+		literal closed;
+		literal open;
+	}	
+
+	enumeration PredicateType {
+		literal AttributionPredicate;
+		literal InequalityPredicate;
+		literal EqualityPredicate;
+		literal AssociationPredicate;
+		literal DataClassificationPredicate;
+		literal DatatypePredicate;
+		literal ObjectClassificationPredicate;
+		literal ReferencePropertyPredicate;
+	}
+
+	enumeration FaultCodeEnum {
+		literal Sender;
+		literal VersionMismatch;
+		literal MustUnderstand;
+		literal Reciever;
+		literal DataEncodingUnknown;
+	}
+	
+			
+				
+	class DerivationRuleSet extends RuleSet {
+		reference rules[*] container : DerivationRule;
+	}
+
+	abstract class RuleSet {
+		attribute ruleSetID[0-1] : String;
+		reference variables[*] : Variable;
+		reference externalVocabulary[0-1] : ExternalVocabulary;
+		reference vocabularies[0-1] container : Vocabulary;
+	}
+
+	class IntegrityRuleSet extends RuleSet {
+		reference rules[*] container : IntegrityRule;
+	}
+
+	class RuleBase {
+		attribute ruleBaseID[0-1] : String;
+		reference vocabularies[0-1] container : Vocabulary;
+		reference externalVocabulaires[*] : ExternalVocabulary;
+		reference rules[*] container : RuleSet;
+	}
+
+	class ProductionRuleSet extends RuleSet {
+		reference rules[*] container : ProductionRule;
+	}
+
+	class ReactionRuleSet extends RuleSet {
+		reference rules[*] container : ReactionRule;
+	}
+
+	package Terms {
+
+		abstract class DataTerm extends Term {
+			
+		}
+
+		abstract class Term {
+			attribute typeCategory[0-1] : CollectionTypes;
+		}
+
+		abstract class ObjectTerm extends Term {
+		}
+
+		abstract class GenericTerm extends Term {
+			
+		}
+
+		package TerFunctional {
+
+			class GenericFunctionTerm extends GenericTerm {
+				reference arguments[*] ordered : GenericTerm;
+				reference functor : GenericFunction;
+			}
+
+			class ObjectOperationTerm extends ObjectTerm {
+				reference "operation" : ObjectOperation;
+				reference arguments[*] : Term;
+				reference contextArgument[0-1] : ObjectTerm;
+			}
+
+			class ReferencePropertyFunctionTerm extends ObjectTerm {
+				reference contextArgument : ObjectTerm;
+				reference referencePropertyRef : ReferenceProperty;
+			}
+
+			class DataOperationTerm extends DataFunctionTerm {
+				reference arguments[*] ordered : Term;
+				reference dataOperationRef : DataOperation;
+				reference contextArgument : ObjectTerm;
+			}
+
+			abstract class DataFunctionTerm extends DataTerm {
+				
+			}
+
+			class AttributeFunctionTerm extends DataFunctionTerm {
+				reference contextArgument : ObjectTerm;
+				reference "attribute" : Attribute;
+			}
+
+			class DatatypeFunctionTerm extends DataFunctionTerm {
+				reference dataArguments[1-*] ordered : DataTerm;
+				reference function : DatatypeFunction;
+			}
+		}
+
+		package TerBasic {
+
+			package Variables {
+
+				class GenericVariable extends GenericTerm, Variable {
+					reference typeRef[0-1] : Type;
+				}
+
+				class DataVariable extends DataTerm, Variable {
+					reference datatypeRef[0-1] : Datatype;
+				}
+
+				class ObjectVariable extends ObjectTerm, Variable {
+					reference classRef[0-1] : Class;
+				}
+
+				abstract class Variable {
+					attribute name : String;
+				}
+			}
+		}
+	}
+
+	package Vocabulary {
+
+		package VocRelational {
+
+			class GenericPredicate extends Predicate {
+				attribute vp[0-1] : String;
+				attribute type : PredicateType;
+				reference genericAtom[*] : GenericAtom;
+			}
+
+			class AssociationPredicate extends Predicate {
+				attribute vp[0-1] : String;
+				reference arguments[*] ordered : Type;
+			}
+		}
+
+		package VocBasic {
+
+			class Type extends Predicate {
+				
+			}
+
+			class Class extends Type {
+				attribute np[0-1] : String;
+				reference attributes[*] : Attribute;
+				reference referencePropertyRef[*] : ReferenceProperty;
+			}
+
+			class Attribute extends Property {
+				attribute np[0-1] : String;
+			}
+
+			abstract class Property extends Predicate {
+				reference domain[0-1] : Class;
+				reference range[0-1] : Type;
+			}
+
+			class Datatype extends Type {
+				
+			}
+
+			class ObjectName extends ObjectTerm, VocabularyEntry {
+				reference classRef[0-1] : Class;
+			}
+
+			abstract class VocabularyEntry {
+				attribute name : String;
+			}
+
+			class ReferenceProperty extends Property {
+				attribute vp[0-1] : String;
+				attribute domrm[0-1] : String;
+				attribute rgrn[0-1] : String;
+			}
+
+			abstract class DataLiteral extends DataTerm {
+				attribute lexicalValue : String;
+			}
+
+			class PlainLiteral extends DataLiteral {
+				attribute languageTag[0-1] : String;
+			}
+
+			class TypedLiteral extends DataLiteral {
+				reference type : Datatype;
+			}
+
+			class DatatypePredicate extends Predicate {
+				attribute vp[0-1] : String;
+				attribute arity : Integer;
+				reference dataPredicateAtom[*] : DatatypePredicateAtom;
+			}
+
+			class Vocabulary {
+				reference entries[1-*] container : VocabularyEntry;
+			}
+
+			class GenericEntityName extends GenericTerm, VocabularyEntry {
+				reference classRef[0-1] : Class;
+			}
+
+			class EventType extends Class {
+				attribute eventTypeID : String;
+			}
+
+			abstract class Predicate extends VocabularyEntry {
+				attribute predicateCategory[0-1] : PredicateCategory;
+			}
+		}
+
+		package VocBuiltin {
+
+			class ExternalVocabulary {
+				attribute externalVocabularyID : String;
+				attribute externalVocabularyLanguage : ExternalVocabularyLanguage;
+			}
+
+		}
+
+		package VocExternal {
+
+			
+		}
+
+		package VocFunctional {
+
+			class EnumerationDatatype extends Datatype {
+				reference literals[*] container : DataLiteral;
+			}
+
+			abstract class Operation extends Function {
+				attribute ap[0-1] : String;
+				reference contextType[0-1] : Class;
+				reference arguments[1-*] ordered : Type;
+			}
+
+			abstract class Function extends VocabularyEntry {
+				attribute arity : Integer;
+			}
+
+			class ObjectOperation extends Operation {
+				reference returnType : Class;
+			}
+
+			class DataOperation extends Operation {
+				reference returnType : Datatype;
+			}
+
+			class DatatypeFunction extends Function {
+				attribute ap[0-1] : String;
+			}
+
+			class GenericFunction extends Function {
+				
+			}
+		}
+	}
+
+	package Atoms {
+
+		abstract class Atom extends AndOrNafNegFormula, LogicalFormula {
+			attribute isNegated : Boolean;
+		}
+
+		abstract class ObjectAtom extends Atom {
+			
+		}
+
+		abstract class DataAtom extends Atom {
+			
+		}
+
+		package AtRelational {
+
+			class AssociationAtom extends ObjectAtom {
+				reference dataArguments[*] ordered : DataTerm;
+				reference associationPredicate : AssociationPredicate;
+				reference objectArguments[2-*] ordered : ObjectTerm;
+			}
+
+			class ObjectDescriptionAtom extends ObjectAtom {
+				reference type[*] : Class;
+				reference baseType : Class;
+				reference subject : ObjectTerm;
+				reference slots[*] container : Slot;
+			}
+
+			abstract class Slot {
+				
+			}
+
+			class AttributionAtom extends ObjectAtom {
+				reference subject : ObjectTerm;
+				reference "attribute" : Attribute;
+				reference dataValue : DataTerm;
+			}
+
+			class ReferencePropertyAtom extends ObjectAtom {
+				reference object : ObjectTerm;
+				reference subject : ObjectTerm;
+				reference referenceProperty : ReferenceProperty;
+			}
+
+			class ObjectSlot extends Slot {
+				reference object : ObjectTerm;
+				reference referenceProperty : ReferenceProperty;
+			}
+
+			class DataSlot extends Slot {
+				reference value : DataTerm;
+				reference "attribute" : Attribute;
+			}
+
+			class PropertyAtom extends ObjectAtom {
+				reference property : Property;
+				reference value : Term;
+				reference subject : ObjectTerm;
+			}
+		}
+
+		package AtBasic {
+
+			class GenericAtom extends Atom {
+				reference predicate : GenericPredicate;
+				reference arguments[*] ordered : Term;
+			}
+
+			class ObjectClassificationAtom extends ObjectAtom {
+				reference type : Class;
+				reference term : ObjectTerm;
+			}
+
+			class EqualityAtom extends ObjectAtom {
+				reference terms[2-*] : ObjectTerm;
+			}
+
+			class InequalityAtom extends ObjectAtom {
+				reference terms[2-*] : ObjectTerm;
+			}
+
+			class DataClassificationAtom extends DataAtom {
+				reference term : DataTerm;
+				reference type : Datatype;
+			}
+
+			class DatatypePredicateAtom extends DataAtom {
+				reference dataArguments[2-*] ordered : DataTerm;
+				reference predicate : DatatypePredicate;
+			}
+		}
+	}
+
+	package Formulas {
+
+		class Disjunction extends LogicalFormula {
+			reference formulas[2-*] container : LogicalFormula;
+		}
+
+		class ExistentiallyQuantifiedFormula extends QuantifiedFormula {
+			
+		}
+
+		abstract class QuantifiedFormula extends LogicalFormula {
+			reference variables[1-*] : Variable;
+			reference formula container : LogicalFormula;
+		}
+
+		class Implication extends LogicalFormula {
+			reference antecedent container : LogicalFormula;
+			reference consequent container : LogicalFormula;
+		}
+
+		class Negation {
+			
+		}
+
+		class NegationAsFailure extends LogicalFormula, Negation {
+			reference formula container : LogicalFormula;
+		}
+
+		class StrongNegation extends LogicalFormula, Negation {
+			reference formula container : LogicalFormula;
+		}
+
+		class UniversallyQuantifiedFormula extends QuantifiedFormula {
+			
+		}
+
+		class Conjuction extends LogicalFormula {
+			reference formulas[2-*] container : LogicalFormula;
+		}
+
+		class AtLeastQuantifiedFormula extends QuantifiedFormula {
+			attribute minCardinality : Integer;
+		}
+
+		class AtMostQuantifiedFormula extends QuantifiedFormula {
+			attribute maxCardinality : Integer;
+		}
+
+		class AtLeastAndAtMostQuantifiedFormula extends QuantifiedFormula {
+			attribute maxCardinality : Integer;
+			attribute minCardinality : Integer;
+		}
+
+		abstract class LogicalFormula {
+			
+		}
+
+		package qf {
+
+			abstract class AndOrNafNegFormula {
+				
+			}
+
+			class QFConjunction extends AndOrNafNegFormula {
+				reference formulas[2-*] container : AndOrNafNegFormula;
+			}
+
+			class QFDisjunction extends AndOrNafNegFormula {
+				reference formulas[2-*] container : AndOrNafNegFormula;
+			}
+
+			class LiteralConjunction {
+				reference atoms[1-*] container : Atom;
+			}
+
+			class QFNegation extends AndOrNafNegFormula {
+				reference formula container : AndOrNafNegFormula;
+			}
+
+			class QFNegationAsFailure extends QFNegation {
+				
+			}
+
+			class QFStrongNegation extends QFNegation {
+				
+			}
+		}
+	}
+
+	package Rules {
+
+		abstract class IntegrityRule extends AbstractIntegrityRule {
+			reference constraint : QuantifiedFormula;
+		}
+
+		class AlethicIntegrityRule extends IntegrityRule {
+			
+		}
+
+		class DeonticIntegrityRule extends IntegrityRule {
+			
+		}
+
+		class ProductionRule extends AbstractProductionRule {
+			reference conditions[1-*] : AndOrNafNegFormula;
+			reference postcondition[0-1] : AndOrNafNegFormula;
+			reference producedAction : AtomicActionEventExpression;
+		}
+
+		class ReactionRule extends AbstractReactionRule {
+			reference postconditon[0-1] container : AndOrNafNegFormula;
+			reference conditions[*] container : AndOrNafNegFormula;
+			--reference triggeringEvent container : AtomicActionEventExpression;
+			reference triggeringEvent : AtomicActionEventExpression;
+			reference producedAction container : AtomicActionEventExpression;
+		}
+
+		class DerivationRule extends AbstarctDerivationRule {
+			reference conditions[1-*] container : AndOrNafNegFormula;
+			reference conclusions[1-*] container : LiteralConjunction;
+		}
+	}
+
+	package Abstract {
+
+		abstract class Rule {
+			attribute ruleID : String;
+			attribute groupID : String;
+		}
+
+		abstract class ECARule extends AbstractReactionRule {
+			
+		}
+
+		abstract class AbstractReactionRule extends Rule {
+			
+		}
+
+		abstract class ECAPRule extends AbstractReactionRule {
+			
+		}
+
+		abstract class AbstarctDerivationRule extends Rule {
+			
+		}
+
+		abstract class AbstractProductionRule extends Rule {
+			
+		}
+
+		abstract class AbstractTransformationRule extends Rule {
+			
+		}
+
+		abstract class AbstractIntegrityRule extends Rule {
+		}
+	}
+
+	package Events {
+
+		abstract class EventExpression {
+			attribute startDateTime : String;
+			attribute duration : String;
+			attribute occurDateTime : String;
+		}
+
+		class AndNotEventExpression extends EventExpression {
+			attribute timeWndow : String;
+			reference expressions[*] ordered container : EventExpression;
+		}
+
+		class AtomicEventExpression extends EventExpression {
+			reference objectVariable[0-1] container : ObjectVariable;
+			reference slot[0-1] container : Slot;
+			reference type : EventType;
+		}
+
+		class ChoiceEventExpression extends EventExpression {
+			attribute minOccurs : Integer;
+			attribute maxOccurs : Integer;
+			attribute timeWindow : String;
+			reference expressions[1-*] container : EventExpression;
+		}
+
+		class SequenceEventExpression extends EventExpression {
+			attribute timeWindow : String;
+			reference expressions[*] ordered container : EventExpression;
+		}
+
+		class ParallelEventExpression extends EventExpression {
+			attribute timeWindow : String;
+			reference expressions[*] container : EventExpression;
+		}
+
+		abstract class TimeEventExpression extends AtomicEventExpression {
+			
+		}
+
+		class SingularTimeEventExpression extends TimeEventExpression {
+			attribute dateTime : Integer;
+		}
+
+		class PeriodicTimeEventExpression extends TimeEventExpression {
+			
+		}
+
+		class SOAPMessageEventExpression extends MessageEventExpression {
+			reference body container : SOAPMessageBody;
+			reference header[0-1] container : SOAPMessageHeader;
+		}
+
+		class MessageEventExpression extends AtomicActionEventExpression {
+			attribute sender : String;
+			attribute receiver : String;
+			reference messageType[1-*] : MessageType;
+		}
+
+		class MessageType extends MessageEventType {
+			
+		}
+
+		class MessageEventType extends EventType {
+			
+		}
+
+		class SOAPMessageBody {
+			reference children[*] container : SOAPMessageBodyChild;
+		}
+
+		class SOAPMessageBodyChild {
+			attribute localName : String;
+			attribute nameSpaceName[0-1] : String;
+			attribute encodingStyle[0-1] : String;
+		}
+
+		class SOAPMessageHeader {
+			reference headerBlocks[*] container : SOAPMessageHeaderBlock;
+		}
+
+		class SOAPMessageHeaderBlock {
+			attribute nameSpaceName : String;
+			attribute localName : String;
+			attribute encodingStyle[0-1] : String;
+			attribute mustUnderstand[0-1] : Boolean;
+			attribute role[0-1] : String;
+			attribute relay[0-1] : Boolean;
+		}
+
+		class EveryMinuteTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute second : Integer;
+		}
+
+		class EveryHourTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute minute : Integer;
+			attribute second[0-1] : Integer;
+		}
+
+		class EveryDayTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute time : Integer;
+		}
+
+		class EveryWeekTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute dayOfWeek : Integer;
+			attribute time[0-1] : Integer;
+		}
+
+		class EveryMonthTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute dayOfMonth : Integer;
+			attribute time[0-1] : Integer;
+		}
+
+		class EveryYearTimeEventExpression extends PeriodicTimeEventExpression {
+			attribute dayOfYear : Integer;
+			attribute time[0-1] : Integer;
+		}
+
+		class SOAPRPCRequestMsgEvtExpression extends SOAPMessageEventExpression {
+		}
+
+		class SOAPRPCResponseMsgEvtExpression extends SOAPMessageEventExpression {
+			
+		}
+
+		class SOAPConversationalMsgEvtExpression extends SOAPMessageEventExpression {
+		}
+
+		class Event {
+			attribute startDateTime : String;
+			attribute duration : String;
+			attribute occurDateTime : String;
+			reference sequenceEvent[2-*] ordered container : SequenceEvent;
+		}
+
+		class SequenceEvent extends Event {
+			
+		}
+
+		class AndNotEvent extends Event {
+			reference event[2-2] ordered container : Event;
+		}
+
+		class AtomicEvent extends Event {
+			reference slot[1-*] container : Slot;
+		}
+
+		class ParallelEvent extends Event {
+			reference event[2-*] container : Event;
+		}
+
+		class ChoiceEvent extends Event {
+			reference event[1-*] container : Event;
+		}
+
+		class TimeEvent extends AtomicEvent {
+			
+		}
+
+		class ActionEvent extends AtomicEvent {
+			attribute actor : String;
+		}
+
+		class SingularTimeEvent extends TimeEvent {
+			
+		}
+
+		class PeriodicTimeEvent extends TimeEvent {
+			
+		}
+
+		class MessageEvent extends ActionEvent {
+			attribute sender : String;
+			attribute receiver : String;
+		}
+
+		class SoapMessageEvent extends MessageEvent {
+			
+		}
+
+		class FaultMessageEventType extends MessageEventType {
+			
+		}
+
+		class ActionEventExpr extends EventExpression {
+			
+		}
+
+		class FaultMessageType extends MessageType {
+			
+		}
+
+		class AtomicActionEventExpression extends AtomicEventExpression {
+			attribute actor : String;
+			reference producedAction[0-1] : ProductionRule;
+		}
+
+		package Actions {
+
+			abstract class SystemActionExpression extends AtomicActionEventExpression {
+				
+			}
+
+			class MessageAction extends SystemActionExpression {
+				
+			}
+
+			class AssignActionExpression extends SystemActionExpression {
+				reference value : Term;
+				reference contextArgument : ObjectTerm;
+				reference property : Property;
+			}
+
+			class CreateActionExpression extends SystemActionExpression {
+				reference slots[*] : Slot;
+				reference context : Class;
+			}
+
+			class DeleteActionExpression extends SystemActionExpression {
+				reference context : Class;
+				reference contextArgument : ObjectTerm;
+			}
+
+			class SOAPAction extends MessageAction {
+				
+			}
+
+			class SOAPRPCAction extends SOAPAction {
+				
+			}
+
+			class InvokeActionExpression extends SystemActionExpression {
+				reference "operation" : Operation;
+				reference arguments[*] ordered : Term;
+				reference contextArgument[0-1] : ObjectTerm;
+			}
+
+			class SystemAction extends ActionEvent {
+				
+			}
+		}
+	}
+
+	package SOAP {
+
+		class SOAPFaultCode {
+			
+		}
+
+		class SOAPFaultMessageType extends FaultMessageType {
+			
+		}
+
+		class SOAPFaultNode {
+			
+		}
+
+		class SOAPFaultReason {
+			
+		}
+
+		class SOAPFaultSubcode {
+			
+		}
+
+		class SOAPFaultText {
+			attribute text : String;
+		}
+
+		class SOAPFaultValue {
+			
+		}
+
+	}
+}
+

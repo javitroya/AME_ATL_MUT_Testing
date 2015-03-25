@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="Diagnostic">
+  <Problem location="18:17-18:57" description="the opposite of the opposite of Reference Cl_F::ref_a should be defined"/>
+  <Problem location="23:17-23:57" description="the opposite of the opposite of Reference Cl_G::ref_d should be this very same Reference"/>
+  <Problem location="19:17-19:57" description="the opposite of the opposite of Reference Cl_F::ref_b should be this very same Reference"/>
+  <Problem location="40:17-40:57" description="the type of the opposite of Reference Cl_K::ref_a should be the owner of this Reference (Cl_K)"/>
+  <Problem location="15:9-16:10" description="a Classifier named Cl_H already exists in Package Pa_2"/>
+  <Problem location="25:9-26:10" description="a Classifier named Cl_H already exists in Package Pa_2"/>
+  <Problem location="5:9-6:10" description="the Class Cl_B is its direct/indirect own supertype"/>
+  <Problem location="10:9-11:10" description="the Class Cl_D is its direct/indirect own supertype"/>
+  <Problem location="7:9-9:10" description="the Class Cl_C is its direct/indirect own supertype"/>
+  <Problem location="3:17-3:42" description="the Class Cl_A contains another feature (including inherited ones) with the same name: att_a"/>
+  <Problem location="34:17-34:43" description="Reference Cl_J::ref_e cannot target a DataType element"/>
+  <Problem severity="warning" location="33:17-33:40" description="Class Cl_J defines a class Attribute (att_b) that is not supported by the Ecore metamodel"/>
+</xmi:XMI>

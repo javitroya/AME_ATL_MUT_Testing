@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<ruleml:imp xmlns:owlx = 'http://www.w3.org/2003/05/owl-xml' xmlns:swrlx = 'http://www.w3.org/2003/11/swrlx' xmlns:ruleml = 'http://www.w3.org/2003/11/ruleml'>
+  <ruleml:_body>
+    <swrlx:datavaluedPropertyAtom swrlx:property = 'name'>
+      <ruleml:var>customer</ruleml:var>
+      <owlx:DataValue owlx:datatype = 'xs:string'>Jos senior</owlx:DataValue>
+    </swrlx:datavaluedPropertyAtom>
+  </ruleml:_body>
+  <ruleml:_head>
+    <swrlx:classAtom>
+      <owlx:Class owlx:name = 'Customer'/>
+      <ruleml:var>customer</ruleml:var>
+    </swrlx:classAtom>
+    <swrlx:individualPropertyAtom swrlx:property = 'age'>
+      <ruleml:var>customer</ruleml:var>
+      <ruleml:var>customerAge</ruleml:var>
+    </swrlx:individualPropertyAtom>
+    <swrlx:builtinAtom swrlx:builtin = 'swrlb:greaterThan'>
+      <ruleml:var>customerAge</ruleml:var>
+      <owlx:DataValue owlx:datatype = 'xs:positiveInteger'>21</owlx:DataValue>
+    </swrlx:builtinAtom>
+  </ruleml:_head>
+</ruleml:imp>

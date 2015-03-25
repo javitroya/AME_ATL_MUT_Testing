@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ruletypesmm:Trafo xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ruletypesmm="http://ruletypesmm/1.0" name="UML2ER">
+  <rules name="Package">
+    <inTypes>src_Package</inTypes>
+    <outTypes>trg_ERModel</outTypes>
+    <allNavigationPaths>src_Package</allNavigationPaths>
+    <allNavigationPaths>trg_ERModel</allNavigationPaths>
+    <allNavigationPaths>src_Package.ownedElements</allNavigationPaths>
+    <allNavigationPaths>trg_ERModel.entities</allNavigationPaths>
+    <bindingFeatures>trg_ERModel.entities</bindingFeatures>
+    <allFootPrints>src_Package</allFootPrints>
+    <allFootPrints>trg_ERModel</allFootPrints>
+    <allFootPrints>src_Package.ownedElements</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>trg_ERModel.entities</allFootPrints>
+    <allFootPrints>trg_EntityType</allFootPrints>
+    <outFeatures>src_Package.ownedElements</outFeatures>
+  </rules>
+  <rules name="NamedElement">
+    <inTypes>src_NamedElement</inTypes>
+    <outTypes>trg_Element</outTypes>
+    <allNavigationPaths>src_NamedElement</allNavigationPaths>
+    <allNavigationPaths>trg_Element</allNavigationPaths>
+    <allNavigationPaths>src_NamedElement.name</allNavigationPaths>
+    <allNavigationPaths>trg_Element.name</allNavigationPaths>
+    <bindingFeatures>trg_Element.name</bindingFeatures>
+    <allFootPrints>src_NamedElement</allFootPrints>
+    <allFootPrints>trg_Element</allFootPrints>
+    <allFootPrints>src_NamedElement.name</allFootPrints>
+    <allFootPrints>trg_Element.name</allFootPrints>
+    <outFeatures>src_NamedElement.name</outFeatures>
+  </rules>
+  <rules name="Class" inherits="//@rules.1">
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_EntityType</outTypes>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>trg_EntityType</allNavigationPaths>
+    <allNavigationPaths>trg_EntityType.features</allNavigationPaths>
+    <bindingFeatures>trg_EntityType.features</bindingFeatures>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>trg_EntityType</allFootPrints>
+    <allFootPrints>trg_EntityType.features</allFootPrints>
+    <allFootPrints>trg_Feature</allFootPrints>
+  </rules>
+  <rules name="Property" inherits="//@rules.1">
+    <inFeatures>src_Class.getAllProperties</inFeatures>
+    <inTypes>src_Property</inTypes>
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_Feature</outTypes>
+    <allNavigationPaths>src_Property</allNavigationPaths>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>src_Class.getAllProperties</allNavigationPaths>
+    <allNavigationPaths>trg_Feature</allNavigationPaths>
+    <allFootPrints>src_Property</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>trg_Feature</allFootPrints>
+  </rules>
+  <rules name="Attributes" inherits="//@rules.3">
+    <inFeatures>src_Property.primitiveType</inFeatures>
+    <inTypes>src_Property</inTypes>
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_Attribute</outTypes>
+    <allNavigationPaths>src_Property</allNavigationPaths>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>src_Property.primitiveType</allNavigationPaths>
+    <allNavigationPaths>trg_Attribute</allNavigationPaths>
+    <allNavigationPaths>trg_Attribute.type</allNavigationPaths>
+    <bindingFeatures>trg_Attribute.type</bindingFeatures>
+    <allFootPrints>src_Property</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>src_Property.primitiveType</allFootPrints>
+    <allFootPrints>trg_Attribute</allFootPrints>
+    <allFootPrints>trg_Attribute.type</allFootPrints>
+    <outFeatures>src_Property.primitiveType</outFeatures>
+  </rules>
+  <rules name="References" inherits="//@rules.3">
+    <inFeatures>src_Property.complexType</inFeatures>
+    <inTypes>src_Property</inTypes>
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_WeakReference</outTypes>
+    <allNavigationPaths>src_Property</allNavigationPaths>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>src_Property.complexType</allNavigationPaths>
+    <allNavigationPaths>trg_WeakReference</allNavigationPaths>
+    <allNavigationPaths>trg_WeakReference.type</allNavigationPaths>
+    <bindingFeatures>trg_WeakReference.type</bindingFeatures>
+    <allFootPrints>src_Property</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>src_Property.complexType</allFootPrints>
+    <allFootPrints>trg_WeakReference</allFootPrints>
+    <allFootPrints>trg_WeakReference.type</allFootPrints>
+    <allFootPrints>trg_EntityType</allFootPrints>
+    <outFeatures>src_Property.complexType</outFeatures>
+  </rules>
+  <rules name="WeakReferences" inherits="//@rules.5">
+    <inFeatures>src_Property.isContainment</inFeatures>
+    <inTypes>src_Property</inTypes>
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_WeakReference</outTypes>
+    <allNavigationPaths>src_Property</allNavigationPaths>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>src_Property.isContainment</allNavigationPaths>
+    <allNavigationPaths>trg_WeakReference</allNavigationPaths>
+    <allFootPrints>src_Property</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>src_Property.isContainment</allFootPrints>
+    <allFootPrints>trg_WeakReference</allFootPrints>
+  </rules>
+  <rules name="StrongReferences" inherits="//@rules.5">
+    <inTypes>src_Property</inTypes>
+    <inTypes>src_Class</inTypes>
+    <outTypes>trg_StrongReference</outTypes>
+    <allNavigationPaths>src_Property</allNavigationPaths>
+    <allNavigationPaths>src_Class</allNavigationPaths>
+    <allNavigationPaths>trg_StrongReference</allNavigationPaths>
+    <allFootPrints>src_Property</allFootPrints>
+    <allFootPrints>src_Class</allFootPrints>
+    <allFootPrints>trg_StrongReference</allFootPrints>
+  </rules>
+  <mms inputMM="SimpleUml"/>
+  <mms outputMM="ER"/>
+</ruletypesmm:Trafo>

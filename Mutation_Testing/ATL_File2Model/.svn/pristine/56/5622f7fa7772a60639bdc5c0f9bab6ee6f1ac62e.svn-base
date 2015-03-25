@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ruletypesmm:Trafo xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ruletypesmm="http://ruletypesmm/1.0" name="XML2PetriNet">
+  <rules name="Main">
+    <inFeatures>src_Element.name</inFeatures>
+    <inTypes>src_Element</inTypes>
+    <outTypes>trg_PetriNet</outTypes>
+    <allNavigationPaths>src_Element</allNavigationPaths>
+    <allNavigationPaths>src_Element.name</allNavigationPaths>
+    <allNavigationPaths>trg_PetriNet</allNavigationPaths>
+    <allNavigationPaths>trg_PetriNet.name</allNavigationPaths>
+    <allNavigationPaths>trg_PetriNet.places</allNavigationPaths>
+    <allNavigationPaths>trg_PetriNet.transitions</allNavigationPaths>
+    <allNavigationPaths>trg_PetriNet.arcs</allNavigationPaths>
+    <bindingFeatures>trg_PetriNet.name</bindingFeatures>
+    <bindingFeatures>trg_PetriNet.places</bindingFeatures>
+    <bindingFeatures>trg_PetriNet.transitions</bindingFeatures>
+    <bindingFeatures>trg_PetriNet.arcs</bindingFeatures>
+    <allFootPrints>src_Element</allFootPrints>
+    <allFootPrints>src_Element.name</allFootPrints>
+    <allFootPrints>trg_PetriNet</allFootPrints>
+    <allFootPrints>trg_PetriNet.name</allFootPrints>
+    <allFootPrints>trg_PetriNet.places</allFootPrints>
+    <allFootPrints>trg_Place</allFootPrints>
+    <allFootPrints>trg_PetriNet.transitions</allFootPrints>
+    <allFootPrints>trg_Transition</allFootPrints>
+    <allFootPrints>trg_PetriNet.arcs</allFootPrints>
+    <allFootPrints>trg_Arc</allFootPrints>
+  </rules>
+  <rules name="Place">
+    <inFeatures>src_Element.name</inFeatures>
+    <inTypes>src_Element</inTypes>
+    <outTypes>trg_Place</outTypes>
+    <allNavigationPaths>src_Element</allNavigationPaths>
+    <allNavigationPaths>src_Element.name</allNavigationPaths>
+    <allNavigationPaths>trg_Place</allNavigationPaths>
+    <allNavigationPaths>trg_Place.name</allNavigationPaths>
+    <allNavigationPaths>trg_Place.incoming</allNavigationPaths>
+    <allNavigationPaths>trg_Place.outgoing</allNavigationPaths>
+    <bindingFeatures>trg_Place.name</bindingFeatures>
+    <bindingFeatures>trg_Place.incoming</bindingFeatures>
+    <bindingFeatures>trg_Place.outgoing</bindingFeatures>
+    <allFootPrints>src_Element</allFootPrints>
+    <allFootPrints>src_Element.name</allFootPrints>
+    <allFootPrints>trg_Place</allFootPrints>
+    <allFootPrints>trg_Place.name</allFootPrints>
+    <allFootPrints>trg_Place.incoming</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc</allFootPrints>
+    <allFootPrints>trg_Place.outgoing</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc</allFootPrints>
+  </rules>
+  <rules name="Transition">
+    <inFeatures>src_Element.name</inFeatures>
+    <inTypes>src_Element</inTypes>
+    <outTypes>trg_Transition</outTypes>
+    <allNavigationPaths>src_Element</allNavigationPaths>
+    <allNavigationPaths>src_Element.name</allNavigationPaths>
+    <allNavigationPaths>trg_Transition</allNavigationPaths>
+    <allNavigationPaths>trg_Transition.name</allNavigationPaths>
+    <allNavigationPaths>trg_Transition.incoming</allNavigationPaths>
+    <allNavigationPaths>trg_Transition.outgoing</allNavigationPaths>
+    <bindingFeatures>trg_Transition.name</bindingFeatures>
+    <bindingFeatures>trg_Transition.incoming</bindingFeatures>
+    <bindingFeatures>trg_Transition.outgoing</bindingFeatures>
+    <allFootPrints>src_Element</allFootPrints>
+    <allFootPrints>src_Element.name</allFootPrints>
+    <allFootPrints>trg_Transition</allFootPrints>
+    <allFootPrints>trg_Transition.name</allFootPrints>
+    <allFootPrints>trg_Transition.incoming</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc</allFootPrints>
+    <allFootPrints>trg_Transition.outgoing</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc</allFootPrints>
+  </rules>
+  <rules name="PlaceToTransArc">
+    <inFeatures>src_Element.name</inFeatures>
+    <inTypes>src_Element</inTypes>
+    <outTypes>trg_PlaceToTransArc</outTypes>
+    <allNavigationPaths>src_Element</allNavigationPaths>
+    <allNavigationPaths>src_Element.name</allNavigationPaths>
+    <allNavigationPaths>trg_PlaceToTransArc</allNavigationPaths>
+    <allNavigationPaths>trg_PlaceToTransArc.weight</allNavigationPaths>
+    <allNavigationPaths>trg_PlaceToTransArc.source</allNavigationPaths>
+    <allNavigationPaths>trg_PlaceToTransArc.target</allNavigationPaths>
+    <bindingFeatures>trg_PlaceToTransArc.weight</bindingFeatures>
+    <bindingFeatures>trg_PlaceToTransArc.source</bindingFeatures>
+    <bindingFeatures>trg_PlaceToTransArc.target</bindingFeatures>
+    <allFootPrints>src_Element</allFootPrints>
+    <allFootPrints>src_Element.name</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc.weight</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc.source</allFootPrints>
+    <allFootPrints>trg_Place</allFootPrints>
+    <allFootPrints>trg_PlaceToTransArc.target</allFootPrints>
+    <allFootPrints>trg_Transition</allFootPrints>
+  </rules>
+  <rules name="TransToPlaceArc">
+    <inFeatures>src_Element.name</inFeatures>
+    <inTypes>src_Element</inTypes>
+    <outTypes>trg_TransToPlaceArc</outTypes>
+    <allNavigationPaths>src_Element</allNavigationPaths>
+    <allNavigationPaths>src_Element.name</allNavigationPaths>
+    <allNavigationPaths>trg_TransToPlaceArc</allNavigationPaths>
+    <allNavigationPaths>trg_TransToPlaceArc.weight</allNavigationPaths>
+    <allNavigationPaths>trg_TransToPlaceArc.source</allNavigationPaths>
+    <allNavigationPaths>trg_TransToPlaceArc.target</allNavigationPaths>
+    <bindingFeatures>trg_TransToPlaceArc.weight</bindingFeatures>
+    <bindingFeatures>trg_TransToPlaceArc.source</bindingFeatures>
+    <bindingFeatures>trg_TransToPlaceArc.target</bindingFeatures>
+    <allFootPrints>src_Element</allFootPrints>
+    <allFootPrints>src_Element.name</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc.weight</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc.source</allFootPrints>
+    <allFootPrints>trg_Transition</allFootPrints>
+    <allFootPrints>trg_TransToPlaceArc.target</allFootPrints>
+    <allFootPrints>trg_Place</allFootPrints>
+  </rules>
+  <mms inputMM="PrimitiveTypes"/>
+  <mms inputMM="XML"/>
+  <mms outputMM="PetriNet"/>
+  <mms outputMM="PrimitiveTypes"/>
+</ruletypesmm:Trafo>

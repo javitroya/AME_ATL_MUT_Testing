@@ -1,0 +1,51 @@
+<project name="gs-example" basedir="." default="build">
+  <property name="example" value="GSApp" />
+  <property name="path" value="/${example}" />
+  <property name="build" value="${jwsdp.home}/docs/tutorial/examples/${example}/build" />
+  <property name="url" value="http://localhost:8080/manager" />
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+  <path id="classpath">
+    <fileset dir="${jwsdp.home}/common/lib">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+  <taskdef name="install" classname="org.apache.catalina.ant.InstallTask"/>
+  <taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask"/>
+  <taskdef name="remove" classname="org.apache.catalina.ant.RemoveTask"/>
+  <target name="init"  >
+    <tstamp/>
+  </target>
+  <target name="prepare" description="Create build directories." depends="init">
+    <mkdir dir="${build}"/>
+    <mkdir dir="${build}/WEB-INF"/>
+    <mkdir dir="${build}/WEB-INF/classes"/>
+  </target>
+  <target name="install" description="Install Web application" depends="build">
+    <install url="${url}" username="${username}" password="${password}" path="${path}" war="file:${build}"/>
+  </target>
+  <target name="reload" description="Reload Web application" depends="build">
+    <reload url="${url}" username="${username}" password="${password}" path="${path}"/>
+  </target>
+  <target name="remove" description="Remove Web application" >
+    <remove url="${url}" username="${username}" password="${password}" path="${path}"/>
+  </target>
+  <target name="build" description="Compile       app Java files and copy HTML and JSP pages" depends="prepare">
+    <javac srcdir="src" destdir="${build}/WEB-INF/classes">
+      <include name="**/*.java"/>
+      <classpath refid="classpath"/>
+    </javac>
+    <copy todir="${build}/WEB-INF">
+      <fileset dir="web/WEB-INF">
+        <include name="web.xml"/>
+      </fileset>
+    </copy>
+    <copy todir="${build}">
+      <fileset dir="web">
+        <include name="*.html"/>
+        <include name="*.jsp"/>
+        <include name="*.gif"/>
+      </fileset>
+    </copy>
+  </target>
+</project>

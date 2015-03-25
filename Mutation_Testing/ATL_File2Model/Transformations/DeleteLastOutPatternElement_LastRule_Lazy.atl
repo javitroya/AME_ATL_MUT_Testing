@@ -1,0 +1,32 @@
+-- @atlcompiler emftvm
+module DeleteLastOutPatternElement_LastRule_Lazy;
+create OUT : ATL refining IN : ATL;
+
+rule DeleteLastOutPatternElement_LastRule {
+ from
+  ope : ATL!OutPatternElement
+  (
+   ope = ope.outPattern.elements -> last() and --It is the last OutPatternElement
+   ope.outPattern.rule = ope.outPattern.rule.module.elements -> last() -- of the last rule
+  )
+ to
+ do{
+ 	for (bd in (ATL!Binding.allInstances() -> select(b | b.value.oclIsTypeOf(ATL!VariableExp) and b.value.referredVariable = ope))){
+ 		thisModule.DeleteBinding(bd);
+ 		bd.propertyName.debug();
+ 	}
+ }
+}
+
+lazy rule DeleteBinding{
+	from
+		b : ATL!Binding
+	to
+}
+--
+--rule DeleteAssociatedBinding{
+--	from
+--	 b : ATL!Binding (b.value.oclIsTypeOf(ATL!VariableExp) and b.value.referredVariable.oclIsUndefined())
+--	to
+--}
+

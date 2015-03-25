@@ -1,0 +1,18 @@
+package Diagnostic {
+
+	enumeration Severity {
+		literal error;
+		literal warning;
+		literal critic;
+	}
+
+	class Problem {
+		attribute severity: Severity;
+		attribute location: String;
+		attribute description: String;
+	}
+}
+
+package PrimitiveTypes {
+	datatype String;
+}

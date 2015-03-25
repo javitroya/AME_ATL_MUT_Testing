@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sooml:Model
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:sooml="http://sooml"
+    xsi:schemaLocation="http://sooml /SOOML2SOOPL/SOOML.ecore">
+  <classes name="Auto">
+    <stateMachine
+        initialState="//@classes.0/@stateMachine/@states.0">
+      <states
+          name="Voll">
+        <transitions
+            target="//@classes.0/@stateMachine/@states.1">
+          <event
+              operation="//@classes.0/@operations.0"/>
+        </transitions>
+      </states>
+      <states
+          name="Reserve">
+        <transitions
+            target="//@classes.0/@stateMachine/@states.0">
+          <event
+              operation="//@classes.0/@operations.0"/>
+        </transitions>
+      </states>
+    </stateMachine>
+    <operations
+        name="op"/>
+    <operations
+        name="op2"/>
+    <features
+        xsi:type="sooml:Attribute"
+        name="kennzeichen"/>
+    <features
+        xsi:type="sooml:Attribute"
+        name="maxFuellstand"
+        type="Integer"/>
+    <features
+        xsi:type="sooml:Attribute"
+        name="reserveFuellstand"
+        type="Integer"/>
+    <features
+        xsi:type="sooml:Attribute"
+        name="aktuellerFuellstand"
+        type="Integer"/>
+  </classes>
+</sooml:Model>

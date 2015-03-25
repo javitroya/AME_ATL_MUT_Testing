@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<r2ml:RuleBase xmlns:r2ml="http://www.rewerse.net/I1/2006/R2ML"
+  xmlns:r2mlv="http://www.rewerse.net/I1/2006/R2ML/R2MLV"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ex="http://www.bookingservice.com/schema"
+  xsi:schemaLocation="http://www.rewerse.net/I1/2006/R2ML http://oxygen.informatik.tu-cottbus.de/R2ML/0.4/R2ML.xsd">
+    
+	<r2mlv:Vocabulary>
+
+        <r2mlv:Class r2mlv:ID="ex:Customer">
+            <r2mlv:Attribute r2mlv:ID="ex:Customer.custNo">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:integer"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+        </r2mlv:Class>
+
+        <r2mlv:MessageType r2mlv:ID="ex:CheckAvailability">
+            <r2mlv:Attribute r2mlv:ID="ex:CheckAvailability.checkInDate">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:dateTime"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+            <r2mlv:Attribute r2mlv:ID="ex:CheckAvailability.checkOutDate">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:dateTime"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+            <r2mlv:Attribute r2mlv:ID="ex:CheckAvailability.roomType">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:integer"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+			<r2mlv:ReferenceProperty r2mlv:ID="ex:CheckAvailability.customer">
+				<r2mlv:range>
+					<r2mlv:Class r2mlv:ID="ex:Customer"/>
+				</r2mlv:range>
+			</r2mlv:ReferenceProperty>
+        </r2mlv:MessageType>
+
+        <r2mlv:FaultMessageType r2mlv:ID="ex:InvalidDataError">
+            <r2mlv:Attribute r2mlv:ID="ex:InvalidDataError.message">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:string"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+        </r2mlv:FaultMessageType>
+
+        <r2mlv:MessageType r2mlv:ID="ex:CheckAvailabilityResponse">
+            <r2mlv:Attribute r2mlv:ID="ex:CheckAvailabilityResponse.yesNoAnswer">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:boolean"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+        </r2mlv:MessageType>
+
+        <r2mlv:Class r2mlv:ID="ex:Room">
+            <r2mlv:Attribute r2mlv:ID="ex:Room.isAvailable">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:boolean"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+            <r2mlv:Attribute r2mlv:ID="ex:Room.roomNo">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:integer"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+            <r2mlv:Attribute r2mlv:ID="ex:Room.roomType">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:integer"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+        </r2mlv:Class>
+
+        <r2mlv:Class r2mlv:ID="ex:Booking">
+            <r2mlv:Attribute r2mlv:ID="ex:Booking.from">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:float"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+            <r2mlv:Attribute r2mlv:ID="ex:Booking.to">
+                <r2mlv:range>
+                    <r2mlv:Datatype r2mlv:ID="xs:float"/>
+                </r2mlv:range>
+            </r2mlv:Attribute>
+		   <r2mlv:ReferenceProperty r2mlv:ID="ex:Booking.room">
+				<r2mlv:range>
+					<r2mlv:Class r2mlv:ID="ex:Room"/>
+				</r2mlv:range>
+		   </r2mlv:ReferenceProperty>
+        </r2mlv:Class>
+
+    </r2mlv:Vocabulary>
+
+    <r2ml:ReactionRuleSet r2ml:ruleSetID="tns:reservationService">
+
+        <r2ml:ReactionRule r2ml:ruleID="id52461" r2ml:groupID="tns:checkAvailability">
+		    <r2ml:triggeringEvent>
+                <r2ml:MessageEventExpression r2ml:sender="http://www.trip.com/ws/client" r2ml:eventType="ex:CheckAvailability">
+                    <r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                </r2ml:MessageEventExpression>
+            </r2ml:triggeringEvent>
+
+            <r2ml:conditions>
+                <r2ml:DatatypePredicateAtom r2ml:datatypePredicateID="swrlb:lessThen" r2ml:isNegated="true">
+                    <r2ml:dataArguments>
+                        <r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkInDate">
+                            <r2ml:contextArgument>
+<r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                            </r2ml:contextArgument>
+                        </r2ml:AttributeFunctionTerm>
+                        <r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkOutDate">
+                            <r2ml:contextArgument>
+<r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                            </r2ml:contextArgument>
+                        </r2ml:AttributeFunctionTerm>
+                    </r2ml:dataArguments>
+                </r2ml:DatatypePredicateAtom>
+
+                <r2ml:ObjectClassificationAtom r2ml:classID="ex:CheckAvailability">
+                    <r2ml:ObjectVariable r2ml:name="chkAv"/>
+                </r2ml:ObjectClassificationAtom>
+				
+				<r2ml:ReferencePropertyAtom r2ml:referencePropertyID="ex:CheckAvailability.customer">
+				  <r2ml:subject>
+				     <r2ml:ObjectVariable r2ml:name="chkAv"/>
+				  </r2ml:subject>
+				  <r2ml:object>
+					 <r2ml:ObjectVariable r2ml:name="customer" r2ml:classID="ex:Customer"/>
+				  </r2ml:object>
+				</r2ml:ReferencePropertyAtom>
+
+            </r2ml:conditions>
+
+            <r2ml:producedAction> 
+ 		      <r2ml:MessageEventExpression r2ml:sender="http://www.bookingservice.com" r2ml:eventType="ex:InvalidDataError">
+                 <r2ml:DataSlot r2ml:attributeID="ex:InvalidDataError.message">
+				   <r2ml:value>
+				          <r2ml:TypedLiteral r2ml:lexicalValue="&lt;ex:InvalidDataError.message&gt;wrong input data!&lt;ex:InvalidDataError.message&gt;" r2ml:datatypeID="xs:string"/>
+				   </r2ml:value>
+				 </r2ml:DataSlot>
+              </r2ml:MessageEventExpression>
+            </r2ml:producedAction>
+
+        </r2ml:ReactionRule>
+
+
+        <r2ml:ReactionRule r2ml:ruleID="id52463" r2ml:groupID="tns:checkAvailability">
+        
+			<r2ml:triggeringEvent>
+                <r2ml:MessageEventExpression r2ml:sender="http://www.trip.com/ws/client" r2ml:eventType="ex:CheckAvailability">
+                    <r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                </r2ml:MessageEventExpression>
+            </r2ml:triggeringEvent>
+
+            <r2ml:conditions>
+                <r2ml:DatatypePredicateAtom r2ml:datatypePredicateID="swrlb:lessThen">
+                    <r2ml:dataArguments>
+                        <r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkInDate">
+                            <r2ml:contextArgument>
+<r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                            </r2ml:contextArgument>
+                        </r2ml:AttributeFunctionTerm>
+                        <r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkOutDate">
+                            <r2ml:contextArgument>
+<r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+                            </r2ml:contextArgument>
+                        </r2ml:AttributeFunctionTerm>
+                    </r2ml:dataArguments>
+                </r2ml:DatatypePredicateAtom>
+				
+				<r2ml:ObjectClassificationAtom r2ml:classID="ex:Booking">
+				  <r2ml:ObjectVariable r2ml:name="booking"/>
+				</r2ml:ObjectClassificationAtom>
+
+				<r2ml:ReferencePropertyAtom r2ml:referencePropertyID="ex:Booking.room">
+				  <r2ml:subject>
+				     <r2ml:ObjectVariable r2ml:name="booking"/>
+				  </r2ml:subject>
+				  <r2ml:object>
+					 <r2ml:ObjectVariable r2ml:name="room" r2ml:classID="ex:Room"/>
+				  </r2ml:object>
+				</r2ml:ReferencePropertyAtom>
+
+				<r2ml:AttributionAtom r2ml:attributeID="ex:Booking.from">
+				   <r2ml:subject>
+				     <r2ml:ObjectVariable r2ml:name="booking"/>
+				   </r2ml:subject>
+				   <r2ml:dataValue>
+					 <r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkInDate">
+					   <r2ml:contextArgument>
+						 <r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+					   </r2ml:contextArgument>
+					 </r2ml:AttributeFunctionTerm>
+				   </r2ml:dataValue>
+				</r2ml:AttributionAtom>
+
+			   <r2ml:AttributionAtom r2ml:attributeID="ex:Booking.to">
+				  <r2ml:subject>
+					<r2ml:ObjectVariable r2ml:name="booking"/>
+				  </r2ml:subject>
+				  <r2ml:dataValue>
+					<r2ml:AttributeFunctionTerm r2ml:attributeID="ex:CheckAvailability.checkOutDate">
+					  <r2ml:contextArgument>
+						<r2ml:ObjectVariable r2ml:name="chkAv" r2ml:classID="ex:CheckAvailability"/>
+					  </r2ml:contextArgument>
+					</r2ml:AttributeFunctionTerm>
+				  </r2ml:dataValue>
+			   </r2ml:AttributionAtom>
+
+		       <r2ml:AttributionAtom r2ml:attributeID="isAvaillable">
+				 <r2ml:subject>
+			       <r2ml:ObjectVariable r2ml:name="room"/>
+				 </r2ml:subject>
+				 <r2ml:dataValue>
+					<r2ml:TypedLiteral r2ml:lexicalValue="true" r2ml:datatypeID="xs:boolean"/>
+				</r2ml:dataValue>
+			   </r2ml:AttributionAtom>
+
+            </r2ml:conditions>
+
+            <r2ml:producedAction>
+                <r2ml:MessageEventExpression r2ml:eventType="ex:CheckAvailabilityResponse" r2ml:sender="http://www.bookingservice.com">
+                    <r2ml:DataSlot r2ml:attributeID="ex:CheckAvailabilityResponse.yesNoAnswer">
+					  <r2ml:value>
+				         <r2ml:TypedLiteral r2ml:lexicalValue="true" r2ml:datatypeID="xs:boolean"/>
+				      </r2ml:value>
+					</r2ml:DataSlot>
+                </r2ml:MessageEventExpression>
+            </r2ml:producedAction>
+
+        </r2ml:ReactionRule>
+    </r2ml:ReactionRuleSet>
+</r2ml:RuleBase>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Metamodel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="KM3" location="1:1-52:2">
+  <contents location="1:1-12:2" name="Pa_1">
+    <contents xsi:type="Class" location="2:9-4:10" name="Cl_A" isAbstract="false" supertypes="//@contents.0/@contents.1">
+      <structuralFeatures xsi:type="Attribute" location="3:17-3:42" name="att_a" lower="1" upper="1" isOrdered="false" type="//@contents.4/@contents.0"/>
+    </contents>
+    <contents xsi:type="Class" location="5:9-6:10" name="Cl_B" isAbstract="false" supertypes="//@contents.0/@contents.2"/>
+    <contents xsi:type="Class" location="7:9-9:10" name="Cl_C" isAbstract="false" supertypes="//@contents.0/@contents.3">
+      <structuralFeatures xsi:type="Attribute" location="8:17-8:43" name="att_a" lower="1" upper="1" isOrdered="false" type="//@contents.4/@contents.1"/>
+    </contents>
+    <contents xsi:type="Class" location="10:9-11:10" name="Cl_D" isAbstract="false" supertypes="//@contents.0/@contents.1"/>
+  </contents>
+  <contents location="14:1-27:2" name="Pa_2">
+    <contents xsi:type="Class" location="15:9-16:10" name="Cl_H" isAbstract="false"/>
+    <contents xsi:type="Class" location="17:9-20:10" name="Cl_F" isAbstract="false">
+      <structuralFeatures xsi:type="Reference" location="18:17-18:57" name="ref_a" lower="1" upper="1" isOrdered="false" type="//@contents.1/@contents.2" isContainer="false" opposite="//@contents.1/@contents.2/@structuralFeatures.0"/>
+      <structuralFeatures xsi:type="Reference" location="19:17-19:57" name="ref_b" lower="1" upper="1" isOrdered="false" type="//@contents.1/@contents.2" isContainer="false" opposite="//@contents.1/@contents.2/@structuralFeatures.1"/>
+    </contents>
+    <contents xsi:type="Class" location="21:9-24:10" name="Cl_G" isAbstract="false">
+      <structuralFeatures xsi:type="Reference" location="22:17-22:40" name="ref_c" lower="1" upper="1" isOrdered="false" type="//@contents.1/@contents.1" isContainer="false"/>
+      <structuralFeatures xsi:type="Reference" location="23:17-23:57" name="ref_d" lower="1" upper="1" isOrdered="false" type="//@contents.1/@contents.1" isContainer="false" opposite="//@contents.1/@contents.1/@structuralFeatures.0"/>
+    </contents>
+    <contents xsi:type="Class" location="25:9-26:10" name="Cl_H" isAbstract="false"/>
+  </contents>
+  <contents location="29:1-36:2" name="Pa_3">
+    <contents xsi:type="Class" location="30:9-31:10" name="Cl_I" isAbstract="false"/>
+    <contents xsi:type="Class" location="32:9-35:10" name="Cl_J" isAbstract="false">
+      <structuralFeatures xsi:type="Attribute" location="33:17-33:40" name="att_b" lower="1" upper="1" isOrdered="false" type="//@contents.2/@contents.0"/>
+      <structuralFeatures xsi:type="Reference" location="34:17-34:43" name="ref_e" lower="1" upper="1" isOrdered="false" type="//@contents.4/@contents.1" isContainer="false"/>
+    </contents>
+  </contents>
+  <contents location="38:1-47:2" name="Pa_4">
+    <contents xsi:type="Class" location="39:9-41:10" name="Cl_K" isAbstract="false">
+      <structuralFeatures xsi:type="Reference" location="40:17-40:57" name="ref_a" lower="1" upper="1" isOrdered="false" type="//@contents.3/@contents.2" isContainer="false" opposite="//@contents.3/@contents.2/@structuralFeatures.0"/>
+    </contents>
+    <contents xsi:type="Class" location="42:9-43:10" name="Cl_L" isAbstract="false" supertypes="//@contents.3/@contents.0"/>
+    <contents xsi:type="Class" location="44:9-46:10" name="Cl_M" isAbstract="false">
+      <structuralFeatures xsi:type="Reference" location="45:17-45:57" name="ref_b" lower="1" upper="1" isOrdered="false" type="//@contents.3/@contents.1" isContainer="false" opposite="//@contents.3/@contents.0/@structuralFeatures.0"/>
+    </contents>
+  </contents>
+  <contents location="49:1-52:2" name="PrimitiveTypes">
+    <contents xsi:type="DataType" location="50:9-50:25" name="String"/>
+    <contents xsi:type="DataType" location="51:9-51:26" name="Integer"/>
+  </contents>
+</Metamodel>

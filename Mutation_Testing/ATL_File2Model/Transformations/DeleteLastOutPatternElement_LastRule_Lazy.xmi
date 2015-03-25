@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="2:1-25:2" name="DeleteLastOutPatternElement_LastRule_Lazy" isRefining="true">
+    <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
+    <commentsAfter>--</commentsAfter>
+    <commentsAfter>--rule DeleteAssociatedBinding{</commentsAfter>
+    <commentsAfter>--	from</commentsAfter>
+    <commentsAfter>--	 b : ATL!Binding (b.value.oclIsTypeOf(ATL!VariableExp) and b.value.referredVariable.oclIsUndefined())</commentsAfter>
+    <commentsAfter>--	to</commentsAfter>
+    <commentsAfter>--}</commentsAfter>
+    <inModels location="3:27-3:35" name="IN" metamodel="/1"/>
+    <outModels location="3:8-3:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="5:1-19:2" name="DeleteLastOutPatternElement_LastRule">
+      <outPattern location="12:2-12:4"/>
+      <actionBlock location="13:2-18:3">
+        <statements xsi:type="atl:ForStat" location="14:3-17:4">
+          <iterator location="14:8-14:10" varName="bd" variableExp="/0/@elements.0/@actionBlock/@statements.0/@statements.0/@expression/@arguments.0 /0/@elements.0/@actionBlock/@statements.0/@statements.1/@expression/@source/@source"/>
+          <collection xsi:type="ocl:IteratorExp" location="14:15-14:128" name="select">
+            <source xsi:type="ocl:OperationCallExp" location="14:15-14:41" operationName="allInstances">
+              <source xsi:type="ocl:OclModelElement" location="14:15-14:26" name="Binding" model="/1"/>
+            </source>
+            <body xsi:type="ocl:OperatorCallExp" location="14:56-14:127" operationName="and">
+              <source xsi:type="ocl:OperationCallExp" location="14:56-14:92" operationName="oclIsTypeOf">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:56-14:63" name="value">
+                  <source xsi:type="ocl:VariableExp" location="14:56-14:57" referredVariable="/0/@elements.0/@actionBlock/@statements.0/@collection/@iterators.0"/>
+                </source>
+                <arguments xsi:type="ocl:OclModelElement" location="14:76-14:91" name="VariableExp" model="/1"/>
+              </source>
+              <arguments xsi:type="ocl:OperatorCallExp" location="14:97-14:127" operationName="=">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:97-14:121" name="referredVariable">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="14:97-14:104" name="value">
+                    <source xsi:type="ocl:VariableExp" location="14:97-14:98" referredVariable="/0/@elements.0/@actionBlock/@statements.0/@collection/@iterators.0"/>
+                  </source>
+                </source>
+                <arguments xsi:type="ocl:VariableExp" location="14:124-14:127" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </arguments>
+            </body>
+            <iterators location="14:52-14:53" varName="b" variableExp="/0/@elements.0/@actionBlock/@statements.0/@collection/@body/@source/@source/@source /0/@elements.0/@actionBlock/@statements.0/@collection/@body/@arguments.0/@source/@source/@source"/>
+          </collection>
+          <statements xsi:type="atl:ExpressionStat" location="15:4-15:33">
+            <expression xsi:type="ocl:OperationCallExp" location="15:4-15:32" operationName="DeleteBinding">
+              <source xsi:type="ocl:VariableExp" location="15:4-15:14" referredVariable="/2"/>
+              <arguments xsi:type="ocl:VariableExp" location="15:29-15:31" referredVariable="/0/@elements.0/@actionBlock/@statements.0/@iterator"/>
+            </expression>
+          </statements>
+          <statements xsi:type="atl:ExpressionStat" location="16:4-16:28">
+            <expression xsi:type="ocl:OperationCallExp" location="16:4-16:27" operationName="debug">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="16:4-16:19" name="propertyName">
+                <source xsi:type="ocl:VariableExp" location="16:4-16:6" referredVariable="/0/@elements.0/@actionBlock/@statements.0/@iterator"/>
+              </source>
+            </expression>
+          </statements>
+        </statements>
+      </actionBlock>
+      <inPattern location="6:2-11:4">
+        <elements xsi:type="atl:SimpleInPatternElement" location="7:3-7:30" varName="ope" variableExp="/0/@elements.0/@inPattern/@filter/@source/@source /0/@elements.0/@inPattern/@filter/@source/@arguments.0/@source/@source/@source /0/@elements.0/@inPattern/@filter/@arguments.0/@source/@source/@source /0/@elements.0/@inPattern/@filter/@arguments.0/@arguments.0/@source/@source/@source/@source/@source /0/@elements.0/@actionBlock/@statements.0/@collection/@body/@arguments.0/@arguments.0">
+          <type xsi:type="ocl:OclModelElement" location="7:9-7:30" name="OutPatternElement" model="/1"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="9:4-10:71" operationName="and">
+          <commentsAfter>-- of the last rule</commentsAfter>
+          <source xsi:type="ocl:OperatorCallExp" location="9:4-9:43" operationName="=">
+            <source xsi:type="ocl:VariableExp" location="9:4-9:7" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+            <arguments xsi:type="ocl:CollectionOperationCallExp" location="9:10-9:43" operationName="last">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:10-9:33" name="elements">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:10-9:24" name="outPattern">
+                  <source xsi:type="ocl:VariableExp" location="9:10-9:13" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                </source>
+              </source>
+            </arguments>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="10:4-10:71" operationName="=">
+            <commentsBefore>--It is the last OutPatternElement</commentsBefore>
+            <commentsAfter>-- of the last rule</commentsAfter>
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:4-10:23" name="rule">
+              <commentsBefore>--It is the last OutPatternElement</commentsBefore>
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:4-10:18" name="outPattern">
+                <commentsBefore>--It is the last OutPatternElement</commentsBefore>
+                <source xsi:type="ocl:VariableExp" location="10:4-10:7" referredVariable="/0/@elements.0/@inPattern/@elements.0">
+                  <commentsBefore>--It is the last OutPatternElement</commentsBefore>
+                </source>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:CollectionOperationCallExp" location="10:26-10:71" operationName="last">
+              <commentsAfter>-- of the last rule</commentsAfter>
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:26-10:61" name="elements">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:26-10:52" name="module">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:26-10:45" name="rule">
+                    <source xsi:type="ocl:NavigationOrAttributeCallExp" location="10:26-10:40" name="outPattern">
+                      <source xsi:type="ocl:VariableExp" location="10:26-10:29" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                    </source>
+                  </source>
+                </source>
+              </source>
+            </arguments>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="21:1-25:2" name="DeleteBinding">
+      <commentsAfter>--</commentsAfter>
+      <commentsAfter>--rule DeleteAssociatedBinding{</commentsAfter>
+      <commentsAfter>--	from</commentsAfter>
+      <commentsAfter>--	 b : ATL!Binding (b.value.oclIsTypeOf(ATL!VariableExp) and b.value.referredVariable.oclIsUndefined())</commentsAfter>
+      <commentsAfter>--	to</commentsAfter>
+      <commentsAfter>--}</commentsAfter>
+      <outPattern location="24:2-24:4"/>
+      <inPattern location="22:2-23:18">
+        <elements xsi:type="atl:SimpleInPatternElement" location="23:3-23:18" varName="b">
+          <type xsi:type="ocl:OclModelElement" location="23:7-23:18" name="Binding" model="/1"/>
+        </elements>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="3:14-3:17" name="ATL" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.0/@actionBlock/@statements.0/@collection/@source/@source /0/@elements.0/@actionBlock/@statements.0/@collection/@body/@source/@arguments.0 /0/@elements.1/@inPattern/@elements.0/@type" model="/0/@outModels.0 /0/@inModels.0"/>
+  <ocl:VariableDeclaration location="15:4-15:14" varName="thisModule" variableExp="/0/@elements.0/@actionBlock/@statements.0/@statements.0/@expression/@source"/>
+</xmi:XMI>

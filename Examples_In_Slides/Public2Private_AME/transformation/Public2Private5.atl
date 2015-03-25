@@ -1,0 +1,30 @@
+-- @atlcompiler emftvm
+
+module Public2Private5;
+create OUT : UML refining IN : UML;
+
+helper context String def: firstToUpper() : String =
+	self.substring(1, 1).toUpper() + self.substring(2, self.size());
+
+rule CreateGetter4PublicProperties {
+	from
+		p_src : UML!Property (p_src.visibility = #public)
+	to
+		p_trg : UML!Property (
+			visibility <- #private
+		),
+		-- getter
+		op : UML!Operation (
+			name <- 'get' + p_src.name.firstToUpper(),
+			class <- p_src.class,
+			type <- p_src.type,
+			ownedParameter <- parm
+		),
+		parm : UML!Parameter (
+			name <- 'return',
+			type <- p_src.type
+		)
+}
+
+
+

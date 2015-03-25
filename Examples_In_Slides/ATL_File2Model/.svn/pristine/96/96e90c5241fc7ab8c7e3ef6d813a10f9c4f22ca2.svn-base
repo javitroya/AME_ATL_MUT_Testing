@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="4:1-35:2" name="SM2LUT">
+    <commentsBefore>-- @path MM=/StateMachine2LookupTable/metamodels/StateMachine.ecore</commentsBefore>
+    <commentsBefore>-- @path MM1=/StateMachine2LookupTable/metamodels/LookUpTable.ecore</commentsBefore>
+    <inModels location="5:23-5:30" name="IN" metamodel="/2"/>
+    <outModels location="5:8-5:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="7:1-14:2" name="SM2LUT">
+      <outPattern location="10:2-13:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="11:3-13:4" varName="b">
+          <type xsi:type="ocl:OclModelElement" location="11:7-11:22" name="LookUpTable" model="/4"/>
+          <bindings location="12:4-12:95" propertyName="event">
+            <value xsi:type="ocl:IteratorExp" location="12:13-12:95" name="collect">
+              <source xsi:type="ocl:OperationCallExp" location="12:13-12:55" operationName="asSet">
+                <source xsi:type="ocl:IteratorExp" location="12:13-12:47" name="collect">
+                  <source xsi:type="ocl:NavigationOrAttributeCallExp" location="12:13-12:25" name="transition">
+                    <source xsi:type="ocl:VariableExp" location="12:13-12:14" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                  </source>
+                  <body xsi:type="ocl:NavigationOrAttributeCallExp" location="12:39-12:46" name="event">
+                    <source xsi:type="ocl:VariableExp" location="12:39-12:40" referredVariable="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@iterators.0"/>
+                  </body>
+                  <iterators location="12:37-12:38" varName="x" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@body/@source"/>
+                </source>
+              </source>
+              <body xsi:type="ocl:OperationCallExp" location="12:69-12:94" operationName="createEvent">
+                <source xsi:type="ocl:VariableExp" location="12:69-12:79" referredVariable="/5"/>
+                <arguments xsi:type="ocl:VariableExp" location="12:92-12:93" referredVariable="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@iterators.0"/>
+              </body>
+              <iterators location="12:67-12:68" varName="x" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@body/@arguments.0"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="8:2-9:22">
+        <elements xsi:type="atl:SimpleInPatternElement" location="9:3-9:22" varName="a" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="9:7-9:22" name="StateMachine" model="/3"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:LazyMatchedRule" location="16:1-23:2" name="createEvent" isUnique="true">
+      <outPattern location="19:2-22:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="20:3-22:4" varName="b">
+          <type xsi:type="ocl:OclModelElement" location="20:7-20:16" name="Event" model="/6"/>
+          <bindings location="21:4-21:13" propertyName="name">
+            <value xsi:type="ocl:VariableExp" location="21:12-21:13" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="17:2-18:13">
+        <elements xsi:type="atl:SimpleInPatternElement" location="18:3-18:13" varName="a" variableExp="/0/@elements.1/@outPattern/@elements.0/@bindings.0/@value">
+          <type xsi:type="ocl:StringType" location="18:7-18:13"/>
+        </elements>
+      </inPattern>
+    </elements>
+    <elements xsi:type="atl:MatchedRule" location="25:1-35:2" name="T2C">
+      <outPattern location="28:2-34:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="29:3-34:4" varName="b">
+          <type xsi:type="ocl:OclModelElement" location="29:7-29:17" name="Change" model="/8"/>
+          <bindings location="30:4-30:27" propertyName="fromState">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="30:17-30:27" name="name">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="30:17-30:22" name="src">
+                <source xsi:type="ocl:VariableExp" location="30:17-30:18" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="31:4-31:25" propertyName="toState">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="31:15-31:25" name="name">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="31:15-31:20" name="tgt">
+                <source xsi:type="ocl:VariableExp" location="31:15-31:16" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="32:4-32:44" propertyName="sm">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="32:10-32:44" name="name">
+              <source xsi:type="ocl:OperationCallExp" location="32:10-32:39" operationName="refImmediateComposite">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="32:10-32:15" name="src">
+                  <source xsi:type="ocl:VariableExp" location="32:10-32:11" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+                </source>
+              </source>
+            </value>
+          </bindings>
+          <bindings location="33:4-33:44" propertyName="event">
+            <value xsi:type="ocl:OperationCallExp" location="33:13-33:44" operationName="createEvent">
+              <source xsi:type="ocl:VariableExp" location="33:13-33:23" referredVariable="/9"/>
+              <arguments xsi:type="ocl:NavigationOrAttributeCallExp" location="33:36-33:43" name="event">
+                <source xsi:type="ocl:VariableExp" location="33:36-33:37" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
+              </arguments>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="26:2-27:20">
+        <elements xsi:type="atl:SimpleInPatternElement" location="27:3-27:20" varName="a" variableExp="/0/@elements.2/@outPattern/@elements.0/@bindings.0/@value/@source/@source /0/@elements.2/@outPattern/@elements.0/@bindings.1/@value/@source/@source /0/@elements.2/@outPattern/@elements.0/@bindings.2/@value/@source/@source/@source /0/@elements.2/@outPattern/@elements.0/@bindings.3/@value/@arguments.0/@source">
+          <type xsi:type="ocl:OclModelElement" location="27:7-27:20" name="Transition" model="/7"/>
+        </elements>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="5:14-5:17" name="MM1" model="/0/@outModels.0"/>
+  <ocl:OclModel location="5:28-5:30" name="MM" model="/0/@inModels.0"/>
+  <ocl:OclModel location="9:7-9:9" name="MM" elements="/0/@elements.0/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="11:7-11:10" name="MM1" elements="/0/@elements.0/@outPattern/@elements.0/@type"/>
+  <ocl:VariableDeclaration location="12:69-12:79" varName="thisModule" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@body/@source"/>
+  <ocl:OclModel location="20:7-20:10" name="MM1" elements="/0/@elements.1/@outPattern/@elements.0/@type"/>
+  <ocl:OclModel location="27:7-27:9" name="MM" elements="/0/@elements.2/@inPattern/@elements.0/@type"/>
+  <ocl:OclModel location="29:7-29:10" name="MM1" elements="/0/@elements.2/@outPattern/@elements.0/@type"/>
+  <ocl:VariableDeclaration location="33:13-33:23" varName="thisModule" variableExp="/0/@elements.2/@outPattern/@elements.0/@bindings.3/@value/@source"/>
+</xmi:XMI>

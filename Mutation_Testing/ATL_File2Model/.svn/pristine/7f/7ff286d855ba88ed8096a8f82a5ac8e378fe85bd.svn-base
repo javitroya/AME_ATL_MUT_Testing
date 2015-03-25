@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<SPL:Program xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SPL="http://SPL">
+  <service name="unnamed">
+    <declarations xsi:type="SPL:LocalFunctionDeclaration" name="voicemail">
+      <returnType xsi:type="SPL:SimpleType" type="response"/>
+      <statements xsi:type="SPL:ReturnStat">
+        <returnedValue xsi:type="SPL:WithExp">
+          <exp xsi:type="SPL:ConstantExp">
+            <value xsi:type="SPL:ResponseConstant">
+              <response xsi:type="SPL:RedirectionErrorResponse" errorKind="MOVED_TEMPORARILY"/>
+            </value>
+          </exp>
+          <msgFields xsi:type="SPL:ReasonMessageField">
+            <exp xsi:type="SPL:ConstantExp">
+              <value xsi:type="SPL:StringConstant" value="unspecified"/>
+            </exp>
+          </msgFields>
+          <msgFields xsi:type="SPL:HeadedMessageField" headerId="#contact:">
+            <exp xsi:type="SPL:ConstantExp">
+              <value xsi:type="SPL:URIConstant" uri="sip:jones@voicemail.example.com"/>
+            </exp>
+          </msgFields>
+        </returnedValue>
+      </statements>
+    </declarations>
+    <sessions xsi:type="SPL:Dialog">
+      <methods direction="inn">
+        <type xsi:type="SPL:SimpleType" type="response"/>
+        <methodName xsi:type="SPL:SIPMethodName" name="INVITE"/>
+        <statements xsi:type="SPL:CompoundStat">
+          <statements xsi:type="SPL:DeclarationStat">
+            <declaration xsi:type="SPL:VariableDeclaration" name="r">
+              <type xsi:type="SPL:SimpleType" type="response"/>
+              <initExp xsi:type="SPL:ForwardExp">
+                <exp xsi:type="SPL:ConstantExp">
+                  <value xsi:type="SPL:URIConstant" uri="sip:jones@phone.example.com"/>
+                </exp>
+              </initExp>
+            </declaration>
+          </statements>
+          <statements xsi:type="SPL:SelectStat">
+            <matchedExp xsi:type="SPL:Variable" source="//@service/@sessions.0/@methods.0/@statements.0/@statements.0/@declaration"/>
+            <selectCases>
+              <commentsBefore>// busy</commentsBefore>
+              <statements xsi:type="SPL:ReturnStat">
+                <returnedValue xsi:type="SPL:FunctionCallExp">
+                  <functionCall function="//@service/@declarations.0"/>
+                </returnedValue>
+              </statements>
+              <values xsi:type="SPL:ResponseConstant">
+                <response xsi:type="SPL:ClientErrorResponse" errorKind="BUSY_HERE"/>
+              </values>
+            </selectCases>
+            <selectCases>
+              <commentsBefore>// noanswer</commentsBefore>
+              <statements xsi:type="SPL:SelectStat">
+                <matchedExp xsi:type="SPL:SIPHeaderPlace" header="FROM"/>
+                <selectCases>
+                  <statements xsi:type="SPL:ReturnStat">
+                    <returnedValue xsi:type="SPL:ForwardExp">
+                      <exp xsi:type="SPL:ConstantExp">
+                        <value xsi:type="SPL:URIConstant" uri="tel:+19175551212"/>
+                      </exp>
+                    </returnedValue>
+                  </statements>
+                  <values xsi:type="SPL:StringConstant" value="sip:boss@example.com"/>
+                </selectCases>
+                <selectDefault>
+                  <statements xsi:type="SPL:ReturnStat">
+                    <returnedValue xsi:type="SPL:FunctionCallExp">
+                      <functionCall function="//@service/@declarations.0"/>
+                    </returnedValue>
+                  </statements>
+                </selectDefault>
+              </statements>
+              <values xsi:type="SPL:ResponseConstant">
+                <response xsi:type="SPL:ClientErrorResponse" errorKind="REQUEST_TIMEOUT"/>
+              </values>
+            </selectCases>
+          </statements>
+        </statements>
+      </methods>
+    </sessions>
+  </service>
+</SPL:Program>

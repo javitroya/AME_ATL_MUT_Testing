@@ -1,0 +1,286 @@
+<?xml version = '1.0' encoding = 'ISO-8859-1' ?>
+<XMI xmi.version = '1.2' timestamp = 'Fri Jul 27 10:00:59 CEST 2007'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <XML.Root xmi.id = 'a1' name = 'r2ml:RuleBase'>
+      <XML.Element.children>
+        <XML.Attribute xmi.id = 'a2' name = 'xmlns:ex' value = 'http://www.bookingservice.com/schema'/>
+        <XML.Attribute xmi.id = 'a3' name = 'xsi:schemaLocation' value = 'http://www.rewerse.net/I1/2006/R2ML http://oxygen.informatik.tu-cottbus.de/R2ML/0.4/R2ML.xsd'/>
+        <XML.Attribute xmi.id = 'a4' name = 'xmlns:r2ml' value = 'http://www.rewerse.net/I1/2006/R2ML'/>
+        <XML.Attribute xmi.id = 'a5' name = 'xmlns:r2mlv' value = 'http://www.rewerse.net/I1/2006/R2MLV'/>
+        <XML.Attribute xmi.id = 'a6' name = 'xmlns:xsi' value = 'http://www.w3.org/2001/XMLSchema-instance'/>
+        <XML.Element xmi.id = 'a7' name = 'r2ml:ReactionRuleSet'>
+          <XML.Element.children>
+            <XML.Attribute xmi.id = 'a8' name = 'r2ml:ruleSetID' value = 'tns:reservationInterface'/>
+            <XML.Element xmi.id = 'a9' name = 'r2ml:ReactionRule'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a10' name = 'r2ml:ruleID' value = '???'/>
+                <XML.Element xmi.id = 'a11' name = 'r2ml:triggeringEvent'>
+                  <XML.Element.children>
+                    <XML.Element xmi.id = 'a12' name = 'r2ml:MessageEventExpression'>
+                      <XML.Element.children>
+                        <XML.Attribute xmi.id = 'a13' name = 'r2ml:eventType' value = 'ex:CheckAvailability'/>
+                        <XML.Attribute xmi.id = 'a14' name = 'r2ml:startTime' value = ''/>
+                        <XML.Attribute xmi.id = 'a15' name = 'r2ml:duration' value = ''/>
+                        <XML.Attribute xmi.id = 'a16' name = 'r2ml:sender' value = 'to_be_defined'/>
+                        <XML.Element xmi.id = 'a17' name = 'r2ml:ObjectVariable'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a18' name = 'r2ml:name' value = '???'/>
+                            <XML.Attribute xmi.id = 'a19' name = 'r2ml:classID' value = 'ex:CheckAvailability'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a20' name = 'r2ml:conditions'/>
+                <XML.Element xmi.id = 'a21' name = 'r2ml:producedAction'>
+                  <XML.Element.children>
+                    <XML.Element xmi.id = 'a22' name = 'r2ml:MessageEventExpression'>
+                      <XML.Element.children>
+                        <XML.Attribute xmi.id = 'a23' name = 'r2ml:eventType' value = 'ex:CheckAvailabilityResponse'/>
+                        <XML.Attribute xmi.id = 'a24' name = 'r2ml:startTime' value = ''/>
+                        <XML.Attribute xmi.id = 'a25' name = 'r2ml:duration' value = ''/>
+                        <XML.Attribute xmi.id = 'a26' name = 'r2ml:sender' value = 'http://www.bookingservice.com'/>
+                        <XML.Element xmi.id = 'a27' name = 'r2ml:DataSlot'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a28' name = 'r2ml:attributeID' value = 'ex:CheckAvailabilityResponse.yesNoAnswer'/>
+                            <XML.Element xmi.id = 'a29' name = 'r2ml:value'>
+                              <XML.Element.children>
+                                <XML.Element xmi.id = 'a30' name = 'r2ml:TypedLiteral'>
+                                  <XML.Element.children>
+                                    <XML.Attribute xmi.id = 'a31' name = 'r2ml:datatypeID' value = 'xs:string'/>
+                                    <XML.Attribute xmi.id = 'a32' name = 'r2ml:lexicalValue' value = '???'/>
+                                  </XML.Element.children>
+                                </XML.Element>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Attribute xmi.id = 'a33' name = 'r2ml:groupID' value = 'tns:checkAvailability'/>
+              </XML.Element.children>
+            </XML.Element>
+            <XML.Element xmi.id = 'a34' name = 'r2ml:ReactionRule'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a35' name = 'r2ml:ruleID' value = '???'/>
+                <XML.Element xmi.id = 'a36' name = 'r2ml:triggeringEvent'>
+                  <XML.Element.children>
+                    <XML.Element xmi.id = 'a37' name = 'r2ml:MessageEventExpression'>
+                      <XML.Element.children>
+                        <XML.Attribute xmi.id = 'a38' name = 'r2ml:eventType' value = 'ex:CheckAvailability'/>
+                        <XML.Attribute xmi.id = 'a39' name = 'r2ml:startTime' value = ''/>
+                        <XML.Attribute xmi.id = 'a40' name = 'r2ml:duration' value = ''/>
+                        <XML.Attribute xmi.id = 'a41' name = 'r2ml:sender' value = 'to_be_defined'/>
+                        <XML.Element xmi.id = 'a42' name = 'r2ml:ObjectVariable'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a43' name = 'r2ml:name' value = '???'/>
+                            <XML.Attribute xmi.id = 'a44' name = 'r2ml:classID' value = 'ex:CheckAvailability'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a45' name = 'r2ml:conditions'/>
+                <XML.Element xmi.id = 'a46' name = 'r2ml:producedAction'>
+                  <XML.Element.children>
+                    <XML.Element xmi.id = 'a47' name = 'r2ml:MessageEventExpression'>
+                      <XML.Element.children>
+                        <XML.Attribute xmi.id = 'a48' name = 'r2ml:eventType' value = 'ex:InvalidDataError'/>
+                        <XML.Attribute xmi.id = 'a49' name = 'r2ml:startTime' value = ''/>
+                        <XML.Attribute xmi.id = 'a50' name = 'r2ml:duration' value = ''/>
+                        <XML.Attribute xmi.id = 'a51' name = 'r2ml:sender' value = 'http://www.bookingservice.com'/>
+                        <XML.Element xmi.id = 'a52' name = 'r2ml:DataSlot'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a53' name = 'r2ml:attributeID' value = 'ex:InvalidDataError.message'/>
+                            <XML.Element xmi.id = 'a54' name = 'r2ml:value'>
+                              <XML.Element.children>
+                                <XML.Element xmi.id = 'a55' name = 'r2ml:TypedLiteral'>
+                                  <XML.Element.children>
+                                    <XML.Attribute xmi.id = 'a56' name = 'r2ml:datatypeID' value = 'xs:string'/>
+                                    <XML.Attribute xmi.id = 'a57' name = 'r2ml:lexicalValue' value = '???'/>
+                                  </XML.Element.children>
+                                </XML.Element>
+                              </XML.Element.children>
+                            </XML.Element>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Attribute xmi.id = 'a58' name = 'r2ml:groupID' value = 'tns:checkAvailability'/>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+        <XML.Element xmi.id = 'a59' name = 'r2mlv:Vocabulary'>
+          <XML.Element.children>
+            <XML.Element xmi.id = 'a60' name = 'r2mlv:MessageType'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a61' name = 'r2mlv:ID' value = 'ex:CheckAvailability'/>
+                <XML.Element xmi.id = 'a62' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a63' name = 'r2mlv:ID' value = 'ex:CheckAvailability.checkInDate'/>
+                    <XML.Element xmi.id = 'a64' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a65' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a66' name = 'r2mlv:ID' value = 'xs:dateTime'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a67' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a68' name = 'r2mlv:ID' value = 'ex:CheckAvailability.checkOutDate'/>
+                    <XML.Element xmi.id = 'a69' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a70' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a71' name = 'r2mlv:ID' value = 'xs:dateTime'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a72' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a73' name = 'r2mlv:ID' value = 'ex:CheckAvailability.roomType'/>
+                    <XML.Element xmi.id = 'a74' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a75' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a76' name = 'r2mlv:ID' value = 'xs:string'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+                <XML.Element xmi.id = 'a77' name = 'r2mlv:ReferenceProperty'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a78' name = 'r2mlv:ID' value = 'ex:Customer'/>
+                    <XML.Element xmi.id = 'a79' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a80' name = 'r2mlv:Class'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a81' name = 'r2mlv:ID' value = 'ex:Customer'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+            <XML.Element xmi.id = 'a82' name = 'r2mlv:Class'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a83' name = 'r2mlv:ID' value = 'ex:Customer'/>
+                <XML.Element xmi.id = 'a84' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a85' name = 'r2mlv:ID' value = 'ex:Customer.custNo'/>
+                    <XML.Element xmi.id = 'a86' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a87' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a88' name = 'r2mlv:ID' value = 'xs:decimal'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+            <XML.Element xmi.id = 'a89' name = 'r2mlv:MessageType'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a90' name = 'r2mlv:ID' value = 'ex:CheckAvailabilityResponse'/>
+                <XML.Element xmi.id = 'a91' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a92' name = 'r2mlv:ID' value = 'ex:CheckAvailabilityResponse.yesNoAnswer'/>
+                    <XML.Element xmi.id = 'a93' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a94' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a95' name = 'r2mlv:ID' value = 'xs:string'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+            <XML.Element xmi.id = 'a96' name = 'r2mlv:FaultMessageType'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a97' name = 'r2mlv:ID' value = 'ex:InvalidDataError'/>
+                <XML.Element xmi.id = 'a98' name = 'r2mlv:Attribute'>
+                  <XML.Element.children>
+                    <XML.Attribute xmi.id = 'a99' name = 'r2mlv:ID' value = 'ex:InvalidDataError.message'/>
+                    <XML.Element xmi.id = 'a100' name = 'r2mlv:range'>
+                      <XML.Element.children>
+                        <XML.Element xmi.id = 'a101' name = 'r2mlv:Datatype'>
+                          <XML.Element.children>
+                            <XML.Attribute xmi.id = 'a102' name = 'r2mlv:ID' value = 'xs:string'/>
+                          </XML.Element.children>
+                        </XML.Element>
+                      </XML.Element.children>
+                    </XML.Element>
+                  </XML.Element.children>
+                </XML.Element>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+      </XML.Element.children>
+    </XML.Root>
+    <XML.Element xmi.id = 'a103' name = 'r2mlv:Class'>
+      <XML.Element.children>
+        <XML.Attribute xmi.id = 'a104' name = 'r2mlv:ID' value = ''/>
+      </XML.Element.children>
+    </XML.Element>
+    <XML.Element xmi.id = 'a105' name = 'r2mlv:Attribute'>
+      <XML.Element.children>
+        <XML.Attribute xmi.id = 'a106' name = 'r2mlv:ID' value = 'ex:CheckAvailabilityResponse.yesNoAnswer'/>
+        <XML.Element xmi.id = 'a107' name = 'r2mlv:range'>
+          <XML.Element.children>
+            <XML.Element xmi.id = 'a108' name = 'r2mlv:Datatype'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a109' name = 'r2mlv:ID' value = 'xs:string'/>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+      </XML.Element.children>
+    </XML.Element>
+    <XML.Element xmi.id = 'a110' name = 'r2mlv:Attribute'>
+      <XML.Element.children>
+        <XML.Attribute xmi.id = 'a111' name = 'r2mlv:ID' value = 'ex:InvalidDataError.message'/>
+        <XML.Element xmi.id = 'a112' name = 'r2mlv:range'>
+          <XML.Element.children>
+            <XML.Element xmi.id = 'a113' name = 'r2mlv:Datatype'>
+              <XML.Element.children>
+                <XML.Attribute xmi.id = 'a114' name = 'r2mlv:ID' value = 'xs:string'/>
+              </XML.Element.children>
+            </XML.Element>
+          </XML.Element.children>
+        </XML.Element>
+      </XML.Element.children>
+    </XML.Element>
+    <XML.Element xmi.id = 'a115' name = 'r2ml:postconditon'/>
+    <XML.Element xmi.id = 'a116' name = 'r2ml:postconditon'/>
+  </XMI.content>
+</XMI>

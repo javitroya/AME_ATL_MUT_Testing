@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="9:1-131:2" name="Measure2Table">
+    <commentsBefore>--@atlcompiler	atl2006</commentsBefore>
+    <commentsBefore>--@name			Measure2Table</commentsBefore>
+    <commentsBefore>--@version		2.0</commentsBefore>
+    <commentsBefore>--@domains		measurement data, metrics, generic table</commentsBefore>
+    <commentsBefore>--@authors		Eric Vepa (evepa &lt;at> sodius.com) for SODIUS (www.sodius.com)</commentsBefore>
+    <commentsBefore>--@date			2007/08/28</commentsBefore>
+    <commentsBefore>--@description	This transformation is used to represent measurement data from terminal models as a generic table representation.</commentsBefore>
+    <commentsAfter>--@end called rule String2Cell</commentsAfter>
+    <libraries location="12:1-12:21" name="MeasureHelpers">
+      <commentsAfter>--@begin helper modelKind</commentsAfter>
+      <commentsAfter>--@comments String values for model type of a measure set.</commentsAfter>
+    </libraries>
+    <inModels location="10:25-10:37" name="IN" metamodel="/2"/>
+    <outModels location="10:8-10:19" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:Helper" location="16:1-18:20">
+      <commentsBefore>--@begin helper modelKind</commentsBefore>
+      <commentsBefore>--@comments String values for model type of a measure set.</commentsBefore>
+      <commentsAfter>--@end helper modelKind</commentsAfter>
+      <commentsAfter>--@begin helper elementKind</commentsAfter>
+      <commentsAfter>--@comments String values for element type of a measure set.</commentsAfter>
+      <definition location="16:8-18:19">
+        <feature xsi:type="ocl:Attribute" location="16:14-18:19" name="modelKind">
+          <initExpression xsi:type="ocl:MapExp" location="17:2-18:19">
+            <elements location="17:7-17:20">
+              <key xsi:type="ocl:StringExp" location="17:8-17:13" stringSymbol="KM3"/>
+              <value xsi:type="ocl:StringExp" location="17:14-17:19" stringSymbol="KM3"/>
+            </elements>
+            <elements location="18:3-18:18">
+              <key xsi:type="ocl:StringExp" location="18:4-18:10" stringSymbol="UML2"/>
+              <value xsi:type="ocl:StringExp" location="18:11-18:17" stringSymbol="UML2"/>
+            </elements>
+          </initExpression>
+          <type xsi:type="ocl:MapType" location="16:26-16:44">
+            <valueType xsi:type="ocl:StringType" location="16:37-16:43"/>
+            <keyType xsi:type="ocl:StringType" location="16:30-16:36"/>
+          </type>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:Helper" location="23:1-28:22">
+      <commentsBefore>--@end helper modelKind</commentsBefore>
+      <commentsBefore>--@begin helper elementKind</commentsBefore>
+      <commentsBefore>--@comments String values for element type of a measure set.</commentsBefore>
+      <commentsAfter>--@end helper elementKind</commentsAfter>
+      <commentsAfter>--@begin entrypoint rule Tables</commentsAfter>
+      <commentsAfter>--@comments Creates tables from the collected measurement data.</commentsAfter>
+      <definition location="23:8-28:21">
+        <feature xsi:type="ocl:Attribute" location="23:14-28:21" name="elementKind">
+          <initExpression xsi:type="ocl:MapExp" location="24:2-28:21">
+            <elements location="24:7-24:32">
+              <key xsi:type="ocl:StringExp" location="24:8-24:19" stringSymbol="metamodel"/>
+              <value xsi:type="ocl:StringExp" location="24:20-24:31" stringSymbol="Metamodel"/>
+            </elements>
+            <elements location="25:3-25:20">
+              <key xsi:type="ocl:StringExp" location="25:4-25:11" stringSymbol="model"/>
+              <value xsi:type="ocl:StringExp" location="25:12-25:19" stringSymbol="Model"/>
+            </elements>
+            <elements location="26:3-26:24">
+              <key xsi:type="ocl:StringExp" location="26:4-26:13" stringSymbol="package"/>
+              <value xsi:type="ocl:StringExp" location="26:14-26:23" stringSymbol="Package"/>
+            </elements>
+            <elements location="27:3-27:28">
+              <key xsi:type="ocl:StringExp" location="27:4-27:15" stringSymbol="interface"/>
+              <value xsi:type="ocl:StringExp" location="27:16-27:27" stringSymbol="Interface"/>
+            </elements>
+            <elements location="28:3-28:20">
+              <key xsi:type="ocl:StringExp" location="28:4-28:11" stringSymbol="class"/>
+              <value xsi:type="ocl:StringExp" location="28:12-28:19" stringSymbol="Class"/>
+            </elements>
+          </initExpression>
+          <type xsi:type="ocl:MapType" location="23:28-23:46">
+            <valueType xsi:type="ocl:StringType" location="23:39-23:45"/>
+            <keyType xsi:type="ocl:StringType" location="23:32-23:38"/>
+          </type>
+        </feature>
+      </definition>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="33:1-63:2" name="Tables" isEntrypoint="true">
+      <commentsBefore>--@end helper elementKind</commentsBefore>
+      <commentsBefore>--@begin entrypoint rule Tables</commentsBefore>
+      <commentsBefore>--@comments Creates tables from the collected measurement data.</commentsBefore>
+      <commentsAfter>--@end entrypoint rule Tables</commentsAfter>
+      <commentsAfter>--@begin called rule AllMeasureSet2Table</commentsAfter>
+      <commentsAfter>--@comments Creates a table for all measure sets for one kind of element.</commentsAfter>
+      <actionBlock location="46:2-62:3">
+        <statements xsi:type="atl:IfStat" location="47:3-49:4">
+          <condition xsi:type="ocl:CollectionOperationCallExp" location="47:7-47:43" operationName="notEmpty">
+            <source xsi:type="ocl:VariableExp" location="47:7-47:31" referredVariable="/0/@elements.2/@variables.0"/>
+          </condition>
+          <thenStatements xsi:type="atl:ExpressionStat" location="48:4-48:61">
+            <expression xsi:type="ocl:OperationCallExp" location="48:4-48:60" operationName="AllMeasureSet2Table">
+              <source xsi:type="ocl:VariableExp" location="48:4-48:14" referredVariable="/8"/>
+              <arguments xsi:type="ocl:VariableExp" location="48:35-48:59" referredVariable="/0/@elements.2/@variables.0"/>
+            </expression>
+          </thenStatements>
+        </statements>
+        <statements xsi:type="atl:IfStat" location="50:3-52:4">
+          <condition xsi:type="ocl:CollectionOperationCallExp" location="50:7-50:39" operationName="notEmpty">
+            <source xsi:type="ocl:VariableExp" location="50:7-50:27" referredVariable="/0/@elements.2/@variables.1"/>
+          </condition>
+          <thenStatements xsi:type="atl:ExpressionStat" location="51:4-51:57">
+            <expression xsi:type="ocl:OperationCallExp" location="51:4-51:56" operationName="AllMeasureSet2Table">
+              <source xsi:type="ocl:VariableExp" location="51:4-51:14" referredVariable="/9"/>
+              <arguments xsi:type="ocl:VariableExp" location="51:35-51:55" referredVariable="/0/@elements.2/@variables.1"/>
+            </expression>
+          </thenStatements>
+        </statements>
+        <statements xsi:type="atl:IfStat" location="53:3-55:4">
+          <condition xsi:type="ocl:CollectionOperationCallExp" location="53:7-53:41" operationName="notEmpty">
+            <source xsi:type="ocl:VariableExp" location="53:7-53:29" referredVariable="/0/@elements.2/@variables.2"/>
+          </condition>
+          <thenStatements xsi:type="atl:ExpressionStat" location="54:4-54:59">
+            <expression xsi:type="ocl:OperationCallExp" location="54:4-54:58" operationName="AllMeasureSet2Table">
+              <source xsi:type="ocl:VariableExp" location="54:4-54:14" referredVariable="/10"/>
+              <arguments xsi:type="ocl:VariableExp" location="54:35-54:57" referredVariable="/0/@elements.2/@variables.2"/>
+            </expression>
+          </thenStatements>
+        </statements>
+        <statements xsi:type="atl:IfStat" location="56:3-58:4">
+          <condition xsi:type="ocl:CollectionOperationCallExp" location="56:7-56:43" operationName="notEmpty">
+            <source xsi:type="ocl:VariableExp" location="56:7-56:31" referredVariable="/0/@elements.2/@variables.3"/>
+          </condition>
+          <thenStatements xsi:type="atl:ExpressionStat" location="57:4-57:61">
+            <expression xsi:type="ocl:OperationCallExp" location="57:4-57:60" operationName="AllMeasureSet2Table">
+              <source xsi:type="ocl:VariableExp" location="57:4-57:14" referredVariable="/11"/>
+              <arguments xsi:type="ocl:VariableExp" location="57:35-57:59" referredVariable="/0/@elements.2/@variables.3"/>
+            </expression>
+          </thenStatements>
+        </statements>
+        <statements xsi:type="atl:IfStat" location="59:3-61:4">
+          <condition xsi:type="ocl:CollectionOperationCallExp" location="59:7-59:39" operationName="notEmpty">
+            <source xsi:type="ocl:VariableExp" location="59:7-59:27" referredVariable="/0/@elements.2/@variables.4"/>
+          </condition>
+          <thenStatements xsi:type="atl:ExpressionStat" location="60:4-60:57">
+            <expression xsi:type="ocl:OperationCallExp" location="60:4-60:56" operationName="AllMeasureSet2Table">
+              <source xsi:type="ocl:VariableExp" location="60:4-60:14" referredVariable="/12"/>
+              <arguments xsi:type="ocl:VariableExp" location="60:35-60:55" referredVariable="/0/@elements.2/@variables.4"/>
+            </expression>
+          </thenStatements>
+        </statements>
+      </actionBlock>
+      <variables location="35:3-36:42" varName="allMetamodelMeasuresSets" variableExp="/0/@elements.2/@actionBlock/@statements.0/@condition/@source /0/@elements.2/@actionBlock/@statements.0/@thenStatements.0/@expression/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="35:30-35:58">
+          <elementType xsi:type="ocl:OclModelElement" location="35:39-35:57" name="MeasureSet" model="/2"/>
+        </type>
+        <initExpression xsi:type="ocl:OperationCallExp" location="36:4-36:41" operationName="allMeasureSets">
+          <source xsi:type="ocl:VariableExp" location="36:4-36:14" referredVariable="/3"/>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="36:30-36:40" name="metamodel"/>
+        </initExpression>
+      </variables>
+      <variables location="37:3-38:38" varName="allModelMeasuresSets" variableExp="/0/@elements.2/@actionBlock/@statements.1/@condition/@source /0/@elements.2/@actionBlock/@statements.1/@thenStatements.0/@expression/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="37:26-37:54">
+          <elementType xsi:type="ocl:OclModelElement" location="37:35-37:53" name="MeasureSet" model="/2"/>
+        </type>
+        <initExpression xsi:type="ocl:OperationCallExp" location="38:4-38:37" operationName="allMeasureSets">
+          <source xsi:type="ocl:VariableExp" location="38:4-38:14" referredVariable="/4"/>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="38:30-38:36" name="model"/>
+        </initExpression>
+      </variables>
+      <variables location="39:3-40:40" varName="allPackageMeasuresSets" variableExp="/0/@elements.2/@actionBlock/@statements.2/@condition/@source /0/@elements.2/@actionBlock/@statements.2/@thenStatements.0/@expression/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="39:28-39:56">
+          <elementType xsi:type="ocl:OclModelElement" location="39:37-39:55" name="MeasureSet" model="/2"/>
+        </type>
+        <initExpression xsi:type="ocl:OperationCallExp" location="40:4-40:39" operationName="allMeasureSets">
+          <source xsi:type="ocl:VariableExp" location="40:4-40:14" referredVariable="/5"/>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="40:30-40:38" name="package"/>
+        </initExpression>
+      </variables>
+      <variables location="41:3-42:42" varName="allInterfaceMeasuresSets" variableExp="/0/@elements.2/@actionBlock/@statements.3/@condition/@source /0/@elements.2/@actionBlock/@statements.3/@thenStatements.0/@expression/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="41:30-41:58">
+          <elementType xsi:type="ocl:OclModelElement" location="41:39-41:57" name="MeasureSet" model="/2"/>
+        </type>
+        <initExpression xsi:type="ocl:OperationCallExp" location="42:4-42:41" operationName="allMeasureSets">
+          <source xsi:type="ocl:VariableExp" location="42:4-42:14" referredVariable="/6"/>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="42:30-42:40" name="interface"/>
+        </initExpression>
+      </variables>
+      <variables location="43:3-44:38" varName="allClassMeasuresSets" variableExp="/0/@elements.2/@actionBlock/@statements.4/@condition/@source /0/@elements.2/@actionBlock/@statements.4/@thenStatements.0/@expression/@arguments.0">
+        <type xsi:type="ocl:SequenceType" location="43:26-43:54">
+          <elementType xsi:type="ocl:OclModelElement" location="43:35-43:53" name="MeasureSet" model="/2"/>
+        </type>
+        <initExpression xsi:type="ocl:OperationCallExp" location="44:4-44:37" operationName="allMeasureSets">
+          <source xsi:type="ocl:VariableExp" location="44:4-44:14" referredVariable="/7"/>
+          <arguments xsi:type="ocl:EnumLiteralExp" location="44:30-44:36" name="class"/>
+        </initExpression>
+      </variables>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="68:1-75:2" name="AllMeasureSet2Table">
+      <commentsBefore>--@end entrypoint rule Tables</commentsBefore>
+      <commentsBefore>--@begin called rule AllMeasureSet2Table</commentsBefore>
+      <commentsBefore>--@comments Creates a table for all measure sets for one kind of element.</commentsBefore>
+      <commentsAfter>--@end called rule AllMeasureSet2Table</commentsAfter>
+      <commentsAfter>--@begin called rule MeasureSet2HdrRow</commentsAfter>
+      <commentsAfter>--@comments Creates a header row with the names of all metrics for this kind of element.</commentsAfter>
+      <outPattern location="69:2-74:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="70:3-74:4" varName="t">
+          <type xsi:type="ocl:OclModelElement" location="70:7-70:18" name="Table" model="/1"/>
+          <bindings location="71:4-71:61" propertyName="rows">
+            <value xsi:type="ocl:OperationCallExp" location="71:12-71:61" operationName="MeasureSet2HdrRow">
+              <source xsi:type="ocl:VariableExp" location="71:12-71:22" referredVariable="/13"/>
+              <arguments xsi:type="ocl:CollectionOperationCallExp" location="71:41-71:60" operationName="first">
+                <source xsi:type="ocl:VariableExp" location="71:41-71:51" referredVariable="/0/@elements.3/@parameters.0"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="72:4-73:51" propertyName="rows">
+            <value xsi:type="ocl:IteratorExp" location="72:12-73:51" name="collect">
+              <source xsi:type="ocl:VariableExp" location="72:12-72:22" referredVariable="/0/@elements.3/@parameters.0"/>
+              <body xsi:type="ocl:OperationCallExp" location="73:16-73:50" operationName="MeasureSet2ValueRow">
+                <source xsi:type="ocl:VariableExp" location="73:16-73:26" referredVariable="/14"/>
+                <arguments xsi:type="ocl:VariableExp" location="73:47-73:49" referredVariable="/0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@iterators.0"/>
+              </body>
+              <iterators location="73:13-73:15" varName="ms" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@body/@arguments.0"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <parameters location="68:26-68:67" varName="allMeasSet" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source /0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@source">
+        <type xsi:type="ocl:SequenceType" location="68:39-68:67">
+          <elementType xsi:type="ocl:OclModelElement" location="68:48-68:66" name="MeasureSet" model="/2"/>
+        </type>
+      </parameters>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="80:1-90:2" name="MeasureSet2HdrRow">
+      <commentsBefore>--@end called rule AllMeasureSet2Table</commentsBefore>
+      <commentsBefore>--@begin called rule MeasureSet2HdrRow</commentsBefore>
+      <commentsBefore>--@comments Creates a header row with the names of all metrics for this kind of element.</commentsBefore>
+      <commentsAfter>--@end called rule MeasureSet2HdrRow</commentsAfter>
+      <commentsAfter>--@begin called rule MeasureSet2ValueRow</commentsAfter>
+      <commentsAfter>--@comments Creates a row with the values for simple measures of a measure set.</commentsAfter>
+      <outPattern location="81:2-86:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="82:3-86:4" varName="hdrRow" variableExp="/0/@elements.4/@actionBlock/@statements.0/@expression">
+          <type xsi:type="ocl:OclModelElement" location="82:12-82:21" name="Row" model="/1"/>
+          <bindings location="83:4-83:56" propertyName="cells">
+            <value xsi:type="ocl:OperationCallExp" location="83:13-83:56" operationName="String2Cell">
+              <source xsi:type="ocl:VariableExp" location="83:13-83:23" referredVariable="/15"/>
+              <arguments xsi:type="ocl:OperationCallExp" location="83:36-83:55" operationName="getElementKind">
+                <source xsi:type="ocl:VariableExp" location="83:36-83:38" referredVariable="/0/@elements.4/@parameters.0"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="84:4-85:60" propertyName="cells">
+            <value xsi:type="ocl:IteratorExp" location="84:13-85:60" name="collect">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="84:13-84:27" name="allMeasures">
+                <source xsi:type="ocl:VariableExp" location="84:13-84:15" referredVariable="/0/@elements.4/@parameters.0"/>
+              </source>
+              <body xsi:type="ocl:OperationCallExp" location="85:18-85:59" operationName="String2Cell">
+                <source xsi:type="ocl:VariableExp" location="85:18-85:28" referredVariable="/16"/>
+                <arguments xsi:type="ocl:OperationCallExp" location="85:41-85:58" operationName="metricName">
+                  <source xsi:type="ocl:VariableExp" location="85:41-85:45" referredVariable="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@iterators.0"/>
+                </arguments>
+              </body>
+              <iterators location="85:13-85:17" varName="meas" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@body/@arguments.0/@source"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <actionBlock location="87:2-89:3">
+        <statements xsi:type="atl:ExpressionStat" location="88:3-88:10">
+          <expression xsi:type="ocl:VariableExp" location="88:3-88:9" referredVariable="/0/@elements.4/@outPattern/@elements.0"/>
+        </statements>
+      </actionBlock>
+      <parameters location="80:24-80:47" varName="ms" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source /0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@source/@source">
+        <type xsi:type="ocl:OclModelElement" location="80:29-80:47" name="MeasureSet" model="/2"/>
+      </parameters>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="95:1-105:2" name="MeasureSet2ValueRow">
+      <commentsBefore>--@end called rule MeasureSet2HdrRow</commentsBefore>
+      <commentsBefore>--@begin called rule MeasureSet2ValueRow</commentsBefore>
+      <commentsBefore>--@comments Creates a row with the values for simple measures of a measure set.</commentsBefore>
+      <commentsAfter>--@end called rule MeasureSet2ValueRow</commentsAfter>
+      <commentsAfter>--@begin called rule Sequence2Row</commentsAfter>
+      <commentsAfter>--@comments Creates a rows with the cells given.</commentsAfter>
+      <outPattern location="96:2-101:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="97:3-101:4" varName="valueRow" variableExp="/0/@elements.5/@actionBlock/@statements.0/@expression">
+          <type xsi:type="ocl:OclModelElement" location="97:14-97:23" name="Row" model="/1"/>
+          <bindings location="98:4-98:54" propertyName="cells">
+            <value xsi:type="ocl:OperationCallExp" location="98:13-98:54" operationName="String2Cell">
+              <source xsi:type="ocl:VariableExp" location="98:13-98:23" referredVariable="/17"/>
+              <arguments xsi:type="ocl:OperationCallExp" location="98:36-98:53" operationName="absoluteName">
+                <source xsi:type="ocl:VariableExp" location="98:36-98:38" referredVariable="/0/@elements.5/@parameters.0"/>
+              </arguments>
+            </value>
+          </bindings>
+          <bindings location="99:4-100:61" propertyName="cells">
+            <value xsi:type="ocl:IteratorExp" location="99:13-100:61" name="collect">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="99:13-99:27" name="allMeasures">
+                <source xsi:type="ocl:VariableExp" location="99:13-99:15" referredVariable="/0/@elements.5/@parameters.0"/>
+              </source>
+              <body xsi:type="ocl:OperationCallExp" location="100:18-100:60" operationName="String2Cell">
+                <source xsi:type="ocl:VariableExp" location="100:18-100:28" referredVariable="/18"/>
+                <arguments xsi:type="ocl:OperationCallExp" location="100:41-100:59" operationName="stringValue">
+                  <source xsi:type="ocl:VariableExp" location="100:41-100:45" referredVariable="/0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@iterators.0"/>
+                </arguments>
+              </body>
+              <iterators location="100:13-100:17" varName="meas" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@body/@arguments.0/@source"/>
+            </value>
+          </bindings>
+        </elements>
+      </outPattern>
+      <actionBlock location="102:2-104:3">
+        <statements xsi:type="atl:ExpressionStat" location="103:3-103:12">
+          <expression xsi:type="ocl:VariableExp" location="103:3-103:11" referredVariable="/0/@elements.5/@outPattern/@elements.0"/>
+        </statements>
+      </actionBlock>
+      <parameters location="95:26-95:49" varName="ms" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.0/@value/@arguments.0/@source /0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@source/@source">
+        <type xsi:type="ocl:OclModelElement" location="95:31-95:49" name="MeasureSet" model="/2"/>
+      </parameters>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="110:1-118:2" name="Sequence2Row">
+      <commentsBefore>--@end called rule MeasureSet2ValueRow</commentsBefore>
+      <commentsBefore>--@begin called rule Sequence2Row</commentsBefore>
+      <commentsBefore>--@comments Creates a rows with the cells given.</commentsBefore>
+      <commentsAfter>--@end called rule Sequence2Row</commentsAfter>
+      <commentsAfter>--@begin called rule String2Cell</commentsAfter>
+      <commentsAfter>--@comments Creates a cell with the content given.</commentsAfter>
+      <outPattern location="111:2-114:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="112:3-114:4" varName="row" variableExp="/0/@elements.6/@actionBlock/@statements.0/@expression">
+          <type xsi:type="ocl:OclModelElement" location="112:9-112:18" name="Row" model="/1"/>
+          <bindings location="113:4-113:18" propertyName="cells">
+            <value xsi:type="ocl:VariableExp" location="113:13-113:18" referredVariable="/0/@elements.6/@parameters.0"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <actionBlock location="115:2-117:3">
+        <statements xsi:type="atl:ExpressionStat" location="116:3-116:7">
+          <expression xsi:type="ocl:VariableExp" location="116:3-116:6" referredVariable="/0/@elements.6/@outPattern/@elements.0"/>
+        </statements>
+      </actionBlock>
+      <parameters location="110:19-110:43" varName="cells" variableExp="/0/@elements.6/@outPattern/@elements.0/@bindings.0/@value">
+        <type xsi:type="ocl:SequenceType" location="110:27-110:43">
+          <elementType xsi:type="ocl:OclAnyType" location="110:36-110:42"/>
+        </type>
+      </parameters>
+    </elements>
+    <elements xsi:type="atl:CalledRule" location="123:1-131:2" name="String2Cell">
+      <commentsBefore>--@end called rule Sequence2Row</commentsBefore>
+      <commentsBefore>--@begin called rule String2Cell</commentsBefore>
+      <commentsBefore>--@comments Creates a cell with the content given.</commentsBefore>
+      <commentsAfter>--@end called rule String2Cell</commentsAfter>
+      <outPattern location="124:2-127:4">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="125:3-127:4" varName="cell" variableExp="/0/@elements.7/@actionBlock/@statements.0/@expression">
+          <type xsi:type="ocl:OclModelElement" location="125:10-125:20" name="Cell" model="/1"/>
+          <bindings location="126:4-126:22" propertyName="content">
+            <value xsi:type="ocl:VariableExp" location="126:15-126:22" referredVariable="/0/@elements.7/@parameters.0"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <actionBlock location="128:2-130:3">
+        <statements xsi:type="atl:ExpressionStat" location="129:3-129:8">
+          <expression xsi:type="ocl:VariableExp" location="129:3-129:7" referredVariable="/0/@elements.7/@outPattern/@elements.0"/>
+        </statements>
+      </actionBlock>
+      <parameters location="123:18-123:34" varName="content" variableExp="/0/@elements.7/@outPattern/@elements.0/@bindings.0/@value">
+        <type xsi:type="ocl:StringType" location="123:28-123:34"/>
+      </parameters>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="10:14-10:19" name="Table" elements="/0/@elements.3/@outPattern/@elements.0/@type /0/@elements.4/@outPattern/@elements.0/@type /0/@elements.5/@outPattern/@elements.0/@type /0/@elements.6/@outPattern/@elements.0/@type /0/@elements.7/@outPattern/@elements.0/@type" model="/0/@outModels.0"/>
+  <ocl:OclModel location="10:30-10:37" name="Measure" elements="/0/@elements.2/@variables.0/@type/@elementType /0/@elements.2/@variables.1/@type/@elementType /0/@elements.2/@variables.2/@type/@elementType /0/@elements.2/@variables.3/@type/@elementType /0/@elements.2/@variables.4/@type/@elementType /0/@elements.3/@parameters.0/@type/@elementType /0/@elements.4/@parameters.0/@type /0/@elements.5/@parameters.0/@type" model="/0/@inModels.0"/>
+  <ocl:VariableDeclaration location="36:4-36:14" varName="thisModule" variableExp="/0/@elements.2/@variables.0/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="38:4-38:14" varName="thisModule" variableExp="/0/@elements.2/@variables.1/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="40:4-40:14" varName="thisModule" variableExp="/0/@elements.2/@variables.2/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="42:4-42:14" varName="thisModule" variableExp="/0/@elements.2/@variables.3/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="44:4-44:14" varName="thisModule" variableExp="/0/@elements.2/@variables.4/@initExpression/@source"/>
+  <ocl:VariableDeclaration location="48:4-48:14" varName="thisModule" variableExp="/0/@elements.2/@actionBlock/@statements.0/@thenStatements.0/@expression/@source"/>
+  <ocl:VariableDeclaration location="51:4-51:14" varName="thisModule" variableExp="/0/@elements.2/@actionBlock/@statements.1/@thenStatements.0/@expression/@source"/>
+  <ocl:VariableDeclaration location="54:4-54:14" varName="thisModule" variableExp="/0/@elements.2/@actionBlock/@statements.2/@thenStatements.0/@expression/@source"/>
+  <ocl:VariableDeclaration location="57:4-57:14" varName="thisModule" variableExp="/0/@elements.2/@actionBlock/@statements.3/@thenStatements.0/@expression/@source"/>
+  <ocl:VariableDeclaration location="60:4-60:14" varName="thisModule" variableExp="/0/@elements.2/@actionBlock/@statements.4/@thenStatements.0/@expression/@source"/>
+  <ocl:VariableDeclaration location="71:12-71:22" varName="thisModule" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.0/@value/@source"/>
+  <ocl:VariableDeclaration location="73:16-73:26" varName="thisModule" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@body/@source"/>
+  <ocl:VariableDeclaration location="83:13-83:23" varName="thisModule" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.0/@value/@source"/>
+  <ocl:VariableDeclaration location="85:18-85:28" varName="thisModule" variableExp="/0/@elements.4/@outPattern/@elements.0/@bindings.1/@value/@body/@source"/>
+  <ocl:VariableDeclaration location="98:13-98:23" varName="thisModule" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.0/@value/@source"/>
+  <ocl:VariableDeclaration location="100:18-100:28" varName="thisModule" variableExp="/0/@elements.5/@outPattern/@elements.0/@bindings.1/@value/@body/@source"/>
+</xmi:XMI>
