@@ -1,0 +1,16 @@
+-- @atlcompiler emftvm
+module ValueChangeBinding_All;
+create OUT : ATL refining IN : ATL;
+
+rule ValueChangeBinding_All{
+	from
+	 b : ATL!Binding (b.value.oclIsTypeOf(ATL!StringExp))
+	to
+	 c : ATL!Binding (
+	 	value <- newStringExp
+	 ),
+	 newStringExp : ATL!StringExp(
+	 	stringSymbol <- 'hello'	
+	 )
+}
+

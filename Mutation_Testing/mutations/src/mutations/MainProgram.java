@@ -32,6 +32,7 @@ public class MainProgram {
 		HOTsGenericMutations.add("AddInPatternElement_FirstRule");
 		HOTsGenericMutations.add("DeleteLastOutPatternElement_LastRule");
 		HOTsGenericMutations.add("DeleteBindingsWithoutReferredVariable");
+		HOTsGenericMutations.add("ValueChangeBinding_All");
 		
 		/**Name of transformation to mutate, plus input and output metamodels**/
 		String trans2Mutate = "PetriNet2PNML";
