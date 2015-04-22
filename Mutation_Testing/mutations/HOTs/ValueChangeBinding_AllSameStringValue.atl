@@ -1,0 +1,19 @@
+-- @atlcompiler emftvm
+module ValueChangeBinding_AllSameStringValue;
+create OUT : ATL refining IN : ATL;
+
+rule ValueChangeBinding_AllSameStringValue{
+	from
+	 b : ATL!Binding(
+	 	b.value.oclIsTypeOf(ATL!StringExp) and 
+		ATL!StringExp.allInstances() -> size() > 1
+	 )
+	to
+	 c : ATL!Binding(
+	 	value <- stringexpression
+	 ), 
+	 stringexpression : ATL!StringExp(
+	 	stringSymbol <- (ATL!StringExp.allInstances() -> first()).stringSymbol
+	)
+	 
+}
