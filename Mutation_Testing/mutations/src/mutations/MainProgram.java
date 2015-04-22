@@ -29,10 +29,11 @@ public class MainProgram {
 		
 		/**Input generic transformations**/
 		List<String> HOTsGenericMutations = new ArrayList<String>();
-		HOTsGenericMutations.add("AddInPatternElement_FirstRule");
-		HOTsGenericMutations.add("DeleteLastOutPatternElement_LastRule");
-		HOTsGenericMutations.add("DeleteBindingsWithoutReferredVariable");
-		HOTsGenericMutations.add("ValueChangeBinding_All");
+//		HOTsGenericMutations.add("AddInPatternElement_FirstRule");
+//		HOTsGenericMutations.add("DeleteLastOutPatternElement_LastRule");
+//		HOTsGenericMutations.add("DeleteBindingsWithoutReferredVariable");
+		//HOTsGenericMutations.add("ValueChangeBinding_All");
+		HOTsGenericMutations.add("ValueChangeBinding_Switch");
 		
 		/**Name of transformation to mutate, plus input and output metamodels**/
 		String trans2Mutate = "PetriNet2PNML";

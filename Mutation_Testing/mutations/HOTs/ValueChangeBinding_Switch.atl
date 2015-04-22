@@ -1,0 +1,43 @@
+-- @atlcompiler emftvm
+module ValueChangeBinding_Switch;
+create OUT : ATL refining IN : ATL;
+
+rule ValueChangeBinding_Switch{
+	from
+	ope : ATL!OutPatternElement (
+		ope.bindings -> size() > 1 ---> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> size() > 1 
+		-- ope.bindings -> forAll(e | e.value.oclIsTypeOf(ATL!StringExp))
+	-- b : ATL!Binding(
+	-- 	b.value.oclIsTypeOf(ATL!StringExp) and 
+	--	ATL!StringExp.allInstances() -> size() > 1
+	 )
+	to
+	ope2 : ATL!OutPatternElement (
+		bindings <- ope.bindings -> excluding (ope.bindings -> first()) -> excluding (ope.bindings -> last()) -> prepend (bindingNewFirst) -> append (bindingNewLast)
+	), 
+	bindingNewLast : ATL!Binding (
+		outPatternElement <- ope2, 
+		propertyName <- (ope.bindings -> last()).propertyName,
+		value <- (ope.bindings -> first()).value
+	),
+	bindingNewFirst : ATL!Binding (
+		outPatternElement <- ope2,
+		propertyName <- (ope.bindings -> first()).propertyName,
+		value <- (ope.bindings -> last()).value	
+	)
+	
+	 --	bindings <- ope.bindings -> insertAt(
+	 	--		ope.bindings -> indexOf( ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> first()), lastElement
+			--	) -> insertAt(
+	 			--ope.bindings -> indexOf( ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> last()), firstElement
+				--)
+	 --),
+	 --lastElement : ATL!Binding (
+	 --	value <- ope2.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> first()
+	 --),
+	 --firstElement : ATL!Binding (
+	 --	value <- ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> last()
+	 --)
+	 
+	 
+}
