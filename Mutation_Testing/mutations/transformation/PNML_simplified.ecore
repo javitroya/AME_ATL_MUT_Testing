@@ -13,6 +13,8 @@
     <eClassifiers xsi:type="ecore:EClass" name="URI" eSuperTypes="#/0/LocatedElement">
       <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
           lowerBound="1" eType="#/1/String"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="value2" ordered="false"
+          lowerBound="1" eType="#/1/String"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="PNMLDocument" eSuperTypes="#/0/LocatedElement">
       <eStructuralFeatures xsi:type="ecore:EReference" name="xmlns" ordered="false"

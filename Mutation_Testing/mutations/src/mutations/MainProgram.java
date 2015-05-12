@@ -33,7 +33,11 @@ public class MainProgram {
 //		HOTsGenericMutations.add("DeleteLastOutPatternElement_LastRule");
 //		HOTsGenericMutations.add("DeleteBindingsWithoutReferredVariable");
 		//HOTsGenericMutations.add("ValueChangeBinding_All");
-		HOTsGenericMutations.add("ValueChangeBinding_Switch");
+//		HOTsGenericMutations.add("ValueChangeBinding_Switch");
+		//HOTsGenericMutations.add("ValueChangeBinding_AllSameStringValue");
+//		HOTsGenericMutations.add("AddBinding");
+		HOTsGenericMutations.add("DeleteInPatternElement_MoreThanOne");
+		HOTsGenericMutations.add("DeleteBindingsAfterIpeDelete");
 		
 		/**Name of transformation to mutate, plus input and output metamodels**/
 		String trans2Mutate = "PetriNet2PNML";

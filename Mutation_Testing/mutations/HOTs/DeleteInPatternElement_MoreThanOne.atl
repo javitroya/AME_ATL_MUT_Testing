@@ -1,0 +1,13 @@
+-- @atlcompiler emftvm
+
+module DeleteInPatternElement_MoreThanOne;
+create OUT : ATL refining IN : ATL;
+
+rule DelteIPE {
+	from ipe : ATL!InPatternElement (
+		ipe.inPattern.elements -> size() > 1 and
+		ipe = ipe.inPattern.elements -> last()
+	)
+	
+	
+}

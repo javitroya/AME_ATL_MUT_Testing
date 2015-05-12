@@ -6,32 +6,27 @@ create OUT : PNML from IN : PetriNet;
 -- Its set of Contents corresponds to the union of the PetriNet Elements and Arcs.
 rule PNMLDocument {
  from
-  e : PetriNet!PetriNet,
-  a : PetriNet!Place
+  e2 : PetriNet!PetriNet
  to
   n : PNML!PNMLDocument (
-   location <- e.location,
    xmlns <- uri,
    nets <- net
   ),
   uri : PNML!URI (
-   value <- 'http://www.informatik.hu-berlin.de/top/pnml/ptNetb'
+   value <- '1http://www.informatik.hu-berlin.de/top/pnml/ptNetb',
+   value2 <- 'new Valee'
   ),
   net : PNML!NetElement (
    name <- name,
-   location <- e.location,
-   id <- e.location,
    type <- type_uri,
-   contents <- e.elements->union(e.arcs)
+   contents <- e2.elements->union(e2.arcs)
   ),
   name : PNML!Name (
    labels <- label
   ),
-  label : PNML!Label (
-   text <- e.name
-  ),
+  label : PNML!Label,
   type_uri : PNML!URI (
-   value <- 'http://www.informatik.hu-berlin.de/top/pntd/ptNetb'
+   value <- '2http://www.informatik.hu-berlin.de/top/pntd/ptNetb'
   )
 } -- The Place rule generates a Place corresponds to the input PetriNet Place element. 
 -- Name of the generated Place is copied from the one of the input Place, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet Place name.
@@ -88,5 +83,10 @@ rule Arc {
    source <- e.from,
    target <- e.to
   ),
-  name : PNML!Name
+  name : PNML!Name (
+   labels <- label
+  ),
+  label : PNML!Label (
+   text <- e.name
+  )
 }

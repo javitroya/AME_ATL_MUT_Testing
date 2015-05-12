@@ -6,7 +6,9 @@ create OUT : PNML from IN : PetriNet;
 -- Its set of Contents corresponds to the union of the PetriNet Elements and Arcs.
 rule PNMLDocument {
 	from
+	e2 : PetriNet!PetriNet,
 		e : PetriNet!PetriNet
+		
 	to	
 		n : PNML!PNMLDocument
 		(
@@ -16,7 +18,8 @@ rule PNMLDocument {
 		),
 		uri : PNML!URI
 		(
-			value <- 'http://www.informatik.hu-berlin.de/top/pnml/ptNetb'
+			value <- '1http://www.informatik.hu-berlin.de/top/pnml/ptNetb',
+			value2 <- 'new Valee'
 		),
 		net : PNML!NetElement
 		(
@@ -36,7 +39,7 @@ rule PNMLDocument {
 		),
 		type_uri : PNML!URI
 		(
-			value <- 'http://www.informatik.hu-berlin.de/top/pntd/ptNetb'
+			value <- '2http://www.informatik.hu-berlin.de/top/pntd/ptNetb'
 		)
 }
 

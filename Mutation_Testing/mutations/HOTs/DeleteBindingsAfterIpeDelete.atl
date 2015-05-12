@@ -1,0 +1,21 @@
+-- @atlcompiler emftvm
+module DeleteBindingsAfterIpeDelete;
+create OUT : ATL refining IN : ATL;
+
+rule DelteNavigationBinding{
+	from b : ATL!Binding(
+			b.value.oclIsTypeOf(ATL!NavigationOrAttributeCallExp) and 
+			b.value.source.referredVariable.oclIsUndefined()
+	)
+	to
+}
+
+rule DeleteCollectionBinding{
+	from b:ATL!Binding(
+			b.value.oclIsTypeOf(ATL!CollectionOperationCallExp) and 
+			b.value.source.oclIsTypeOf(ATL!NavigationOrAttributeCallExp) and 
+			b.value.source.source.referredVariable.oclIsUndefined()
+	)
+	to
+}
+
