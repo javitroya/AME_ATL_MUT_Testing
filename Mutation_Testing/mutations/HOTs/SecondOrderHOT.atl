@@ -22,3 +22,15 @@ rule CompleteInMMNames {
 		classes->at((thisModule.random()*classes->size()).floor()+1).name;
 	}
 }
+
+rule AddBindingNames {
+	from b : ATL!StringExp (
+		b.stringSymbol = 'NewBinding_PropertyName'
+	)
+	using{
+		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.getESuperTypes() -> size() <= 0);
+	}
+	to b2 : ATL!StringExp ( 
+		stringSymbol <- classes -> first().getEStructuralFeatures() -> last().name
+	)	
+}

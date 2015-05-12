@@ -1,0 +1,25 @@
+-- @atlcompiler emftvm
+module AddBinding;
+create OUT : ATL refining IN : ATL;
+
+rule AddBinding{
+	from
+	ope : ATL!OutPatternElement ( 
+		ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
+	)
+	to
+	ope2 : ATL!OutPatternElement (
+		
+		bindings <- ope.bindings -> append(bindingNewElement)
+		
+	), 
+	bindingNewElement : ATL!Binding (
+		outPatternElement <- ope2,
+		propertyName <- 'NewBinding_PropertyName',
+		value <- newValue	
+	),
+	newValue : ATL!StringExp (
+	 	stringSymbol <- 'testvalue'
+	)
+	
+}
