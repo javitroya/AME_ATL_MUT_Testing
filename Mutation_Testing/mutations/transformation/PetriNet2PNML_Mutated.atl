@@ -6,37 +6,26 @@ create OUT : PNML from IN : PetriNet;
 -- Its set of Contents corresponds to the union of the PetriNet Elements and Arcs.
 rule PNMLDocument {
  from
-  e2 : PetriNet!PetriNet,
-  e : PetriNet!PetriNet
+  e2 : PetriNet!PetriNet
  to
   n : PNML!PNMLDocument (
-   location <- e.location,
    xmlns <- uri,
    nets <- net
   ),
   uri : PNML!URI (
    value <- '1http://www.informatik.hu-berlin.de/top/pnml/ptNetb',
-   value2 <- 'new Valee',
-   location <- 'testvalue'
+   value2 <- 'new Valee'
   ),
   net : PNML!NetElement (
    name <- name,
-   location <- e.location,
-   id <- e.location,
-   type <- type_uri,
-   contents <- e.elements->union(e.arcs)
+   type <- type_uri
   ),
   name : PNML!Name (
-   labels <- label,
-   location <- 'testvalue'
+   labels <- label
   ),
-  label : PNML!Label (
-   text <- e.name,
-   location <- 'testvalue'
-  ),
+  label : PNML!Label,
   type_uri : PNML!URI (
-   value <- '2http://www.informatik.hu-berlin.de/top/pntd/ptNetb',
-   location <- 'testvalue'
+   value <- '2http://www.informatik.hu-berlin.de/top/pntd/ptNetb'
   )
 } -- The Place rule generates a Place corresponds to the input PetriNet Place element. 
 -- Name of the generated Place is copied from the one of the input Place, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet Place name.
@@ -52,12 +41,10 @@ rule Place {
    location <- e.location
   ),
   name : PNML!Name (
-   labels <- label,
-   location <- 'testvalue'
+   labels <- label
   ),
   label : PNML!Label (
-   text <- e.name,
-   location <- 'testvalue'
+   text <- e.name
   )
 } -- The Transition rule generates a Transition corresponds to the input PetriNet Transition element. 
 -- Name of the generated Transition is copied from the one of the input Transition, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet Transition name.
@@ -73,12 +60,10 @@ rule Transition {
    location <- e.location
   ),
   name : PNML!Name (
-   labels <- label,
-   location <- 'testvalue'
+   labels <- label
   ),
   label : PNML!Label (
-   text <- e.name,
-   location <- 'testvalue'
+   text <- e.name
   )
 } -- The Arc rule generates a Arc corresponds to the input PetriNet Arc element (TransitionToPlace and PlaceToTransition). 
 -- Name of the generated Arc is copied from the one of the input Arc, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet Arc name.
@@ -98,11 +83,9 @@ rule Arc {
    target <- e.to
   ),
   name : PNML!Name (
-   labels <- label,
-   location <- 'testvalue'
+   labels <- label
   ),
   label : PNML!Label (
-   text <- e.name,
-   location <- 'testvalue'
+   text <- e.name
   )
 }

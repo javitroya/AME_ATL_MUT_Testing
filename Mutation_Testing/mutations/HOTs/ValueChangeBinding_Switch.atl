@@ -5,11 +5,8 @@ create OUT : ATL refining IN : ATL;
 rule ValueChangeBinding_Switch{
 	from
 	ope : ATL!OutPatternElement (
-		ope.bindings -> size() > 1 ---> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> size() > 1 
-		-- ope.bindings -> forAll(e | e.value.oclIsTypeOf(ATL!StringExp))
-	-- b : ATL!Binding(
-	-- 	b.value.oclIsTypeOf(ATL!StringExp) and 
-	--	ATL!StringExp.allInstances() -> size() > 1
+		ope.bindings -> forAll(e | e.value.oclIsTypeOf(ATL!StringExp)) and
+		ope.bindings -> size() > 1
 	 )
 	to
 	ope2 : ATL!OutPatternElement (
@@ -26,18 +23,4 @@ rule ValueChangeBinding_Switch{
 		value <- (ope.bindings -> last()).value	
 	)
 	
-	 --	bindings <- ope.bindings -> insertAt(
-	 	--		ope.bindings -> indexOf( ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> first()), lastElement
-			--	) -> insertAt(
-	 			--ope.bindings -> indexOf( ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> last()), firstElement
-				--)
-	 --),
-	 --lastElement : ATL!Binding (
-	 --	value <- ope2.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> first()
-	 --),
-	 --firstElement : ATL!Binding (
-	 --	value <- ope.bindings -> select(e | e.value.oclIsTypeOf(ATL!StringExp)) -> last()
-	 --)
-	 
-	 
 }

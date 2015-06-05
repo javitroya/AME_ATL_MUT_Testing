@@ -27,7 +27,8 @@ rule PNMLDocument {
 			location <- e.location,
 			id <- e.location,
 			type <- type_uri,
-			contents <- e.elements -> union(e.arcs)
+			-- contents <- e.elements -> union(e.arcs)
+			contents <- e2.elements -> select(f | f.property = e.elements -> last())
 		),
 		name : PNML!Name
 		(
