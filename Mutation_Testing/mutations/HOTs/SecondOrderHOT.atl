@@ -31,6 +31,6 @@ rule AddBindingNames {
 		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.getESuperTypes() -> size() <= 0);
 	}
 	to b2 : ATL!StringExp ( 
-		stringSymbol <- classes -> first().getEStructuralFeatures() -> last().name
+		stringSymbol <- classes -> first().getEStructuralFeatures() ->  select (c | c.getEType().name = 'String') -> last().name
 	)	
 }
