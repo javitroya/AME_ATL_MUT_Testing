@@ -1,0 +1,44 @@
+-- @atlcompiler emftvm
+module DeleteBindingsAfterIpeDelete;
+create OUT : ATL refining IN : ATL;
+
+rule DelteNavigationBinding {
+ from
+  b : ATL!Binding
+  (
+   b.value.oclIsKindOf(ATL!PropertyCallExp) and b.value.isUndefined()
+  )
+ to
+  
+}
+
+rule DeleteVariableExp {
+ from
+  b : ATL!Binding
+  (
+   b.value.oclIsKindOf(ATL!VariableExp) and b.value.isUndefined()
+  )
+ to
+  
+}
+
+helper context ATL!OclExpression def: isUndefined() : Boolean =
+ if self.oclIsTypeOf(ATL!VariableExp) = true then
+  self.referredVariable.oclIsUndefined()
+ else
+  if self.oclIsTypeOf(ATL!NavigationOrAttributeCallExp) = true then
+   self.source.isUndefined()
+  else
+   if self.oclIsKindOf(ATL!OperationCallExp) = true then
+    self.source.isUndefined() or self.arguments->exists(b |
+     b.isUndefined()
+    )
+   else
+    if self.oclIsKindOf(ATL!LoopExp) = true then
+     self.source.isUndefined() or self.body.isUndefined()
+    else
+     self.source.referredVariable.oclIsUndefined()
+    endif
+   endif
+  endif
+ endif;

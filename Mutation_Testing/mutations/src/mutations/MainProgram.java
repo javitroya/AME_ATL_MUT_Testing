@@ -35,14 +35,19 @@ public class MainProgram {
 		//HOTsGenericMutations.add("ValueChangeBinding_All");
 //		HOTsGenericMutations.add("ValueChangeBinding_Switch");
 		//HOTsGenericMutations.add("ValueChangeBinding_AllSameStringValue");
-		HOTsGenericMutations.add("AddBinding");
+//		HOTsGenericMutations.add("AddBinding");
 //		HOTsGenericMutations.add("DeleteInPatternElement_MoreThanOne");
 //		HOTsGenericMutations.add("DeleteBindingsAfterIpeDelete");
+		HOTsGenericMutations.add("AddBindingReference");
 		
 		/**Name of transformation to mutate, plus input and output metamodels**/
-		String trans2Mutate = "PetriNet2PNML";
-		String inputMM = "PetriNet.ecore";
-		String outputMM = "PNML_simplified.ecore";
+//		String trans2Mutate = "PetriNet2PNML";
+//		String inputMM = "PetriNet.ecore";
+//		String outputMM = "PNML_simplified.ecore";
+		
+		String trans2Mutate = "AddBindingExample";
+		String inputMM = "AddBindingSource.ecore";
+		String outputMM = "AddBindingTarget.ecore";
 		
 		String HOTs = "HOTs/";
 		String transformation = "transformation/";

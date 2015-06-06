@@ -23,14 +23,65 @@ rule CompleteInMMNames {
 	}
 }
 
-rule AddBindingNames {
-	from b : ATL!StringExp (
-		b.stringSymbol = 'NewBinding_PropertyName'
+-- rule AddBindingNames {
+--	from b : ATL!StringExp (
+--		b.stringSymbol = 'NewBinding_PropertyName'
+--	)
+--	using{
+--		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.getESuperTypes() -> size() <= 0);
+--	}
+--	to b2 : ATL!StringExp ( 
+--		stringSymbol <- classes -> first().getEStructuralFeatures() ->  select (c | c.getEType().name = 'String') -> last().name
+--	)	
+--}
+
+rule AddBindingReferencePropertyName{
+	from a : ATL!StringExp(
+		a.stringSymbol = 'NewBinding_PropertyName'	
 	)
 	using{
-		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.getESuperTypes() -> size() <= 0);
+		classes2 : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
 	}
-	to b2 : ATL!StringExp ( 
-		stringSymbol <- classes -> first().getEStructuralFeatures() ->  select (c | c.getEType().name = 'String') -> last().name
-	)	
+	to a2 : ATL!StringExp ( 
+		stringSymbol <- classes2 -> first().getEStructuralFeatures() -> select (c | c.getEType().name = classes2 -> last().name) -> last().name
+	)
+	
 }
+
+rule AddBindingReferenceValue{
+	from a : ATL!StringExp(
+		a.stringSymbol = 'testvariable'	
+	)
+	using{
+		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
+		classT1 : OUT_MM!EClass = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> first();
+		featureB : OUT_MM!EStructuralFeature = classT1.getEStructuralFeatures() -> select (c | c.getEType().name = classes -> last().name) -> last();
+		typeB : OUT_MM!EClass = featureB.getEType();
+		
+	}
+	to a2 : ATL!StringExp(
+		stringSymbol <- typeB.name
+	)
+}
+
+rule AddBindingReferenceValue2{
+	from a : ATL!StringExp(
+		a.stringSymbol = 'testname'	
+	)
+	using{
+		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
+		classT1 : OUT_MM!EClass = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> first();
+		featureB : OUT_MM!EStructuralFeature = classT1.getEStructuralFeatures() -> select (c | c.getEType().name = classes -> last().name) -> last();
+		typeB : OUT_MM!EClass = featureB.getEType();
+		
+	}
+	to a2 : ATL!StringExp(
+		stringSymbol <- typeB.name
+	)
+}
+
+
+
+
+
+	

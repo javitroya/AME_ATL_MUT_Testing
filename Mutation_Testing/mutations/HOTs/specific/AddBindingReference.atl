@@ -1,0 +1,40 @@
+-- @atlcompiler emftvm
+module AddBindingReference;
+create OUT : ATL refining IN : ATL;
+
+rule AddBindingReference {
+ from
+  ope : ATL!OutPatternElement
+  (
+   ATL!Rule.allInstances()->first() = ope.outPattern.rule
+  )
+ using
+ {
+  rule1 : ATL!MatchedRule = ATL!MatchedRule.allInstances()->select(r |
+   r.outPattern.elements->first().type.name = 'Type2'
+  )->first();
+  testclass2 : ATL!StringExp = rule1.inPattern.elements->first().type.name;
+ }
+ to
+  ope2 : ATL!OutPatternElement (
+   bindings <- ope.bindings->append(bindingNewElement)
+  ),
+  bindingNewElement : ATL!Binding (
+   outPatternElement <- ope2,
+   propertyName <- 'b',
+   value <- newNavigateExp
+  ),
+  newNavigateExp : ATL!NavigationOrAttributeCallExp (
+   source <- newValue,
+   name <- 'testname'
+  ),
+  newValue : ATL!VariableExp (
+   referredVariable <- newVariableDeclaration
+  ),
+  newVariableDeclaration : ATL!VariableDeclaration (
+   varName <- ope.outPattern.rule.inPattern.elements->first().varName
+  ),
+  newName : ATL!StringExp (
+   stringSymbol <- 'test'
+  )
+}

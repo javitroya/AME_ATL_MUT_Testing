@@ -1,0 +1,26 @@
+module AddBindingExample;
+create OUT : AddBindingTarget from IN : AddBindingSource;
+
+-- The PNMLDocument rule generates a PNMLDocument  and the NetElement which corresponds to the input PetriNet element. 
+-- Name of the generated NetElement is copied from the one of the input PetriNet, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet name.
+-- Its set of Contents corresponds to the union of the PetriNet Elements and Arcs.
+rule TransformC1 {
+ from
+  c1 : AddBindingSource!Class1
+ to
+  t1 : AddBindingTarget!Type1 (
+   name <- c1.name --,
+   --b <- c1.a
+   --,
+   --b <- c1.a
+   ,
+   b <- c1.testname
+  )
+}
+
+rule TransformC2 {
+ from
+  c2 : AddBindingSource!Class2
+ to
+  t2 : AddBindingTarget!Type2
+}

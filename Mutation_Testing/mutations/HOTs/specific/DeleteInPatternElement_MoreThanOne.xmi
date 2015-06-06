@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="3:1-13:2" name="DeleteInPatternElement_MoreThanOne" isRefining="true">
+    <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
+    <inModels location="4:27-4:35" name="IN" metamodel="/1"/>
+    <outModels location="4:8-4:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="6:1-13:2" name="DelteIPE">
+      <inPattern location="7:2-10:3">
+        <elements xsi:type="atl:SimpleInPatternElement" location="7:7-7:33" varName="ipe" variableExp="/0/@elements.0/@inPattern/@filter/@source/@source/@source/@source/@source /0/@elements.0/@inPattern/@filter/@arguments.0/@source /0/@elements.0/@inPattern/@filter/@arguments.0/@arguments.0/@source/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="7:13-7:33" name="InPatternElement" model="/1"/>
+        </elements>
+        <filter xsi:type="ocl:OperatorCallExp" location="8:3-9:41" operationName="and">
+          <source xsi:type="ocl:OperatorCallExp" location="8:3-8:39" operationName=">">
+            <source xsi:type="ocl:CollectionOperationCallExp" location="8:3-8:35" operationName="size">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="8:3-8:25" name="elements">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="8:3-8:16" name="inPattern">
+                  <source xsi:type="ocl:VariableExp" location="8:3-8:6" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                </source>
+              </source>
+            </source>
+            <arguments xsi:type="ocl:IntegerExp" location="8:38-8:39" integerSymbol="1"/>
+          </source>
+          <arguments xsi:type="ocl:OperatorCallExp" location="9:3-9:41" operationName="=">
+            <source xsi:type="ocl:VariableExp" location="9:3-9:6" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+            <arguments xsi:type="ocl:CollectionOperationCallExp" location="9:9-9:41" operationName="last">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:9-9:31" name="elements">
+                <source xsi:type="ocl:NavigationOrAttributeCallExp" location="9:9-9:22" name="inPattern">
+                  <source xsi:type="ocl:VariableExp" location="9:9-9:12" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+                </source>
+              </source>
+            </arguments>
+          </arguments>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="4:14-4:17" name="ATL" elements="/0/@elements.0/@inPattern/@elements.0/@type" model="/0/@outModels.0 /0/@inModels.0"/>
+</xmi:XMI>

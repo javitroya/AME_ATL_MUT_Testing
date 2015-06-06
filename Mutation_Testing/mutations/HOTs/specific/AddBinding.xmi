@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
+  <atl:Module location="2:1-25:2" name="AddBinding" isRefining="true">
+    <commentsBefore>-- @atlcompiler emftvm</commentsBefore>
+    <inModels location="3:27-3:35" name="IN" metamodel="/1"/>
+    <outModels location="3:8-3:17" name="OUT" metamodel="/1"/>
+    <elements xsi:type="atl:MatchedRule" location="5:1-25:2" name="AddBinding">
+      <outPattern location="10:2-23:3">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="11:2-15:3" varName="ope2" variableExp="/0/@elements.0/@outPattern/@elements.1/@bindings.0/@value">
+          <type xsi:type="ocl:OclModelElement" location="11:9-11:30" name="OutPatternElement" model="/1"/>
+          <bindings location="13:3-13:56" propertyName="bindings">
+            <value xsi:type="ocl:CollectionOperationCallExp" location="13:15-13:56" operationName="append">
+              <source xsi:type="ocl:NavigationOrAttributeCallExp" location="13:15-13:27" name="bindings">
+                <source xsi:type="ocl:VariableExp" location="13:15-13:18" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+              </source>
+              <arguments xsi:type="ocl:VariableExp" location="13:38-13:55" referredVariable="/0/@elements.0/@outPattern/@elements.1"/>
+            </value>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="16:2-20:3" varName="bindingNewElement" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@arguments.0">
+          <type xsi:type="ocl:OclModelElement" location="16:22-16:33" name="Binding" model="/1"/>
+          <bindings location="17:3-17:28" propertyName="outPatternElement">
+            <value xsi:type="ocl:VariableExp" location="17:24-17:28" referredVariable="/0/@elements.0/@outPattern/@elements.0"/>
+          </bindings>
+          <bindings location="18:3-18:44" propertyName="propertyName">
+            <value xsi:type="ocl:StringExp" location="18:19-18:44" stringSymbol="b"/>
+          </bindings>
+          <bindings location="19:3-19:20" propertyName="value">
+            <value xsi:type="ocl:VariableExp" location="19:12-19:20" referredVariable="/0/@elements.0/@outPattern/@elements.2"/>
+          </bindings>
+        </elements>
+        <elements xsi:type="atl:SimpleOutPatternElement" location="21:2-23:3" varName="newValue" variableExp="/0/@elements.0/@outPattern/@elements.1/@bindings.2/@value">
+          <type xsi:type="ocl:OclModelElement" location="21:13-21:26" name="StringExp" model="/1"/>
+          <bindings location="22:4-22:31" propertyName="stringSymbol">
+            <value xsi:type="ocl:StringExp" location="22:20-22:31" stringSymbol="testvalue"/>
+          </bindings>
+        </elements>
+      </outPattern>
+      <inPattern location="6:2-9:3">
+        <elements xsi:type="atl:SimpleInPatternElement" location="7:2-7:29" varName="ope" variableExp="/0/@elements.0/@inPattern/@filter/@source/@source /0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source/@source">
+          <type xsi:type="ocl:OclModelElement" location="7:8-7:29" name="OutPatternElement" model="/1"/>
+        </elements>
+        <filter xsi:type="ocl:IteratorExp" location="8:3-8:75" name="forAll">
+          <source xsi:type="ocl:NavigationOrAttributeCallExp" location="8:3-8:15" name="bindings">
+            <source xsi:type="ocl:VariableExp" location="8:3-8:6" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+          </source>
+          <body xsi:type="ocl:OperatorCallExp" location="8:31-8:74" operationName="&lt;>">
+            <source xsi:type="ocl:NavigationOrAttributeCallExp" location="8:31-8:45" name="propertyName">
+              <source xsi:type="ocl:VariableExp" location="8:31-8:32" referredVariable="/0/@elements.0/@inPattern/@filter/@iterators.0"/>
+            </source>
+            <arguments xsi:type="ocl:StringExp" location="8:49-8:74" stringSymbol="b"/>
+          </body>
+          <iterators location="8:27-8:28" varName="b" variableExp="/0/@elements.0/@inPattern/@filter/@body/@source/@source"/>
+        </filter>
+      </inPattern>
+    </elements>
+  </atl:Module>
+  <ocl:OclModel location="3:14-3:17" name="ATL" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.0/@outPattern/@elements.0/@type /0/@elements.0/@outPattern/@elements.1/@type /0/@elements.0/@outPattern/@elements.2/@type" model="/0/@outModels.0 /0/@inModels.0"/>
+</xmi:XMI>
