@@ -5,7 +5,8 @@ create OUT : ATL refining IN : ATL;
 rule AddBindingReference{
 	from
 	ope : ATL!OutPatternElement ( 
-		ATL!Rule.allInstances()->first() = ope.outPattern."rule"
+		ATL!Rule.allInstances()->first() = ope.outPattern."rule" and
+		ope.type.name = 'testopename'
 		-- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
 	)
 	--using{

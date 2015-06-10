@@ -6,7 +6,8 @@ rule AddBindingReference {
  from
   ope : ATL!OutPatternElement
   (
-   ATL!Rule.allInstances()->first() = ope.outPattern.rule -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
+   ATL!Rule.allInstances()->first() = ope.outPattern.rule and ope.type.name = 'NetElement' -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
+   -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
    -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
    
   )
@@ -24,12 +25,12 @@ rule AddBindingReference {
   ),
   bindingNewElement : ATL!Binding (
    outPatternElement <- ope2,
-   propertyName <- 'refToType3',
+   propertyName <- 'document',
    value <- newNavigateExp
   ),
   newNavigateExp : ATL!NavigationOrAttributeCallExp (
    source <- newValue,
-   name <- 'refToClass3'
+   name <- 'net'
   ),
   newValue : ATL!VariableExp (
    referredVariable <- newVariableDeclaration

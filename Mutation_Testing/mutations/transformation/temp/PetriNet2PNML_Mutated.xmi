@@ -32,9 +32,6 @@
           <bindings location="22:4-22:25" propertyName="value2">
             <value xsi:type="ocl:StringExp" location="22:14-22:25" stringSymbol="new Valee"/>
           </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
-          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="24:3-32:4" varName="net" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.2/@value">
           <type xsi:type="ocl:OclModelElement" location="24:9-24:24" name="NetElement" model="/1"/>
@@ -73,14 +70,16 @@
               <iterators location="31:38-31:39" varName="f" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.4/@value/@body/@source/@source"/>
             </value>
           </bindings>
+          <bindings propertyName="document">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" name="net">
+              <source xsi:type="ocl:VariableExp" referredVariable="/3"/>
+            </value>
+          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="33:3-36:4" varName="name" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.0/@value">
           <type xsi:type="ocl:OclModelElement" location="33:10-33:19" name="Name" model="/1"/>
           <bindings location="35:4-35:19" propertyName="labels">
             <value xsi:type="ocl:VariableExp" location="35:14-35:19" referredVariable="/0/@elements.0/@outPattern/@elements.4"/>
-          </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
           </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="37:3-40:4" varName="label" variableExp="/0/@elements.0/@outPattern/@elements.3/@bindings.0/@value">
@@ -90,17 +89,11 @@
               <source xsi:type="ocl:VariableExp" location="39:12-39:13" referredVariable="/0/@elements.0/@inPattern/@elements.1"/>
             </value>
           </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
-          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="41:3-44:4" varName="type_uri" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.3/@value">
           <type xsi:type="ocl:OclModelElement" location="41:14-41:22" name="URI" model="/1"/>
           <bindings location="43:4-43:66" propertyName="value">
             <value xsi:type="ocl:StringExp" location="43:13-43:66" stringSymbol="2http://www.informatik.hu-berlin.de/top/pntd/ptNetb"/>
-          </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
           </bindings>
         </elements>
       </outPattern>
@@ -140,9 +133,6 @@
           <bindings location="61:4-61:19" propertyName="labels">
             <value xsi:type="ocl:VariableExp" location="61:14-61:19" referredVariable="/0/@elements.1/@outPattern/@elements.2"/>
           </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
-          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="63:3-66:4" varName="label" variableExp="/0/@elements.1/@outPattern/@elements.1/@bindings.0/@value">
           <type xsi:type="ocl:OclModelElement" location="63:11-63:21" name="Label" model="/1"/>
@@ -150,9 +140,6 @@
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="65:12-65:18" name="name">
               <source xsi:type="ocl:VariableExp" location="65:12-65:13" referredVariable="/0/@elements.1/@inPattern/@elements.0"/>
             </value>
-          </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
           </bindings>
         </elements>
       </outPattern>
@@ -190,9 +177,6 @@
           <bindings location="83:4-83:19" propertyName="labels">
             <value xsi:type="ocl:VariableExp" location="83:14-83:19" referredVariable="/0/@elements.2/@outPattern/@elements.2"/>
           </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
-          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="85:3-88:4" varName="label" variableExp="/0/@elements.2/@outPattern/@elements.1/@bindings.0/@value">
           <type xsi:type="ocl:OclModelElement" location="85:11-85:21" name="Label" model="/1"/>
@@ -200,9 +184,6 @@
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="87:12-87:18" name="name">
               <source xsi:type="ocl:VariableExp" location="87:12-87:13" referredVariable="/0/@elements.2/@inPattern/@elements.0"/>
             </value>
-          </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
           </bindings>
         </elements>
       </outPattern>
@@ -248,9 +229,6 @@
           <bindings location="108:4-108:19" propertyName="labels">
             <value xsi:type="ocl:VariableExp" location="108:14-108:19" referredVariable="/0/@elements.3/@outPattern/@elements.2"/>
           </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
-          </bindings>
         </elements>
         <elements xsi:type="atl:SimpleOutPatternElement" location="110:3-113:4" varName="label" variableExp="/0/@elements.3/@outPattern/@elements.1/@bindings.0/@value">
           <type xsi:type="ocl:OclModelElement" location="110:11-110:21" name="Label" model="/1"/>
@@ -258,9 +236,6 @@
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="112:12-112:18" name="name">
               <source xsi:type="ocl:VariableExp" location="112:12-112:13" referredVariable="/0/@elements.3/@inPattern/@elements.0"/>
             </value>
-          </bindings>
-          <bindings propertyName="location">
-            <value xsi:type="ocl:StringExp" stringSymbol="testvalue"/>
           </bindings>
         </elements>
       </outPattern>
@@ -273,4 +248,5 @@
   </atl:Module>
   <ocl:OclModel location="2:14-2:18" name="PNML" elements="/0/@elements.0/@outPattern/@elements.0/@type /0/@elements.0/@outPattern/@elements.1/@type /0/@elements.0/@outPattern/@elements.2/@type /0/@elements.0/@outPattern/@elements.3/@type /0/@elements.0/@outPattern/@elements.4/@type /0/@elements.0/@outPattern/@elements.5/@type /0/@elements.1/@outPattern/@elements.0/@type /0/@elements.1/@outPattern/@elements.1/@type /0/@elements.1/@outPattern/@elements.2/@type /0/@elements.2/@outPattern/@elements.0/@type /0/@elements.2/@outPattern/@elements.1/@type /0/@elements.2/@outPattern/@elements.2/@type /0/@elements.3/@outPattern/@elements.0/@type /0/@elements.3/@outPattern/@elements.1/@type /0/@elements.3/@outPattern/@elements.2/@type" model="/0/@outModels.0"/>
   <ocl:OclModel location="2:29-2:37" name="PetriNet" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.0/@inPattern/@elements.1/@type /0/@elements.1/@inPattern/@elements.0/@type /0/@elements.2/@inPattern/@elements.0/@type /0/@elements.3/@inPattern/@elements.0/@type" model="/0/@inModels.0"/>
+  <ocl:VariableDeclaration varName="e2" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.5/@value/@source"/>
 </xmi:XMI>

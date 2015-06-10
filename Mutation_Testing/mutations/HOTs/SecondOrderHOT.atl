@@ -85,6 +85,30 @@ rule AddBindingReferenceValue2{
 	)
 }
 
+rule AddBindingReferenceValue3{
+	from a : ATL!StringExp(
+		a.stringSymbol = 'testopename'
+	)
+	using{
+		
+		classToAdd : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM')  -- is type1
+			-> select(c | c.getEStructuralFeatures() -> exists ( f | f.oclIsTypeOf(OUT_MM!EReference))
+				and c.getEStructuralFeatures() -> exists ( f | allBindingsForClass -> forAll( b | b.propertyName.debug('bindingname') <> f.name.debug('f.name')).debug('forall'))
+			);
+		allBindingsForClass : Sequence(IN_ATL!Binding) = IN_ATL!Binding.allInstancesFrom('IN_ATL').debug('bindings');
+		bindingB : OUT_MM!EStructuralFeature = classToAdd -> first().getEStructuralFeatures() -> select (f | allBindingsForClass -> forAll(b | b.propertyName <> f.name)) -> first();
+		typeB : OUT_MM!EClass = bindingB.getEType();
+
+		c : IN_ATL!MatchedRule = IN_ATL!MatchedRule.allInstancesFrom('IN_ATL') -> select(r | r.outPattern.elements -> first().type.name = typeB.name) -> first().debug();--.inPattern.elements -> first().type.name.debug();
+		ref : IN_MM!EReference = IN_MM!EReference.allInstancesFrom('IN_MM') -> select(r | r.eReferenceType.name = c.inPattern.elements -> first().type.name) -> first().debug();
+		
+		
+	}
+	to a2 : ATL!StringExp(
+		stringSymbol <- classToAdd -> first().name
+	)
+}
+
 
 
 
