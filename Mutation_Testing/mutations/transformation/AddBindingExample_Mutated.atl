@@ -9,12 +9,9 @@ rule TransformC1 {
   c1 : AddBindingSource!Class1
  to
   t1 : AddBindingTarget!Type1 (
-   name <- c1.name --,
-   --b <- c1.a
-   --,
-   --b <- c1.a
-   ,
-   b <- c1.testname
+   name <- c1.name,
+   b <- c1.a,
+   refToType3 <- c1.refToClass3
   )
 }
 
@@ -23,4 +20,11 @@ rule TransformC2 {
   c2 : AddBindingSource!Class2
  to
   t2 : AddBindingTarget!Type2
+}
+
+rule TransformC3 {
+ from
+  c3 : AddBindingSource!Class3
+ to
+  t3 : AddBindingTarget!Type3
 }

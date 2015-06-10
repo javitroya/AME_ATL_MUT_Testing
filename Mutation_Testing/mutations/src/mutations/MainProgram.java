@@ -70,7 +70,8 @@ public class MainProgram {
 			copyFile(HOTs + "temp/" + hot + ".xmi", HOTs + "specific/" + hot + ".xmi");
 			TransfoRunnerEMFTVM tr = new TransfoRunnerEMFTVM();
 			tr.runTransformation(HOTs + "specific/" + hot + ".xmi", "ATL",
-					transformation + inputMM, "IN_MM",
+					transformation + "temp/" + trans2Mutate + ".xmi", "IN_ATL",
+					transformation + inputMM, "IN_MM",					
 					transformation + outputMM, "OUT_MM",
 					HOTs, "SecondOrderHOT"); //path name plus module name of the transformation
 		}	

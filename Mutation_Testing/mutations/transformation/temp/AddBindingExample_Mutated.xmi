@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:atl="http://www.eclipse.org/gmt/2005/ATL" xmlns:ocl="http://www.eclipse.org/gmt/2005/OCL">
-  <atl:Module location="1:1-22:2" name="AddBindingExample">
+  <atl:Module location="1:1-29:2" name="AddBindingExample">
     <inModels location="2:36-2:57" name="IN" metamodel="/2"/>
     <outModels location="2:8-2:30" name="OUT" metamodel="/1"/>
     <elements xsi:type="atl:MatchedRule" location="7:1-15:2" name="TransformC1">
@@ -11,23 +11,24 @@
         <elements xsi:type="atl:SimpleOutPatternElement" location="11:3-14:4" varName="t1">
           <type xsi:type="ocl:OclModelElement" location="11:8-11:30" name="Type1" model="/1"/>
           <bindings location="12:4-12:19" propertyName="name">
-            <commentsAfter>--,</commentsAfter>
-            <commentsAfter>--b &lt;- c1.a</commentsAfter>
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="12:12-12:19" name="name">
-              <commentsAfter>--,</commentsAfter>
-              <commentsAfter>--b &lt;- c1.a</commentsAfter>
               <source xsi:type="ocl:VariableExp" location="12:12-12:14" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
             </value>
           </bindings>
-          <bindings propertyName="b">
-            <value xsi:type="ocl:NavigationOrAttributeCallExp" name="testname">
+          <bindings location="13:4-13:13" propertyName="b">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="13:9-13:13" name="a">
+              <source xsi:type="ocl:VariableExp" location="13:9-13:11" referredVariable="/0/@elements.0/@inPattern/@elements.0"/>
+            </value>
+          </bindings>
+          <bindings propertyName="refToType3">
+            <value xsi:type="ocl:NavigationOrAttributeCallExp" name="refToClass3">
               <source xsi:type="ocl:VariableExp" referredVariable="/3"/>
             </value>
           </bindings>
         </elements>
       </outPattern>
       <inPattern location="8:2-9:31">
-        <elements xsi:type="atl:SimpleInPatternElement" location="9:3-9:31" varName="c1" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source">
+        <elements xsi:type="atl:SimpleInPatternElement" location="9:3-9:31" varName="c1" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.0/@value/@source /0/@elements.0/@outPattern/@elements.0/@bindings.1/@value/@source">
           <type xsi:type="ocl:OclModelElement" location="9:8-9:31" name="Class1" model="/2"/>
         </elements>
       </inPattern>
@@ -44,9 +45,20 @@
         </elements>
       </inPattern>
     </elements>
+    <elements xsi:type="atl:MatchedRule" location="24:1-29:2" name="TransformC3">
+      <outPattern location="27:2-28:30">
+        <elements xsi:type="atl:SimpleOutPatternElement" location="28:3-28:30" varName="t3">
+          <type xsi:type="ocl:OclModelElement" location="28:8-28:30" name="Type3" model="/1"/>
+        </elements>
+      </outPattern>
+      <inPattern location="25:2-26:31">
+        <elements xsi:type="atl:SimpleInPatternElement" location="26:3-26:31" varName="c3">
+          <type xsi:type="ocl:OclModelElement" location="26:8-26:31" name="Class3" model="/2"/>
+        </elements>
+      </inPattern>
+    </elements>
   </atl:Module>
-  <ocl:OclModel location="2:14-2:30" name="AddBindingTarget" elements="/0/@elements.0/@outPattern/@elements.0/@type /0/@elements.1/@outPattern/@elements.0/@type" model="/0/@outModels.0"/>
-  <ocl:OclModel location="2:41-2:57" name="AddBindingSource" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.1/@inPattern/@elements.0/@type" model="/0/@inModels.0"/>
-  <ocl:VariableDeclaration varName="c1" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.1/@value/@source"/>
-  <ocl:StringExp stringSymbol="test"/>
+  <ocl:OclModel location="2:14-2:30" name="AddBindingTarget" elements="/0/@elements.0/@outPattern/@elements.0/@type /0/@elements.1/@outPattern/@elements.0/@type /0/@elements.2/@outPattern/@elements.0/@type" model="/0/@outModels.0"/>
+  <ocl:OclModel location="2:41-2:57" name="AddBindingSource" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.1/@inPattern/@elements.0/@type /0/@elements.2/@inPattern/@elements.0/@type" model="/0/@inModels.0"/>
+  <ocl:VariableDeclaration varName="c1" variableExp="/0/@elements.0/@outPattern/@elements.0/@bindings.2/@value/@source"/>
 </xmi:XMI>

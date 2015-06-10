@@ -1,7 +1,7 @@
 -- @atlcompiler emftvm
 
 module SecondOrderHOT;
-create OUT : ATL refining IN : ATL, IN_MM : IN_MM, OUT_MM : OUT_MM;
+create OUT : ATL refining IN : ATL, IN_ATL : IN_ATL, IN_MM : IN_MM,  OUT_MM : OUT_MM;
 
 helper def : random() : Real =
 	"#native"!"java::util::Random".newInstance().nextDouble();
@@ -40,43 +40,48 @@ rule AddBindingReferencePropertyName{
 		a.stringSymbol = 'NewBinding_PropertyName'	
 	)
 	using{
-		classes2 : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
+		classes2 : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM'); -- all classes from out metamodel
+		rule1 : IN_ATL!MatchedRule = IN_ATL!MatchedRule.allInstancesFrom('IN_ATL') -> first(); -- first rule from original transformation
+		-- class where i can add a reference binding
+		-- 1. select all Structural features
+		-- 2. filter references
+		-- 3. filter non existing references
+		-- 4. first
+		classToAdd : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM')  -- is type1
+			-> select(c | c.getEStructuralFeatures() -> exists ( f | f.oclIsTypeOf(OUT_MM!EReference))
+				and c.getEStructuralFeatures() -> exists ( f | allBindingsForClass -> forAll( b | b.propertyName <> f.name))
+			);
+		allBindingsForClass : Sequence(IN_ATL!Binding) = IN_ATL!Binding.allInstancesFrom('IN_ATL');
+		-- get name of first non existing binding
+		bindingName : OUT_MM!EStructuralFeature = classToAdd -> first().getEStructuralFeatures() -> select (f | allBindingsForClass -> exists(b | b.propertyName = f.name) = false) -> first();
 	}
 	to a2 : ATL!StringExp ( 
-		stringSymbol <- classes2 -> first().getEStructuralFeatures() -> select (c | c.getEType().name = classes2 -> last().name) -> last().name
+		stringSymbol <- bindingName.name.debug('bname')
 	)
 	
 }
 
-rule AddBindingReferenceValue{
-	from a : ATL!StringExp(
-		a.stringSymbol = 'testvariable'	
-	)
-	using{
-		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
-		classT1 : OUT_MM!EClass = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> first();
-		featureB : OUT_MM!EStructuralFeature = classT1.getEStructuralFeatures() -> select (c | c.getEType().name = classes -> last().name) -> last();
-		typeB : OUT_MM!EClass = featureB.getEType();
-		
-	}
-	to a2 : ATL!StringExp(
-		stringSymbol <- typeB.name
-	)
-}
-
 rule AddBindingReferenceValue2{
 	from a : ATL!StringExp(
-		a.stringSymbol = 'testname'	
+		a.stringSymbol = 'testname'
 	)
 	using{
-		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM');
-		classT1 : OUT_MM!EClass = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> first();
-		featureB : OUT_MM!EStructuralFeature = classT1.getEStructuralFeatures() -> select (c | c.getEType().name = classes -> last().name) -> last();
-		typeB : OUT_MM!EClass = featureB.getEType();
+		
+		classToAdd : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM')  -- is type1
+			-> select(c | c.getEStructuralFeatures() -> exists ( f | f.oclIsTypeOf(OUT_MM!EReference))
+				and c.getEStructuralFeatures() -> exists ( f | allBindingsForClass -> forAll( b | b.propertyName.debug('bindingname') <> f.name.debug('f.name')).debug('forall'))
+			);
+		allBindingsForClass : Sequence(IN_ATL!Binding) = IN_ATL!Binding.allInstancesFrom('IN_ATL').debug('bindings');
+		bindingB : OUT_MM!EStructuralFeature = classToAdd -> first().getEStructuralFeatures() -> select (f | allBindingsForClass -> forAll(b | b.propertyName <> f.name)) -> first();
+		typeB : OUT_MM!EClass = bindingB.getEType();
+
+		c : IN_ATL!MatchedRule = IN_ATL!MatchedRule.allInstancesFrom('IN_ATL') -> select(r | r.outPattern.elements -> first().type.name = typeB.name) -> first().debug();--.inPattern.elements -> first().type.name.debug();
+		ref : IN_MM!EReference = IN_MM!EReference.allInstancesFrom('IN_MM') -> select(r | r.eReferenceType.name = c.inPattern.elements -> first().type.name) -> first().debug();
+		
 		
 	}
 	to a2 : ATL!StringExp(
-		stringSymbol <- typeB.name
+		stringSymbol <- ref.name
 	)
 }
 

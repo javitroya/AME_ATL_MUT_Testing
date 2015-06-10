@@ -6,35 +6,35 @@ rule AddBindingReference {
  from
   ope : ATL!OutPatternElement
   (
-   ATL!Rule.allInstances()->first() = ope.outPattern.rule
+   ATL!Rule.allInstances()->first() = ope.outPattern.rule -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
+   -- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
+   
   )
- using
- {
-  rule1 : ATL!MatchedRule = ATL!MatchedRule.allInstances()->select(r |
-   r.outPattern.elements->first().type.name = 'Type2'
-  )->first();
-  testclass2 : ATL!StringExp = rule1.inPattern.elements->first().type.name;
- }
+ --using{
+ --	rule1 : ATL!MatchedRule = ATL!MatchedRule.allInstances() -> select (r | r.outPattern.elements -> first().type.name = 'testvariable') -> first();
+ --	testclass2 : ATL!StringExp = rule1.inPattern.elements -> first().type.name;
+ --}
+ --using{
+ --	rule1 : ATL!MatchedRule = ATL!MatchedRule.allInstances() -> select (r | r.outPattern.elements -> first().type.name = 'testvariable') -> first();
+ --	testclass2 : ATL!StringExp = rule1.inPattern.elements -> first().type.name;
+ --}
  to
   ope2 : ATL!OutPatternElement (
    bindings <- ope.bindings->append(bindingNewElement)
   ),
   bindingNewElement : ATL!Binding (
    outPatternElement <- ope2,
-   propertyName <- 'b',
+   propertyName <- 'refToType3',
    value <- newNavigateExp
   ),
   newNavigateExp : ATL!NavigationOrAttributeCallExp (
    source <- newValue,
-   name <- 'testname'
+   name <- 'refToClass3'
   ),
   newValue : ATL!VariableExp (
    referredVariable <- newVariableDeclaration
   ),
   newVariableDeclaration : ATL!VariableDeclaration (
    varName <- ope.outPattern.rule.inPattern.elements->first().varName
-  ),
-  newName : ATL!StringExp (
-   stringSymbol <- 'test'
   )
 }
