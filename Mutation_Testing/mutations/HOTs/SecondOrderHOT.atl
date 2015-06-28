@@ -23,6 +23,20 @@ rule CompleteInMMNames {
 	}
 }
 
+rule CompleteOutPatternElementMetaModelNames {
+	from 
+		sExp : ATL!StringExp (
+			sExp.stringSymbol = 'Complete_OPE'
+		)
+	using {
+		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | not c.abstract);
+	}
+	to 
+		outExp : ATL!StringExp(
+			stringSymbol <- classes -> at( (thisModule.random() * classes -> size()).floor() + 1).name			
+		)
+}
+
 -- rule AddBindingNames {
 --	from b : ATL!StringExp (
 --		b.stringSymbol = 'NewBinding_PropertyName'
@@ -34,6 +48,13 @@ rule CompleteInMMNames {
 --		stringSymbol <- classes -> first().getEStructuralFeatures() ->  select (c | c.getEType().name = 'String') -> last().name
 --	)	
 --}
+
+rule ChangeClassToSuperTypeInOutPatternElement {
+	from 
+		inOPE : ATL!OutPatternElement
+	to
+		outOPE : ATL!OutPatternElement
+}
 
 rule AddBindingReferencePropertyName{
 	from a : ATL!StringExp(
