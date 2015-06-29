@@ -7,12 +7,7 @@ rule AddBindingReference{
 	ope : ATL!OutPatternElement ( 
 		ATL!Rule.allInstances()->first() = ope.outPattern."rule" and
 		ope.type.name = 'testopename'
-		-- ope.bindings -> forAll( b | b.propertyName <> 'NewBinding_PropertyName')
 	)
-	--using{
-	--	rule1 : ATL!MatchedRule = ATL!MatchedRule.allInstances() -> select (r | r.outPattern.elements -> first().type.name = 'testvariable') -> first();
-	--	testclass2 : ATL!StringExp = rule1.inPattern.elements -> first().type.name;
-	--}
 	to
 	ope2 : ATL!OutPatternElement (
 		

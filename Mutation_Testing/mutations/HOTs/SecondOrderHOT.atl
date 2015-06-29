@@ -28,34 +28,19 @@ rule CompleteInMMNames {
 	}
 }
 
---rule ChangeClassToSuperTypeInOutPatternElement {
---	from 
---		inOPEBinding : ATL!OutPatternElement
---	to
-	--	outOPEBinding : ATL!OutPatternElement(
-		--	varName <- 'NewBinding_PropertyName'
-		--),
-		--newOCLType : ATL!OclModelElement(
---			model <- inOPEBinding.type.model,
---			name <- inOPEBinding.type.getSuperTypeOf(inOPEBinding.type.name.toString).name
---		)	
---}
-
-
-
--- rule AddBindingNames {
---	from b : ATL!StringExp (
---		b.stringSymbol = 'NewBinding_PropertyName'
---	)
---	using{
---		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.getESuperTypes() -> size() <= 0);
---	}
---	to b2 : ATL!StringExp ( 
---		stringSymbol <- classes -> first().getEStructuralFeatures() ->  select (c | c.getEType().name = 'String') -> last().name
---	)	
---}
-
-
+rule CompleteOutMMNames {
+	from s : ATL!StringExp (s.stringSymbol = 'Complete_OPE')
+	using {
+		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM')->select(c|not c.abstract);
+	}
+	to t : ATL!StringExp(
+		-- The idea is to have in the following a random class from the input model
+		stringSymbol <- classes->at((thisModule.random()*classes->size()).floor()+1).name
+	)
+	do{
+		classes->at((thisModule.random()*classes->size()).floor()+1).name;
+	}
+}
 
 rule AddBindingReferencePropertyName{
 	from a : ATL!StringExp(
