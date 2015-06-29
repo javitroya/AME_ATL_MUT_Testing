@@ -38,7 +38,8 @@ public class MainProgram {
 //		HOTsGenericMutations.add("AddBinding");
 //		HOTsGenericMutations.add("DeleteInPatternElement_MoreThanOne");
 //		HOTsGenericMutations.add("DeleteBindingsAfterIpeDelete");
-		HOTsGenericMutations.add("AddBindingReference");
+//		HOTsGenericMutations.add("AddBindingReference");
+		HOTsGenericMutations.add("ChangeClassToSuperTypeInOutPatternElement");
 		
 		/**Name of transformation to mutate, plus input and output metamodels**/
 		String trans2Mutate = "PetriNet2PNML";

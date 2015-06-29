@@ -201,6 +201,10 @@
         xsi:type="ecore:EClass"
         name="Transition"
         eSuperTypes="#/0/NetContentElement"/>
+    <eClassifiers
+        xsi:type="ecore:EClass"
+        name="PNMLDocumentSubtype"
+        eSuperTypes="#/0/PNMLDocument"/>
   </ecore:EPackage>
   <ecore:EPackage
       name="PrimitiveTypes">

@@ -195,8 +195,6 @@
 		<constant value="__applyArc"/>
 		<constant value="from"/>
 		<constant value="source"/>
-		<constant value="to"/>
-		<constant value="target"/>
 		<constant value="100:12-100:16"/>
 		<constant value="100:4-100:16"/>
 		<constant value="101:16-101:17"/>
@@ -208,9 +206,6 @@
 		<constant value="103:14-103:15"/>
 		<constant value="103:14-103:22"/>
 		<constant value="103:4-103:22"/>
-		<constant value="104:14-104:15"/>
-		<constant value="104:14-104:20"/>
-		<constant value="104:4-104:20"/>
 		<constant value="108:14-108:19"/>
 		<constant value="108:4-108:19"/>
 		<constant value="112:12-112:13"/>
@@ -1069,12 +1064,6 @@
 			<get arg="192"/>
 			<call arg="30"/>
 			<set arg="193"/>
-			<dup/>
-			<getasm/>
-			<load arg="29"/>
-			<get arg="194"/>
-			<call arg="30"/>
-			<set arg="195"/>
 			<pop/>
 			<load arg="85"/>
 			<dup/>
@@ -1093,36 +1082,33 @@
 			<pop/>
 		</code>
 		<linenumbertable>
-			<lne id="196" begin="19" end="19"/>
-			<lne id="197" begin="17" end="21"/>
-			<lne id="198" begin="24" end="24"/>
-			<lne id="199" begin="24" end="25"/>
-			<lne id="200" begin="22" end="27"/>
-			<lne id="201" begin="30" end="30"/>
-			<lne id="202" begin="30" end="31"/>
-			<lne id="203" begin="28" end="33"/>
-			<lne id="204" begin="36" end="36"/>
-			<lne id="205" begin="36" end="37"/>
-			<lne id="206" begin="34" end="39"/>
-			<lne id="207" begin="42" end="42"/>
-			<lne id="208" begin="42" end="43"/>
-			<lne id="209" begin="40" end="45"/>
-			<lne id="188" begin="16" end="46"/>
-			<lne id="210" begin="50" end="50"/>
-			<lne id="211" begin="48" end="52"/>
-			<lne id="189" begin="47" end="53"/>
-			<lne id="212" begin="57" end="57"/>
-			<lne id="213" begin="57" end="58"/>
-			<lne id="214" begin="55" end="60"/>
-			<lne id="190" begin="54" end="61"/>
+			<lne id="194" begin="19" end="19"/>
+			<lne id="195" begin="17" end="21"/>
+			<lne id="196" begin="24" end="24"/>
+			<lne id="197" begin="24" end="25"/>
+			<lne id="198" begin="22" end="27"/>
+			<lne id="199" begin="30" end="30"/>
+			<lne id="200" begin="30" end="31"/>
+			<lne id="201" begin="28" end="33"/>
+			<lne id="202" begin="36" end="36"/>
+			<lne id="203" begin="36" end="37"/>
+			<lne id="204" begin="34" end="39"/>
+			<lne id="188" begin="16" end="40"/>
+			<lne id="205" begin="44" end="44"/>
+			<lne id="206" begin="42" end="46"/>
+			<lne id="189" begin="41" end="47"/>
+			<lne id="207" begin="51" end="51"/>
+			<lne id="208" begin="51" end="52"/>
+			<lne id="209" begin="49" end="54"/>
+			<lne id="190" begin="48" end="55"/>
 		</linenumbertable>
 		<localvariabletable>
-			<lve slot="3" name="62" begin="7" end="61"/>
-			<lve slot="4" name="38" begin="11" end="61"/>
-			<lve slot="5" name="70" begin="15" end="61"/>
-			<lve slot="2" name="33" begin="3" end="61"/>
-			<lve slot="0" name="17" begin="0" end="61"/>
-			<lve slot="1" name="150" begin="0" end="61"/>
+			<lve slot="3" name="62" begin="7" end="55"/>
+			<lve slot="4" name="38" begin="11" end="55"/>
+			<lve slot="5" name="70" begin="15" end="55"/>
+			<lve slot="2" name="33" begin="3" end="55"/>
+			<lve slot="0" name="17" begin="0" end="55"/>
+			<lve slot="1" name="150" begin="0" end="55"/>
 		</localvariabletable>
 	</operation>
 </asm>

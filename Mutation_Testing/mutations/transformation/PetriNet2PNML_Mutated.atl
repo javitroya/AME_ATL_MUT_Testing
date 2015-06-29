@@ -9,7 +9,7 @@ rule PNMLDocument {
   e2 : PetriNet!PetriNet,
   e : PetriNet!PetriNet
  to
-  n : PNML!PNMLDocument (
+  n : PNML!PNMLDocumentSubtype (
    location <- e.location,
    xmlns <- uri,
    nets <- net
@@ -26,8 +26,7 @@ rule PNMLDocument {
    -- contents <- e.elements -> union(e.arcs)
    contents <- e2.elements->select(f |
     f.property = e.elements->last()
-   ),
-   document <- e2.net
+   )
   ),
   name : PNML!Name (
    labels <- label
@@ -90,8 +89,11 @@ rule Arc {
    name <- name,
    location <- e.location,
    id <- e.name,
-   source <- e.from,
-   target <- e.to
+   source <- e.from --,
+   --target <- e."to"
+   --,
+   --target <- e."to"
+   
   ),
   name : PNML!Name (
    labels <- label

@@ -7,13 +7,17 @@ create OUT : ATL refining IN : ATL;
 helper def : varNames : Sequence(String) = Sequence{'a','aa','b','bb','c','cc','d','dd','e','ee','f','ff','...'};
 
 rule ChangeClassToSuperTypeInOutPatternElement {
-	from inOPEBinding : ATL!OutPatternElement
+	from inOPEBinding : ATL!OutPatternElement(
+		inOPEBinding = ATL!OutPatternElement.allInstances() -> first()	
+	)
 	to 
 	outOPEBinding : ATL!OutPatternElement(		
-		type <- newOCLType
+		type <- newOCLType,
+		bindings <- inOPEBinding.bindings,
+		outPattern <- inOPEBinding.outPattern
 	),
 	newOCLType : ATL!OclModelElement(
 		model <- inOPEBinding.type.model,
-		name <- 'cc_change_type_' + inOPEBinding.type.name
+		name <- 'cc_change_type'
 	)
 }

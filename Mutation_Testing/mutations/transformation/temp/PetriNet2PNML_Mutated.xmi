@@ -11,7 +11,7 @@
       <commentsAfter>-- Name of the generated Place is copied from the one of the input Place, by creating a PNML Name composed of a PNML Label which value is initialized by the PetriNet Place name.</commentsAfter>
       <outPattern location="12:2-44:4">
         <elements xsi:type="atl:SimpleOutPatternElement" location="13:3-18:4" varName="n">
-          <type xsi:type="ocl:OclModelElement" location="13:7-13:24" name="PNMLDocument" model="/1"/>
+          <type xsi:type="ocl:OclModelElement" name="PNMLDocumentSubtype" model="/1"/>
           <bindings location="15:4-15:26" propertyName="location">
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="15:16-15:26" name="location">
               <source xsi:type="ocl:VariableExp" location="15:16-15:17" referredVariable="/0/@elements.0/@inPattern/@elements.1"/>
@@ -68,11 +68,6 @@
                 </arguments>
               </body>
               <iterators location="31:38-31:39" varName="f" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.4/@value/@body/@source/@source"/>
-            </value>
-          </bindings>
-          <bindings propertyName="document">
-            <value xsi:type="ocl:NavigationOrAttributeCallExp" name="net">
-              <source xsi:type="ocl:VariableExp" referredVariable="/3"/>
             </value>
           </bindings>
         </elements>
@@ -214,13 +209,12 @@
             </value>
           </bindings>
           <bindings location="103:4-103:22" propertyName="source">
+            <commentsAfter>--,</commentsAfter>
+            <commentsAfter>--target &lt;- e.&quot;to&quot;</commentsAfter>
             <value xsi:type="ocl:NavigationOrAttributeCallExp" location="103:14-103:22" name="from">
+              <commentsAfter>--,</commentsAfter>
+              <commentsAfter>--target &lt;- e.&quot;to&quot;</commentsAfter>
               <source xsi:type="ocl:VariableExp" location="103:14-103:15" referredVariable="/0/@elements.3/@inPattern/@elements.0"/>
-            </value>
-          </bindings>
-          <bindings location="104:4-104:20" propertyName="target">
-            <value xsi:type="ocl:NavigationOrAttributeCallExp" location="104:14-104:20" name="to">
-              <source xsi:type="ocl:VariableExp" location="104:14-104:15" referredVariable="/0/@elements.3/@inPattern/@elements.0"/>
             </value>
           </bindings>
         </elements>
@@ -240,13 +234,13 @@
         </elements>
       </outPattern>
       <inPattern location="95:2-96:19">
-        <elements xsi:type="atl:SimpleInPatternElement" location="96:3-96:19" varName="e" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@source /0/@elements.3/@outPattern/@elements.0/@bindings.2/@value/@source /0/@elements.3/@outPattern/@elements.0/@bindings.3/@value/@source /0/@elements.3/@outPattern/@elements.0/@bindings.4/@value/@source /0/@elements.3/@outPattern/@elements.2/@bindings.0/@value/@source">
+        <elements xsi:type="atl:SimpleInPatternElement" location="96:3-96:19" varName="e" variableExp="/0/@elements.3/@outPattern/@elements.0/@bindings.1/@value/@source /0/@elements.3/@outPattern/@elements.0/@bindings.2/@value/@source /0/@elements.3/@outPattern/@elements.0/@bindings.3/@value/@source /0/@elements.3/@outPattern/@elements.2/@bindings.0/@value/@source">
           <type xsi:type="ocl:OclModelElement" location="96:7-96:19" name="Arc" model="/2"/>
         </elements>
       </inPattern>
     </elements>
   </atl:Module>
-  <ocl:OclModel location="2:14-2:18" name="PNML" elements="/0/@elements.0/@outPattern/@elements.0/@type /0/@elements.0/@outPattern/@elements.1/@type /0/@elements.0/@outPattern/@elements.2/@type /0/@elements.0/@outPattern/@elements.3/@type /0/@elements.0/@outPattern/@elements.4/@type /0/@elements.0/@outPattern/@elements.5/@type /0/@elements.1/@outPattern/@elements.0/@type /0/@elements.1/@outPattern/@elements.1/@type /0/@elements.1/@outPattern/@elements.2/@type /0/@elements.2/@outPattern/@elements.0/@type /0/@elements.2/@outPattern/@elements.1/@type /0/@elements.2/@outPattern/@elements.2/@type /0/@elements.3/@outPattern/@elements.0/@type /0/@elements.3/@outPattern/@elements.1/@type /0/@elements.3/@outPattern/@elements.2/@type" model="/0/@outModels.0"/>
+  <ocl:OclModel location="2:14-2:18" name="PNML" elements="/3 /0/@elements.0/@outPattern/@elements.1/@type /0/@elements.0/@outPattern/@elements.2/@type /0/@elements.0/@outPattern/@elements.3/@type /0/@elements.0/@outPattern/@elements.4/@type /0/@elements.0/@outPattern/@elements.5/@type /0/@elements.1/@outPattern/@elements.0/@type /0/@elements.1/@outPattern/@elements.1/@type /0/@elements.1/@outPattern/@elements.2/@type /0/@elements.2/@outPattern/@elements.0/@type /0/@elements.2/@outPattern/@elements.1/@type /0/@elements.2/@outPattern/@elements.2/@type /0/@elements.3/@outPattern/@elements.0/@type /0/@elements.3/@outPattern/@elements.1/@type /0/@elements.3/@outPattern/@elements.2/@type /0/@elements.0/@outPattern/@elements.0/@type" model="/0/@outModels.0"/>
   <ocl:OclModel location="2:29-2:37" name="PetriNet" elements="/0/@elements.0/@inPattern/@elements.0/@type /0/@elements.0/@inPattern/@elements.1/@type /0/@elements.1/@inPattern/@elements.0/@type /0/@elements.2/@inPattern/@elements.0/@type /0/@elements.3/@inPattern/@elements.0/@type" model="/0/@inModels.0"/>
-  <ocl:VariableDeclaration varName="e2" variableExp="/0/@elements.0/@outPattern/@elements.2/@bindings.5/@value/@source"/>
+  <ocl:OclModelElement location="13:7-13:24" name="PNMLDocument" model="/1"/>
 </xmi:XMI>

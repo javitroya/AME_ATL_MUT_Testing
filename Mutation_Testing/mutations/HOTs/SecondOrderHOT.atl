@@ -4,7 +4,7 @@ module SecondOrderHOT;
 create OUT : ATL refining IN : ATL, IN_ATL : IN_ATL, IN_MM : IN_MM,  OUT_MM : OUT_MM;
 
 
-helper def : getSuperTypeOf(typeName : String) : ATL!EClass = 
+helper def : getSuperTypeOf(typeName : String) : OUT_MM!EClass = 
 	if (OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.name = typeName).eAllGenericSuperTypes.size > 0) then 
 		OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.name = typeName).eAllGenericSuperTypes -> last()
 	else
@@ -28,6 +28,19 @@ rule CompleteInMMNames {
 	}
 }
 
+--rule ChangeClassToSuperTypeInOutPatternElement {
+--	from 
+--		inOPEBinding : ATL!OutPatternElement
+--	to
+	--	outOPEBinding : ATL!OutPatternElement(
+		--	varName <- 'NewBinding_PropertyName'
+		--),
+		--newOCLType : ATL!OclModelElement(
+--			model <- inOPEBinding.type.model,
+--			name <- inOPEBinding.type.getSuperTypeOf(inOPEBinding.type.name.toString).name
+--		)	
+--}
+
 
 
 -- rule AddBindingNames {
@@ -42,18 +55,7 @@ rule CompleteInMMNames {
 --	)	
 --}
 
-rule ChangeClassToSuperTypeInOutPatternElement {
-	from 
-		inOPEBinding : ATL!OutPatternElement
-	to
-		outOPEBinding : ATL!OutPatternElement(
-			varName <- 'NewBinding_PropertyName'
-		),
-		newOCLType : ATL!OclModelElement(
-			model <- inOPEBinding.type.model,
-			name <- getSuperTypeOf(inOPEBinding.type.name.toString).name
-		)	
-}
+
 
 rule AddBindingReferencePropertyName{
 	from a : ATL!StringExp(
@@ -128,6 +130,29 @@ rule AddBindingReferenceValue3{
 		stringSymbol <- classToAdd -> first().name
 	)
 }
+
+rule ChangeClassToSuperTypeInOutPatternElement {
+	from 
+		ope : ATL!StringExp (
+			--ope.type.name.debug('type') = 'cc_change_type'
+			ope.stringSymbol = 'cc_change_type'
+		)
+	using{
+		originalType : IN_ATL!OutPatternElement = IN_ATL!OutPatternElement.allInstancesFrom('IN_ATL') -> first().debug('first');
+		allTypesOutMM : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM').debug(); --name
+		subtype : Sequence(OUT_MM!EClass) = allTypesOutMM -> select (c | c.getESuperTypes() -> exists( t | t.name.debug('t.name') = originalType.type.name.debug('originaltype.name')));
+			--c.name.debug('c.name') = originalType.type.name.debug('originaltype.name'));
+	}
+	to
+		st : ATL!StringExp (
+			stringSymbol <- subtype -> first().name
+		)
+		
+	
+}
+
+
+
 
 
 

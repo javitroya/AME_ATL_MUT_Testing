@@ -100,8 +100,8 @@ rule Arc {
 			name <- name,
 			location <- e.location,
 			id <- e.name,
-			source <- e."from",
-			target <- e."to"
+			source <- e."from"--,
+			--target <- e."to"
 		),
 		name : PNML!Name
 		(
