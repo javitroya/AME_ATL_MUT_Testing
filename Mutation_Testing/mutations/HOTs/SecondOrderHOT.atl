@@ -3,8 +3,7 @@
 module SecondOrderHOT;
 create OUT : ATL refining IN : ATL, IN_ATL : IN_ATL, IN_MM : IN_MM,  OUT_MM : OUT_MM;
 
-helper def : random() : Real =
-	"#native"!"java::util::Random".newInstance().nextDouble();
+
 
 -- A StringExp is one of the types that can conform to the value part of a Binding
 -- Since the generic mutation transformation adds 'CompleteIt_IM' in the value part,
@@ -23,19 +22,7 @@ rule CompleteInMMNames {
 	}
 }
 
-rule CompleteOutPatternElementMetaModelNames {
-	from 
-		sExp : ATL!StringExp (
-			sExp.stringSymbol = 'Complete_OPE'
-		)
-	using {
-		classes : Sequence(OUT_MM!EClass) = OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | not c.abstract);
-	}
-	to 
-		outExp : ATL!StringExp(
-			stringSymbol <- classes -> at( (thisModule.random() * classes -> size()).floor() + 1).name			
-		)
-}
+
 
 -- rule AddBindingNames {
 --	from b : ATL!StringExp (
@@ -51,9 +38,14 @@ rule CompleteOutPatternElementMetaModelNames {
 
 rule ChangeClassToSuperTypeInOutPatternElement {
 	from 
-		inOPE : ATL!OutPatternElement
+		inOPEBinding : ATL!VariableDeclaration(
+			inOPEBinding.variableExp -> select(exp | exp.debug() <> false).debug() <> false and
+			inOPEBinding.varName.debug().contains('cc_class_change_')
+		)
 	to
-		outOPE : ATL!OutPatternElement
+		outOPEBinding : ATL!VariableDeclaration(
+			varName <- 'NewBinding_PropertyName'
+		)
 }
 
 rule AddBindingReferencePropertyName{
