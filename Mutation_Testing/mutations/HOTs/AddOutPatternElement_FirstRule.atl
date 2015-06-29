@@ -1,20 +1,38 @@
 -- @atlcompiler emftvm
 
-module AddOutPatternElement_FirstRule;
-create OUT : ATL refining IN : ATL;
 
-helper def : varNames : Sequence(String) = Sequence{'a','aa','b','bb','c','cc','d','dd','e','ee','f','ff','...'};
+module AddOutPatternElement_FirstRule;
+create OUT: ATL refining IN: ATL;
+
+helper def: varNames: Sequence(String) =
+	Sequence{'a',
+			'aa',
+			'b',
+			'bb',
+			'c',
+			'cc',
+			'd',
+			'dd',
+			'e',
+			'ee',
+			'f',
+			'ff',
+			'...'};
 
 rule AddOutPatternElement_FirstRule {
 	from inOP : ATL!OutPattern(
 		ATL!Rule.allInstances() -> first() = inOP."rule"	
 	)
 	to outOP : ATL!OutPattern(
-		elements <- inOP.elements -> append(newOutPatternElement),
-		varName <- thisModule.varNames->any(n | ATL!PatternElement.allInstances()->collect(pe|pe.varName)->excludes(n))
+		elements <- inOP.elements -> append(newOutPatternElement)
 	),
 	newOutPatternElement : ATL!SimpleOutPatternElement(
+		varName <- thisModule.varNames->any(n | ATL!PatternElement.
+				allInstances()->collect(pe|pe.varName)->excludes(n)),
+		type <- newOCLType
+	),
+	newOCLType : ATL!OclModelElement(
 		model <- inOP.elements -> first().type.model,
-		name <- 'Complete_OPE'
+		name <- 'Complete_OPE'	
 	)
 }
