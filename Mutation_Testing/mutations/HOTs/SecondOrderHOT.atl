@@ -4,6 +4,12 @@ module SecondOrderHOT;
 create OUT : ATL refining IN : ATL, IN_ATL : IN_ATL, IN_MM : IN_MM,  OUT_MM : OUT_MM;
 
 
+helper def : getSuperTypeOf(typeName : String) : ATL!EClass = 
+	if (OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.name = typeName).eAllGenericSuperTypes.size > 0) then 
+		OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.name = typeName).eAllGenericSuperTypes -> last()
+	else
+		OUT_MM!EClass.allInstancesFrom('OUT_MM') -> select(c | c.name = typeName).first()
+	endif;
 
 -- A StringExp is one of the types that can conform to the value part of a Binding
 -- Since the generic mutation transformation adds 'CompleteIt_IM' in the value part,
@@ -38,14 +44,15 @@ rule CompleteInMMNames {
 
 rule ChangeClassToSuperTypeInOutPatternElement {
 	from 
-		inOPEBinding : ATL!VariableDeclaration(
-			inOPEBinding.variableExp -> select(exp | exp.debug() <> false).debug() <> false and
-			inOPEBinding.varName.debug().contains('cc_class_change_')
-		)
+		inOPEBinding : ATL!OutPatternElement
 	to
-		outOPEBinding : ATL!VariableDeclaration(
+		outOPEBinding : ATL!OutPatternElement(
 			varName <- 'NewBinding_PropertyName'
-		)
+		),
+		newOCLType : ATL!OclModelElement(
+			model <- inOPEBinding.type.model,
+			name <- getSuperTypeOf(inOPEBinding.type.name.toString).name
+		)	
 }
 
 rule AddBindingReferencePropertyName{
